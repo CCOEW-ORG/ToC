@@ -1,0 +1,53 @@
+site_name: Theory of Computation
+site_url: https://ccoew-org.github.io/ToC/
+site_author: Sourav Kulkarni
+site_description: >-
+  Course notes for Theory of Computation (23PCCE401), CCEW Pune.
+  Covers Formal Languages, Finite Automata, Regular Expressions,
+  Context-Free Grammars, Pushdown Automata, and Turing Machines.
+
+repo_name: ccoew-org/ToC
+repo_url: https://github.com/ccoew-org/ToC
+
+theme:
+  name: readthedocs
+
+docs_dir: docs
+site_dir: site
+
+nav:
+  - Home: index.md
+  - Unit 0 — Motivation & Foundations:
+    - Overview & Course Details: unit0/overview.md
+    - Mathematical Foundations: unit0/math-foundations.md
+    - Building Blocks of Computation: unit0/building-blocks.md
+  - Unit 1 — Formal Languages & Finite Automata:
+    - Introduction: unit1/intro.md
+    - Deterministic Finite Automata (DFA): unit1/dfa.md
+    - Non-Deterministic Finite Automata (NFA): unit1/nfa.md
+    - Epsilon-NFA and Conversions: unit1/enfa-conversions.md
+    - Finite Automata with Output: unit1/fa-with-output.md
+  - Unit 2 — Regular Expressions & Languages:
+    - Regular Languages & Operations: unit2/regular-languages.md
+    - Regular Expressions: unit2/regular-expressions.md
+    - Equivalence of REs and FAs: unit2/re-fa-equivalence.md
+    - Arden's Theorem & FA→RE Conversion: unit2/ardens-theorem.md
+    - Pumping Lemma: unit2/pumping-lemma.md
+  - Unit 3 — Context-Free Grammars & Languages:
+    - The Chomsky Hierarchy: unit3/chomsky-hierarchy.md
+    - Grammars — Basics & Regular Grammars: unit3/grammars-basics.md
+    - Context-Free Grammars & Derivations: unit3/cfg-derivations.md
+    - Ambiguity in CFGs: unit3/ambiguity.md
+    - Simplification of CFGs: unit3/simplification.md
+    - Normal Forms (CNF & GNF): unit3/normal-forms.md
+    - Properties of CFLs: unit3/cfl-properties.md
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - tables
+  - fenced_code
+  - footnotes
+  - attr_list
+  - def_list
