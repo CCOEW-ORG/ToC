@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Sourav Kulkarni" /><link rel="canonical" href="https://ccoew-org.github.io/ToC/unit3/chomsky-hierarchy/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>The Chomsky Hierarchy - Theory of Computation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "The Chomsky Hierarchy";
+        var mkdocs_page_input_path = "unit3/chomsky-hierarchy.md";
+        var mkdocs_page_url = "/ToC/unit3/chomsky-hierarchy/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Theory of Computation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 0 — Motivation & Foundations</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/overview/">Overview & Course Details</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/math-foundations/">Mathematical Foundations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/building-blocks/">Building Blocks of Computation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 1 — Formal Languages & Finite Automata</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/intro/">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/dfa/">Deterministic Finite Automata (DFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/nfa/">Non-Deterministic Finite Automata (NFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/enfa-conversions/">Epsilon-NFA and Conversions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/fa-with-output/">Finite Automata with Output</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 2 — Regular Expressions & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-languages/">Regular Languages & Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-expressions/">Regular Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/re-fa-equivalence/">Equivalence of REs and FAs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/ardens-theorem/">Arden's Theorem & FA→RE Conversion</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/pumping-lemma/">Pumping Lemma</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 3 — Context-Free Grammars & Languages</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">The Chomsky Hierarchy</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#going-beyond-finite-memory">Going Beyond Finite Memory</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-hierarchy">The Hierarchy</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summary-table">Summary Table</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-changes-between-levels">What Changes Between Levels?</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#decidability">Decidability</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#why-this-course-focuses-on-types-3-and-2">Why This Course Focuses on Types 3 and 2</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../grammars-basics/">Grammars — Basics & Regular Grammars</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cfg-derivations/">Context-Free Grammars & Derivations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ambiguity/">Ambiguity in CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simplification/">Simplification of CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../normal-forms/">Normal Forms (CNF & GNF)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cfl-properties/">Properties of CFLs</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Theory of Computation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Unit 3 — Context-Free Grammars & Languages</li>
+      <li class="breadcrumb-item active">The Chomsky Hierarchy</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ccoew-org/ToC/edit/master/docs/unit3/chomsky-hierarchy.md">Edit on ccoew-org/ToC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="the-chomsky-hierarchy">The Chomsky Hierarchy<a class="headerlink" href="#the-chomsky-hierarchy" title="Permanent link">&para;</a></h1>
+<h2 id="going-beyond-finite-memory">Going Beyond Finite Memory<a class="headerlink" href="#going-beyond-finite-memory" title="Permanent link">&para;</a></h2>
+<p>Finite automata are powerful tools, but their defining limitation is that they can only track a <em>fixed, finite</em> amount of information. They cannot count to an arbitrary number, match opening and closing brackets, or verify that two halves of a string have equal lengths.</p>
+<p>These tasks require more memory. The Chomsky Hierarchy organizes all formal languages into four nested classes, each characterized by the type of machine that recognizes it and the type of grammar that generates it.</p>
+<hr />
+<h2 id="the-hierarchy">The Hierarchy<a class="headerlink" href="#the-hierarchy" title="Permanent link">&para;</a></h2>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│             Recursively Enumerable (Type 0)             │
+│   ┌─────────────────────────────────────────────────┐   │
+│   │         Context-Sensitive (Type 1)              │   │
+│   │   ┌─────────────────────────────────────────┐   │   │
+│   │   │       Context-Free (Type 2)             │   │   │
+│   │   │   ┌─────────────────────────────────┐   │   │   │
+│   │   │   │     Regular (Type 3)            │   │   │   │
+│   │   │   └─────────────────────────────────┘   │   │   │
+│   │   └─────────────────────────────────────────┘   │   │
+│   └─────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────┘
+</code></pre>
+<p>Each inner class is strictly contained within the outer classes. A Type 3 language is also Type 2, Type 1, and Type 0 — but not vice versa.</p>
+<hr />
+<h2 id="summary-table">Summary Table<a class="headerlink" href="#summary-table" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Class</th>
+<th>Machine</th>
+<th>Grammar</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type 3</td>
+<td>Regular</td>
+<td>Finite Automaton (DFA/NFA)</td>
+<td>Regular Grammar</td>
+<td><code>aⁿ</code>, strings ending in <code>ab</code></td>
+</tr>
+<tr>
+<td>Type 2</td>
+<td>Context-Free</td>
+<td>Pushdown Automaton (PDA)</td>
+<td>Context-Free Grammar</td>
+<td><code>aⁿbⁿ</code>, matched brackets</td>
+</tr>
+<tr>
+<td>Type 1</td>
+<td>Context-Sensitive</td>
+<td>Linear Bounded Automaton</td>
+<td>Context-Sensitive Grammar</td>
+<td><code>aⁿbⁿcⁿ</code></td>
+</tr>
+<tr>
+<td>Type 0</td>
+<td>Recursively Enumerable</td>
+<td>Turing Machine</td>
+<td>Unrestricted Grammar</td>
+<td>Halting problem (semi-decidable)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="what-changes-between-levels">What Changes Between Levels?<a class="headerlink" href="#what-changes-between-levels" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Memory Model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regular</td>
+<td>No memory beyond current state (finite)</td>
+</tr>
+<tr>
+<td>Context-Free</td>
+<td>A <strong>stack</strong> (last-in, first-out; unbounded depth)</td>
+</tr>
+<tr>
+<td>Context-Sensitive</td>
+<td>A <strong>tape</strong> bounded by input length (linear space)</td>
+</tr>
+<tr>
+<td>Recursively Enumerable</td>
+<td>An <strong>unbounded tape</strong> (full Turing machine)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="decidability">Decidability<a class="headerlink" href="#decidability" title="Permanent link">&para;</a></h2>
+<p>An important practical distinction:</p>
+<ul>
+<li><strong>Type 3 (Regular):</strong> Membership is decidable in <code>O(n)</code> time (just run the DFA).</li>
+<li><strong>Type 2 (CFL):</strong> Membership is decidable, e.g., via the CYK algorithm in <code>O(n³)</code> time.</li>
+<li><strong>Type 1 (Context-Sensitive):</strong> Membership is decidable but may require exponential time.</li>
+<li><strong>Type 0 (RE):</strong> Membership is only <em>semi-decidable</em> — a Turing machine will eventually accept strings in the language, but may loop forever on strings not in the language. The halting problem is Type 0.</li>
+</ul>
+<hr />
+<h2 id="why-this-course-focuses-on-types-3-and-2">Why This Course Focuses on Types 3 and 2<a class="headerlink" href="#why-this-course-focuses-on-types-3-and-2" title="Permanent link">&para;</a></h2>
+<p>Types 3 and 2 are the most directly applicable to software engineering:</p>
+<ul>
+<li><strong>Type 3 (Regular languages):</strong> Used in lexical analysis (tokenizers, scanners), <code>grep</code>, URL patterns, input validation.</li>
+<li><strong>Type 2 (Context-free languages):</strong> Used in parsing programming languages, XML/HTML validation, compiler front-ends.</li>
+</ul>
+<p>Understanding these two levels — their power, their limits, and the machines and grammars that characterize them — is the core goal of Units 1–4 of this course.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../unit2/pumping-lemma/" class="btn btn-neutral float-left" title="Pumping Lemma"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../grammars-basics/" class="btn btn-neutral float-right" title="Grammars — Basics & Regular Grammars">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ccoew-org/ToC" class="fa fa-code-fork" style="color: #fcfcfc"> ccoew-org/ToC</a>
+        </span>
+    
+    
+      <span><a href="../../unit2/pumping-lemma/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../grammars-basics/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Sourav Kulkarni" /><link rel="canonical" href="https://ccoew-org.github.io/ToC/unit0/math-foundations/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Mathematical Foundations - Theory of Computation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Mathematical Foundations";
+        var mkdocs_page_input_path = "unit0/math-foundations.md";
+        var mkdocs_page_url = "/ToC/unit0/math-foundations/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Theory of Computation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 0 — Motivation & Foundations</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../overview/">Overview & Course Details</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Mathematical Foundations</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#sets">Sets</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#power-set">Power Set</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sequences-and-tuples">Sequences and Tuples</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cartesian-product">Cartesian Product</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#graphs">Graphs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#closure">Closure</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#closed-under-an-operation">Closed Under an Operation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#closure-of-a-set">Closure of a Set</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../building-blocks/">Building Blocks of Computation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 1 — Formal Languages & Finite Automata</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/intro/">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/dfa/">Deterministic Finite Automata (DFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/nfa/">Non-Deterministic Finite Automata (NFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/enfa-conversions/">Epsilon-NFA and Conversions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/fa-with-output/">Finite Automata with Output</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 2 — Regular Expressions & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-languages/">Regular Languages & Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-expressions/">Regular Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/re-fa-equivalence/">Equivalence of REs and FAs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/ardens-theorem/">Arden's Theorem & FA→RE Conversion</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/pumping-lemma/">Pumping Lemma</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 3 — Context-Free Grammars & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/chomsky-hierarchy/">The Chomsky Hierarchy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/grammars-basics/">Grammars — Basics & Regular Grammars</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfg-derivations/">Context-Free Grammars & Derivations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/ambiguity/">Ambiguity in CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/simplification/">Simplification of CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/normal-forms/">Normal Forms (CNF & GNF)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfl-properties/">Properties of CFLs</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Theory of Computation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Unit 0 — Motivation & Foundations</li>
+      <li class="breadcrumb-item active">Mathematical Foundations</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ccoew-org/ToC/edit/master/docs/unit0/math-foundations.md">Edit on ccoew-org/ToC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="mathematical-foundations">Mathematical Foundations<a class="headerlink" href="#mathematical-foundations" title="Permanent link">&para;</a></h1>
+<p>This section reviews the mathematical vocabulary used throughout the course. These are not new ideas — you have seen most of them in Discrete Mathematics — but the ToC framing is worth making explicit.</p>
+<hr />
+<h2 id="sets">Sets<a class="headerlink" href="#sets" title="Permanent link">&para;</a></h2>
+<p>A <strong>set</strong> is an <em>unordered</em> collection of distinct objects. The two defining properties are:</p>
+<ul>
+<li><strong>Order does not matter:</strong> <code>{1, 2, 3} = {3, 2, 1}</code></li>
+<li><strong>Duplicates do not matter:</strong> <code>{1, 2, 2, 3} = {1, 2, 3}</code></li>
+</ul>
+<p>Sets can be described by listing elements, or by a property:</p>
+<pre><code>A = {1, 2, 3}
+B = {x | x is a prime number ending in 3}
+S = {x | x is an even number less than 10}  →  S = {2, 4, 6, 8}
+</code></pre>
+<p>The <strong>empty set</strong> is written <code>∅</code> or <code>{}</code>.</p>
+<h3 id="power-set">Power Set<a class="headerlink" href="#power-set" title="Permanent link">&para;</a></h3>
+<p>The <strong>power set</strong> of <code>A</code>, written <code>P(A)</code> or <code>2^A</code>, is the set of all subsets of <code>A</code>.</p>
+<p><strong>Example:</strong> If <code>A = {1, 2, 3}</code>, then:</p>
+<pre><code>P(A) = { ∅, {1}, {2}, {3}, {1,2}, {1,3}, {2,3}, {1,2,3} }
+</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Size of the Power Set</p>
+<p>If <code>|A| = n</code>, then <code>|P(A)| = 2ⁿ</code>. This grows fast: a set with 4 elements has 16 subsets, one with 10 elements has 1024.</p>
+</div>
+<hr />
+<h2 id="sequences-and-tuples">Sequences and Tuples<a class="headerlink" href="#sequences-and-tuples" title="Permanent link">&para;</a></h2>
+<p>A <strong>sequence</strong> is an <em>ordered</em> list of objects where both order and duplicates matter:</p>
+<ul>
+<li><code>(1, 2, 3) ≠ (3, 2, 1)</code> — order matters</li>
+<li><code>(1, 2, 3) ≠ (1, 2, 3, 3)</code> — duplicates matter</li>
+</ul>
+<p>A <strong>tuple</strong> is a <em>finite</em> sequence. Tuples of specific sizes have conventional names:</p>
+<table>
+<thead>
+<tr>
+<th>Size</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>singleton (1-tuple)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>pair (2-tuple)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>triple (3-tuple)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>quadruple</td>
+</tr>
+<tr>
+<td>n</td>
+<td>n-tuple</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="cartesian-product">Cartesian Product<a class="headerlink" href="#cartesian-product" title="Permanent link">&para;</a></h2>
+<p>The <strong>Cartesian product</strong> (or <em>cross product</em>) of sets <code>A₁, A₂, …, Aₖ</code> is the set of all <code>k</code>-tuples <code>(a₁, a₂, …, aₖ)</code> where <code>aᵢ ∈ Aᵢ</code>:</p>
+<pre><code>A₁ × A₂ × … × Aₖ = { (a₁, a₂, …, aₖ) | aᵢ ∈ Aᵢ for each i }
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code>A = {Tea, Coffee},  B = {Toast, Eggs},  C = {Apple, Banana}
+
+A × B × C = {
+  (Tea,    Toast, Apple),  (Tea,    Toast, Banana),
+  (Tea,    Eggs,  Apple),  (Tea,    Eggs,  Banana),
+  (Coffee, Toast, Apple),  (Coffee, Toast, Banana),
+  (Coffee, Eggs,  Apple),  (Coffee, Eggs,  Banana)
+}
+</code></pre>
+<p>The size of the Cartesian product: <code>|A₁ × A₂ × … × Aₖ| = |A₁| · |A₂| · … · |Aₖ|</code>.</p>
+<hr />
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h2>
+<p>A <strong>function</strong> is a rule that assigns to each element of the <em>domain</em> exactly one element of the <em>range</em>:</p>
+<pre><code>f : D → R       means f maps domain D to range R
+f(input) = output,   input ∈ D,  output ∈ R
+</code></pre>
+<p>The domain can be a Cartesian product, giving functions of multiple arguments:</p>
+<pre><code>f(a₁, a₂, …, aₙ) = output
+</code></pre>
+<p>The <strong>arity</strong> of such a function is <code>n</code> (the number of arguments).</p>
+<div class="admonition warning">
+<p class="admonition-title">Domain vs. Range vs. Codomain</p>
+<p>In some textbooks, <em>range</em> refers only to the set of values <em>actually produced</em> by <code>f</code>, while <em>codomain</em> is the set <code>R</code> declared in <code>f : D → R</code>. In ToC, the distinction rarely matters, but be aware of it when reading other sources.</p>
+</div>
+<hr />
+<h2 id="graphs">Graphs<a class="headerlink" href="#graphs" title="Permanent link">&para;</a></h2>
+<p>A <strong>graph</strong> is an ordered pair <code>G = (V, E)</code> where:</p>
+<ul>
+<li><code>V</code> is a finite set of <strong>vertices</strong> (nodes).</li>
+<li><code>E</code> is a set of <strong>edges</strong>.</li>
+</ul>
+<p>For an <strong>undirected graph</strong> (no self-loops): <code>E ⊆ { {u, v} | u, v ∈ V,  u ≠ v }</code>.</p>
+<p>For a <strong>directed graph</strong> (digraph): <code>E ⊆ { (u, v) | u, v ∈ V }</code> — here order matters, so <code>(u, v) ≠ (v, u)</code>.</p>
+<p>We use directed graphs extensively when drawing <strong>state transition diagrams</strong> for automata.</p>
+<hr />
+<h2 id="closure">Closure<a class="headerlink" href="#closure" title="Permanent link">&para;</a></h2>
+<h3 id="closed-under-an-operation">Closed Under an Operation<a class="headerlink" href="#closed-under-an-operation" title="Permanent link">&para;</a></h3>
+<p>A set <code>A</code> is <strong>closed under</strong> an operation <code>○</code> if applying <code>○</code> to any two members of <code>A</code> always produces another member of <code>A</code>:</p>
+<pre><code>∀ x, y ∈ A :  x ○ y ∈ A
+</code></pre>
+<p><strong>Example:</strong> The natural numbers <code>ℕ</code> are closed under addition (<code>3 + 5 = 8 ∈ ℕ</code>) but <em>not</em> under subtraction (<code>3 − 5 = −2 ∉ ℕ</code>).</p>
+<h3 id="closure-of-a-set">Closure of a Set<a class="headerlink" href="#closure-of-a-set" title="Permanent link">&para;</a></h3>
+<p>The <strong>closure</strong> of a set <code>S</code> under a rule/operation is the <em>smallest</em> superset of <code>S</code> that is closed under that rule. It is obtained by repeatedly applying the rule until no new elements can be generated.</p>
+<p><strong>Examples:</strong></p>
+<ul>
+<li>The closure of <code>{0, 1}</code> under addition is <code>ℕ</code> (the whole numbers) — you can reach any non-negative integer by adding 0s and 1s.</li>
+<li>The closure of <code>{-1, 1}</code> under addition is <code>ℤ</code> (all integers).</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Why Closure Matters in ToC</p>
+<p>The concept of closure appears constantly. We will ask: <em>Is the set of regular languages closed under union? Under intersection? Under complement?</em> A positive answer means any combination of regular languages using that operation stays regular — a very useful property when designing machines.</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../overview/" class="btn btn-neutral float-left" title="Overview & Course Details"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../building-blocks/" class="btn btn-neutral float-right" title="Building Blocks of Computation">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ccoew-org/ToC" class="fa fa-code-fork" style="color: #fcfcfc"> ccoew-org/ToC</a>
+        </span>
+    
+    
+      <span><a href="../overview/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../building-blocks/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

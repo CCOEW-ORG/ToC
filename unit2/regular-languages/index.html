@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Sourav Kulkarni" /><link rel="canonical" href="https://ccoew-org.github.io/ToC/unit2/regular-languages/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Regular Languages & Operations - Theory of Computation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Regular Languages \u0026 Operations";
+        var mkdocs_page_input_path = "unit2/regular-languages.md";
+        var mkdocs_page_url = "/ToC/unit2/regular-languages/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Theory of Computation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 0 — Motivation & Foundations</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/overview/">Overview & Course Details</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/math-foundations/">Mathematical Foundations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/building-blocks/">Building Blocks of Computation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 1 — Formal Languages & Finite Automata</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/intro/">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/dfa/">Deterministic Finite Automata (DFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/nfa/">Non-Deterministic Finite Automata (NFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/enfa-conversions/">Epsilon-NFA and Conversions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/fa-with-output/">Finite Automata with Output</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 2 — Regular Expressions & Languages</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Regular Languages & Operations</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-a-regular-language">What Is a Regular Language?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#examples-of-regular-languages">Examples of Regular Languages</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#examples-of-non-regular-languages">Examples of Non-Regular Languages</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#regular-operations">Regular Operations</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-union">1. Union</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-concatenation">2. Concatenation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-kleene-star">3. Kleene Star</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#closure-under-regular-operations">Closure Under Regular Operations</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#closure-under-union">Closure Under Union</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#closure-under-concatenation">Closure Under Concatenation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#closure-under-star">Closure Under Star</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#additional-closure-properties">Additional Closure Properties</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../regular-expressions/">Regular Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../re-fa-equivalence/">Equivalence of REs and FAs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ardens-theorem/">Arden's Theorem & FA→RE Conversion</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pumping-lemma/">Pumping Lemma</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 3 — Context-Free Grammars & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/chomsky-hierarchy/">The Chomsky Hierarchy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/grammars-basics/">Grammars — Basics & Regular Grammars</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfg-derivations/">Context-Free Grammars & Derivations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/ambiguity/">Ambiguity in CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/simplification/">Simplification of CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/normal-forms/">Normal Forms (CNF & GNF)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfl-properties/">Properties of CFLs</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Theory of Computation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Unit 2 — Regular Expressions & Languages</li>
+      <li class="breadcrumb-item active">Regular Languages & Operations</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ccoew-org/ToC/edit/master/docs/unit2/regular-languages.md">Edit on ccoew-org/ToC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="regular-languages-operations">Regular Languages &amp; Operations<a class="headerlink" href="#regular-languages-operations" title="Permanent link">&para;</a></h1>
+<h2 id="what-is-a-regular-language">What Is a Regular Language?<a class="headerlink" href="#what-is-a-regular-language" title="Permanent link">&para;</a></h2>
+<p>A language <code>L</code> is called a <strong>regular language</strong> if there exists some finite automaton (DFA, NFA, or ε-NFA — all equivalent) that accepts it:</p>
+<pre><code>L is regular  ⟺  ∃ FA M such that L(M) = L
+</code></pre>
+<h3 id="examples-of-regular-languages">Examples of Regular Languages<a class="headerlink" href="#examples-of-regular-languages" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>L = { w ∈ {0,1}* | w ends with 101 }</code></li>
+<li><code>L = { w ∈ {0,1}* | w contains '11' or '00' as a substring }</code></li>
+<li><code>L = { w ∈ {a,b}* | w starts with 'ab' and ends with 'ba' }</code></li>
+<li>All finite languages (any finite set of strings is regular — you can build a DFA for it)</li>
+</ul>
+<h3 id="examples-of-non-regular-languages">Examples of Non-Regular Languages<a class="headerlink" href="#examples-of-non-regular-languages" title="Permanent link">&para;</a></h3>
+<p>These languages require counting beyond the capability of any finite automaton:</p>
+<ul>
+<li><code>L = { w ∈ {0,1}* | w contains equal numbers of 0s and 1s }</code></li>
+<li><code>L = { aⁿbⁿ | n ≥ 0 }</code> — equal counts of a's and b's</li>
+<li><code>L = { w ∈ {a,b}* | w is a palindrome }</code></li>
+</ul>
+<p>We can prove non-regularity rigorously using the <strong>Pumping Lemma</strong> (see Unit 2, Pumping Lemma page).</p>
+<hr />
+<h2 id="regular-operations">Regular Operations<a class="headerlink" href="#regular-operations" title="Permanent link">&para;</a></h2>
+<p>Three operations on languages are called <strong>regular operations</strong> because the class of regular languages is <strong>closed</strong> under all three.</p>
+<p>Let <code>A</code> and <code>B</code> be languages over the same alphabet Σ.</p>
+<h3 id="1-union">1. Union<a class="headerlink" href="#1-union" title="Permanent link">&para;</a></h3>
+<pre><code>A ∪ B = { x | x ∈ A  or  x ∈ B }
+</code></pre>
+<p><strong>Example:</strong> If <code>A = {a, aa}</code> and <code>B = {b, bb}</code>, then <code>A ∪ B = {a, aa, b, bb}</code>.</p>
+<h3 id="2-concatenation">2. Concatenation<a class="headerlink" href="#2-concatenation" title="Permanent link">&para;</a></h3>
+<pre><code>A ∘ B = { xy | x ∈ A  and  y ∈ B }
+</code></pre>
+<p>Every string in <code>A ∘ B</code> is formed by picking a string from <code>A</code> followed by a string from <code>B</code>.</p>
+<p><strong>Example:</strong> If <code>A = {ab, c}</code> and <code>B = {d, ef}</code>, then <code>A ∘ B = {abd, abef, cd, cef}</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Concatenation is not commutative</p>
+<p>In general, <code>A ∘ B ≠ B ∘ A</code>. The concatenation operation preserves order.</p>
+</div>
+<h3 id="3-kleene-star">3. Kleene Star<a class="headerlink" href="#3-kleene-star" title="Permanent link">&para;</a></h3>
+<pre><code>A* = { x₁x₂…xₖ | k ≥ 0  and each xᵢ ∈ A }
+</code></pre>
+<p><code>A*</code> contains all strings formed by concatenating <strong>zero or more</strong> strings from <code>A</code>. The <code>k = 0</code> case gives the empty string <code>ε</code>, so <code>ε ∈ A*</code> always.</p>
+<p><strong>Example:</strong> If <code>A = {ab}</code>, then <code>A* = {ε, ab, abab, ababab, …}</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Why are these called 'regular' operations?</p>
+<p>They are called regular operations because — as we prove below — applying any of them to regular languages always produces a regular language. The class of regular languages is <em>closed</em> under union, concatenation, and star.</p>
+</div>
+<hr />
+<h2 id="closure-under-regular-operations">Closure Under Regular Operations<a class="headerlink" href="#closure-under-regular-operations" title="Permanent link">&para;</a></h2>
+<p>We prove that regular languages are closed under each of the three operations. The proofs construct NFAs for the combined language from NFAs for the component languages.</p>
+<h3 id="closure-under-union">Closure Under Union<a class="headerlink" href="#closure-under-union" title="Permanent link">&para;</a></h3>
+<p><strong>Theorem:</strong> If <code>A</code> and <code>B</code> are regular languages, then <code>A ∪ B</code> is regular.</p>
+<p><strong>Proof:</strong> Since <code>A</code> and <code>B</code> are regular, there exist NFAs <code>Mₐ</code> and <code>M_b</code> accepting them. Construct a new NFA <code>M</code> as follows:</p>
+<ol>
+<li>Create a new start state <code>q_new</code>.</li>
+<li>Add ε-transitions from <code>q_new</code> to the start states of both <code>Mₐ</code> and <code>M_b</code>.</li>
+<li>Keep all states, transitions, and accept states of both machines.</li>
+</ol>
+<pre><code>          ε ──→  Mₐ (accepts A)
+q_new
+          ε ──→  M_b (accepts B)
+</code></pre>
+<p><code>M</code> accepts a string <code>x</code> iff <code>x ∈ A</code> or <code>x ∈ B</code>. Therefore <code>L(M) = A ∪ B</code>, which is regular. ∎</p>
+<h3 id="closure-under-concatenation">Closure Under Concatenation<a class="headerlink" href="#closure-under-concatenation" title="Permanent link">&para;</a></h3>
+<p><strong>Theorem:</strong> If <code>A</code> and <code>B</code> are regular languages, then <code>A ∘ B</code> is regular.</p>
+<p><strong>Proof:</strong> Let <code>Mₐ</code> accept <code>A</code> and <code>M_b</code> accept <code>B</code>. Construct <code>M</code>:</p>
+<ol>
+<li>Keep all states of <code>Mₐ</code> and <code>M_b</code>.</li>
+<li>The start state of <code>M</code> is the start state of <code>Mₐ</code>.</li>
+<li>Add ε-transitions from each accept state of <code>Mₐ</code> to the start state of <code>M_b</code>.</li>
+<li>The accept states of <code>M</code> are the accept states of <code>M_b</code> only (the accept states of <code>Mₐ</code> become non-accepting in <code>M</code>).</li>
+</ol>
+<pre><code>x ──→  Mₐ ──ε──→  M_b ──→ (accept)
+</code></pre>
+<p><code>Mₐ</code> processes the <code>x</code> portion; when it "accepts" that prefix, ε-transitions hand control to <code>M_b</code> to process <code>y</code>. <code>M</code> accepts <code>xy</code> iff <code>x ∈ A</code> and <code>y ∈ B</code>. ∎</p>
+<h3 id="closure-under-star">Closure Under Star<a class="headerlink" href="#closure-under-star" title="Permanent link">&para;</a></h3>
+<p><strong>Theorem:</strong> If <code>A</code> is a regular language, then <code>A*</code> is regular.</p>
+<p><strong>Proof:</strong> Let <code>Mₐ</code> accept <code>A</code>. Construct <code>M</code>:</p>
+<ol>
+<li>Create a new start state <code>q_new</code> that is also an accept state (to handle the <code>k=0</code> case, accepting <code>ε</code>).</li>
+<li>Add an ε-transition from <code>q_new</code> to the start state of <code>Mₐ</code>.</li>
+<li>Add ε-transitions from each accept state of <code>Mₐ</code> back to the start state of <code>Mₐ</code> (to allow repeated concatenation).</li>
+</ol>
+<pre><code>              ┌────────────ε──────────────┐
+              ↓                           │
+q_new ──ε──→  (start of Mₐ) ──…──→ (accept of Mₐ)
+  ↑
+(also accept)
+</code></pre>
+<p>This allows the machine to "restart" <code>Mₐ</code> zero or more times. ∎</p>
+<hr />
+<h2 id="additional-closure-properties">Additional Closure Properties<a class="headerlink" href="#additional-closure-properties" title="Permanent link">&para;</a></h2>
+<p>Regular languages are closed under several other operations:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Closed?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Union</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td>Concatenation</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td>Kleene Star</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td>Complement</td>
+<td>✅ Yes (swap accept and non-accept states in the DFA)</td>
+</tr>
+<tr>
+<td>Intersection</td>
+<td>✅ Yes (via De Morgan: <code>A ∩ B = ¬(¬A ∪ ¬B)</code>, or by product construction)</td>
+</tr>
+<tr>
+<td>Difference (<code>A \ B</code>)</td>
+<td>✅ Yes (<code>A \ B = A ∩ ¬B</code>)</td>
+</tr>
+<tr>
+<td>Reversal</td>
+<td>✅ Yes</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition danger">
+<p class="admonition-title">Contrast with Context-Free Languages</p>
+<p>Context-free languages are closed under union, concatenation, and star — but <strong>NOT</strong> under intersection or complement. This is one of the key differences between regular and context-free languages.</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../unit1/fa-with-output/" class="btn btn-neutral float-left" title="Finite Automata with Output"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../regular-expressions/" class="btn btn-neutral float-right" title="Regular Expressions">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ccoew-org/ToC" class="fa fa-code-fork" style="color: #fcfcfc"> ccoew-org/ToC</a>
+        </span>
+    
+    
+      <span><a href="../../unit1/fa-with-output/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../regular-expressions/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Sourav Kulkarni" /><link rel="canonical" href="https://ccoew-org.github.io/ToC/unit3/normal-forms/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Normal Forms (CNF & GNF) - Theory of Computation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Normal Forms (CNF \u0026 GNF)";
+        var mkdocs_page_input_path = "unit3/normal-forms.md";
+        var mkdocs_page_url = "/ToC/unit3/normal-forms/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Theory of Computation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 0 — Motivation & Foundations</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/overview/">Overview & Course Details</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/math-foundations/">Mathematical Foundations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/building-blocks/">Building Blocks of Computation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 1 — Formal Languages & Finite Automata</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/intro/">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/dfa/">Deterministic Finite Automata (DFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/nfa/">Non-Deterministic Finite Automata (NFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/enfa-conversions/">Epsilon-NFA and Conversions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/fa-with-output/">Finite Automata with Output</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 2 — Regular Expressions & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-languages/">Regular Languages & Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-expressions/">Regular Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/re-fa-equivalence/">Equivalence of REs and FAs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/ardens-theorem/">Arden's Theorem & FA→RE Conversion</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/pumping-lemma/">Pumping Lemma</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 3 — Context-Free Grammars & Languages</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../chomsky-hierarchy/">The Chomsky Hierarchy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../grammars-basics/">Grammars — Basics & Regular Grammars</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cfg-derivations/">Context-Free Grammars & Derivations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ambiguity/">Ambiguity in CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simplification/">Simplification of CFGs</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Normal Forms (CNF & GNF)</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chomsky-normal-form-cnf">Chomsky Normal Form (CNF)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#definition">Definition</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#why-cnf">Why CNF?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#converting-to-cnf">Converting to CNF</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#worked-example">Worked Example</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#longer-example">Longer Example</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#greibach-normal-form-gnf">Greibach Normal Form (GNF)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#definition_1">Definition</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#why-gnf">Why GNF?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#converting-to-gnf">Converting to GNF</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#worked-example_1">Worked Example</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cnf-vs-gnf-summary">CNF vs. GNF: Summary</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cfl-properties/">Properties of CFLs</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Theory of Computation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Unit 3 — Context-Free Grammars & Languages</li>
+      <li class="breadcrumb-item active">Normal Forms (CNF & GNF)</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ccoew-org/ToC/edit/master/docs/unit3/normal-forms.md">Edit on ccoew-org/ToC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="normal-forms-cnf-and-gnf">Normal Forms: CNF and GNF<a class="headerlink" href="#normal-forms-cnf-and-gnf" title="Permanent link">&para;</a></h1>
+<p>Normal forms are standardized formats for CFGs. Converting to a normal form does not change the language generated; it constrains the <em>shape</em> of the production rules, which makes certain algorithms (like CYK parsing) much easier to implement and analyze.</p>
+<hr />
+<h2 id="chomsky-normal-form-cnf">Chomsky Normal Form (CNF)<a class="headerlink" href="#chomsky-normal-form-cnf" title="Permanent link">&para;</a></h2>
+<h3 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">&para;</a></h3>
+<p>A CFG is in <strong>Chomsky Normal Form (CNF)</strong> if every production rule is of exactly one of two forms:</p>
+<pre><code>A → BC    (two variables)
+A → a     (single terminal)
+</code></pre>
+<p>where <code>A</code>, <code>B</code>, <code>C ∈ V</code> and <code>a ∈ Σ</code>. The exception: the start symbol may have the rule <code>S → ε</code> if <code>ε ∈ L(G)</code>.</p>
+<h3 id="why-cnf">Why CNF?<a class="headerlink" href="#why-cnf" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Parse trees in CNF are <strong>binary trees</strong> (each internal node has exactly 2 children or is a leaf).</li>
+<li>The <strong>CYK (Cocke-Younger-Kasami) algorithm</strong> — an efficient <code>O(n³)</code> parsing algorithm for CFLs — requires the grammar to be in CNF.</li>
+<li>CNF grammars are easy to reason about for theoretical proofs.</li>
+</ul>
+<h3 id="converting-to-cnf">Converting to CNF<a class="headerlink" href="#converting-to-cnf" title="Permanent link">&para;</a></h3>
+<p><strong>Preconditions:</strong> First apply all three simplification steps (remove useless symbols, ε-productions, and unit productions).</p>
+<p><strong>Algorithm:</strong></p>
+<ol>
+<li>
+<p>Add a new start symbol <code>S_new → S</code>. (Ensures the start symbol never appears on the right-hand side of any rule.)</p>
+</li>
+<li>
+<p><strong>Eliminate ε-productions</strong> (see Simplification page).</p>
+</li>
+<li>
+<p><strong>Eliminate unit productions</strong> (see Simplification page).</p>
+</li>
+<li>
+<p><strong>Convert remaining rules to CNF form</strong> by:</p>
+</li>
+<li>For each terminal <code>a</code> appearing in a rule with two or more symbols on the RHS, create a new variable <code>X_a → a</code> and replace <code>a</code> with <code>X_a</code> in the longer rule.</li>
+<li>For each rule <code>A → B₁B₂B₃…Bₖ</code> with <code>k ≥ 3</code>, break it into a chain of binary rules by introducing new variables.</li>
+</ol>
+<h3 id="worked-example">Worked Example<a class="headerlink" href="#worked-example" title="Permanent link">&para;</a></h3>
+<p><strong>Original grammar:</strong></p>
+<pre><code>S → aAB | b
+A → a
+B → b
+</code></pre>
+<p><strong>Step 1:</strong> Add <code>S_new → S</code>.</p>
+<pre><code>S_new → S
+S → aAB | b
+A → a
+B → b
+</code></pre>
+<p><strong>Step 2:</strong> No ε-productions.</p>
+<p><strong>Step 3:</strong> Eliminate unit production <code>S_new → S</code>. Replace with <code>S_new → aAB | b</code>.</p>
+<pre><code>S_new → aAB | b
+S → aAB | b           (S is now unreachable — will be removed)
+A → a
+B → b
+</code></pre>
+<p>Remove unreachable <code>S</code>:</p>
+<pre><code>S_new → aAB | b
+A → a
+B → b
+</code></pre>
+<p><strong>Step 4:</strong> Convert <code>S_new → aAB</code> to CNF.
+- Create <code>X_a → a</code> for the terminal <code>a</code>.
+- Replace: <code>S_new → X_a AB</code>
+- <code>X_a AB</code> has 3 symbols — introduce <code>Y → AB</code>.
+- Result: <code>S_new → X_a Y</code></p>
+<p>Final CNF:</p>
+<pre><code>S_new → X_a Y | b
+Y → AB
+A → a
+B → b
+X_a → a
+</code></pre>
+<p>All rules are now of the form <code>A → BC</code> or <code>A → a</code>. ✓</p>
+<h3 id="longer-example">Longer Example<a class="headerlink" href="#longer-example" title="Permanent link">&para;</a></h3>
+<p><strong>Original:</strong></p>
+<pre><code>S → aAB | bB | ε
+A → aA | a
+B → b
+</code></pre>
+<p>After full simplification (applying Steps 1–3):</p>
+<ul>
+<li><code>S → ε</code> is kept (since <code>ε ∈ L(G)</code>).</li>
+<li>No unit productions.</li>
+<li>Remaining: <code>S → aAB | bB</code>, <code>A → aA | a</code>, <code>B → b</code>.</li>
+</ul>
+<p><strong>Convert to CNF:</strong></p>
+<p>For <code>S → aAB</code>:
+- <code>a</code> in a multi-symbol rule → <code>X_a → a</code>. Replace: <code>S → X_a AB</code>.
+- <code>X_a AB</code> has 3 symbols → <code>S → X_a Y₁</code> and <code>Y₁ → AB</code>.</p>
+<p>For <code>S → bB</code>:
+- <code>b</code> in a multi-symbol rule → <code>X_b → b</code>. Replace: <code>S → X_b B</code>.</p>
+<p>For <code>A → aA</code>:
+- <code>a</code> in a multi-symbol rule → <code>S → X_a A</code> (reuse <code>X_a</code>).</p>
+<p>Final CNF:</p>
+<pre><code>S → X_a Y₁ | X_b B | ε
+Y₁ → AB
+A → X_a A | a
+B → b
+X_a → a
+X_b → b
+</code></pre>
+<hr />
+<h2 id="greibach-normal-form-gnf">Greibach Normal Form (GNF)<a class="headerlink" href="#greibach-normal-form-gnf" title="Permanent link">&para;</a></h2>
+<h3 id="definition_1">Definition<a class="headerlink" href="#definition_1" title="Permanent link">&para;</a></h3>
+<p>A CFG is in <strong>Greibach Normal Form (GNF)</strong> if every production rule is of the form:</p>
+<pre><code>A → a α
+</code></pre>
+<p>where <code>a ∈ Σ</code> is a single terminal and <code>α ∈ V*</code> is a (possibly empty) string of <strong>variables</strong> only.</p>
+<p>Every rule must start with exactly one terminal, followed by zero or more variables.</p>
+<h3 id="why-gnf">Why GNF?<a class="headerlink" href="#why-gnf" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Every derivation step produces exactly <strong>one terminal</strong>. For a string of length <code>n</code>, exactly <code>n</code> derivation steps are needed.</li>
+<li>GNF is useful for constructing Pushdown Automata from CFGs and for certain parsing strategies.</li>
+</ul>
+<h3 id="converting-to-gnf">Converting to GNF<a class="headerlink" href="#converting-to-gnf" title="Permanent link">&para;</a></h3>
+<p>The conversion to GNF is more involved than CNF. The key challenge is eliminating <strong>left recursion</strong> — rules of the form <code>A → Aα</code>, which have the variable <code>A</code> as the first symbol on the right-hand side.</p>
+<p><strong>Informal algorithm:</strong></p>
+<ol>
+<li>Ensure all rules are in CNF (or at least simplified).</li>
+<li>Order the variables <code>A₁, A₂, …, Aₙ</code>.</li>
+<li>For each variable <code>Aᵢ</code>, ensure that the first symbol in every RHS of <code>Aᵢ</code>'s rules is either a terminal or <code>Aⱼ</code> with <code>j &gt; i</code> (no "backward" references).</li>
+<li>Eliminate direct left recursion using the standard transformation.</li>
+<li>Substitute rules back to ensure every RHS starts with a terminal.</li>
+</ol>
+<h3 id="worked-example_1">Worked Example<a class="headerlink" href="#worked-example_1" title="Permanent link">&para;</a></h3>
+<p><strong>Original grammar:</strong></p>
+<pre><code>S → AB
+A → aA | a
+B → b
+</code></pre>
+<p>All rules for <code>A</code> and <code>B</code> already start with a terminal. Only <code>S → AB</code> does not.</p>
+<p><strong>Step 1:</strong> Expand <code>A</code> into <code>S</code>'s rules:</p>
+<p>Since <code>A → aA | a</code>, substitute:</p>
+<pre><code>S → aAB | aB        (replacing A with its productions)
+</code></pre>
+<p><strong>Step 2:</strong> Check remaining rules:</p>
+<pre><code>S → aAB | aB         ✓ starts with 'a'
+A → aA | a           ✓ starts with 'a'
+B → b                ✓ starts with 'b'
+</code></pre>
+<p>All rules already satisfy GNF requirements!</p>
+<p><strong>Final GNF:</strong></p>
+<pre><code>S → aAB | aB
+A → aA | a
+B → b
+</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">GNF and left recursion</p>
+<p>If the original grammar has left recursion (e.g., <code>A → Aa | b</code>), you first need to eliminate it before converting to GNF. Left recursion elimination uses a standard transformation that introduces a new variable:</p>
+<p><code>A → Aa | b</code>
+becomes:
+<code>A → bA'
+A' → aA' | ε</code></p>
+<p>Then substitute to ensure everything starts with a terminal.</p>
+</div>
+<hr />
+<h2 id="cnf-vs-gnf-summary">CNF vs. GNF: Summary<a class="headerlink" href="#cnf-vs-gnf-summary" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>CNF</th>
+<th>GNF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rule form</td>
+<td><code>A → BC</code> or <code>A → a</code></td>
+<td><code>A → aα</code></td>
+</tr>
+<tr>
+<td>Parse tree shape</td>
+<td>Binary tree</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Steps per derivation</td>
+<td>2n-1 for string of length n</td>
+<td>Exactly n</td>
+</tr>
+<tr>
+<td>Main use</td>
+<td>CYK algorithm, theoretical analysis</td>
+<td>PDA construction, parsing strategy</td>
+</tr>
+<tr>
+<td>Handles ε?</td>
+<td>Only via <code>S → ε</code></td>
+<td>Only via <code>S → ε</code></td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../simplification/" class="btn btn-neutral float-left" title="Simplification of CFGs"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../cfl-properties/" class="btn btn-neutral float-right" title="Properties of CFLs">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ccoew-org/ToC" class="fa fa-code-fork" style="color: #fcfcfc"> ccoew-org/ToC</a>
+        </span>
+    
+    
+      <span><a href="../simplification/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../cfl-properties/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

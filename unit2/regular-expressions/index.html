@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Sourav Kulkarni" /><link rel="canonical" href="https://ccoew-org.github.io/ToC/unit2/regular-expressions/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Regular Expressions - Theory of Computation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Regular Expressions";
+        var mkdocs_page_input_path = "unit2/regular-expressions.md";
+        var mkdocs_page_url = "/ToC/unit2/regular-expressions/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Theory of Computation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 0 — Motivation & Foundations</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/overview/">Overview & Course Details</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/math-foundations/">Mathematical Foundations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/building-blocks/">Building Blocks of Computation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 1 — Formal Languages & Finite Automata</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/intro/">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/dfa/">Deterministic Finite Automata (DFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/nfa/">Non-Deterministic Finite Automata (NFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/enfa-conversions/">Epsilon-NFA and Conversions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/fa-with-output/">Finite Automata with Output</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 2 — Regular Expressions & Languages</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../regular-languages/">Regular Languages & Operations</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Regular Expressions</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#informal-introduction">Informal Introduction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#formal-definition-inductive">Formal Definition (Inductive)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#expansion-order-precedence">Expansion Order (Precedence)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#worked-examples">Worked Examples</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#example-1">Example 1</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-2">Example 2</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-3">Example 3</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-4">Example 4</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-5-combined">Example 5 (Combined)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#common-regex-patterns">Common Regex Patterns</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#practice-problems">Practice Problems</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../re-fa-equivalence/">Equivalence of REs and FAs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ardens-theorem/">Arden's Theorem & FA→RE Conversion</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pumping-lemma/">Pumping Lemma</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 3 — Context-Free Grammars & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/chomsky-hierarchy/">The Chomsky Hierarchy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/grammars-basics/">Grammars — Basics & Regular Grammars</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfg-derivations/">Context-Free Grammars & Derivations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/ambiguity/">Ambiguity in CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/simplification/">Simplification of CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/normal-forms/">Normal Forms (CNF & GNF)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfl-properties/">Properties of CFLs</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Theory of Computation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Unit 2 — Regular Expressions & Languages</li>
+      <li class="breadcrumb-item active">Regular Expressions</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ccoew-org/ToC/edit/master/docs/unit2/regular-expressions.md">Edit on ccoew-org/ToC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="regular-expressions">Regular Expressions<a class="headerlink" href="#regular-expressions" title="Permanent link">&para;</a></h1>
+<h2 id="informal-introduction">Informal Introduction<a class="headerlink" href="#informal-introduction" title="Permanent link">&para;</a></h2>
+<p>In arithmetic, expressions like <code>5 × 4 + 3(32 ÷ 16)</code> are built from numbers and operators. When <em>evaluated</em>, they yield a numeric result.</p>
+<p><strong>Regular expressions (regexes)</strong> work analogously, but:</p>
+<ul>
+<li>The "numbers" are languages (sets of strings).</li>
+<li>The "operators" are the three regular operations: union (<code>|</code> or <code>+</code>), concatenation (<code>.</code> or juxtaposition), and star (<code>*</code>).</li>
+<li>When evaluated, a regex yields a <strong>language</strong>.</li>
+</ul>
+<hr />
+<h2 id="formal-definition-inductive">Formal Definition (Inductive)<a class="headerlink" href="#formal-definition-inductive" title="Permanent link">&para;</a></h2>
+<p>A <strong>regular expression</strong> over alphabet Σ is defined inductively:</p>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th>Description</th>
+<th>Language Denoted</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a</code> where <code>a ∈ Σ</code></td>
+<td>Atomic symbol</td>
+<td><code>{a}</code></td>
+</tr>
+<tr>
+<td><code>ε</code></td>
+<td>Empty string</td>
+<td><code>{ε}</code></td>
+</tr>
+<tr>
+<td><code>∅</code></td>
+<td>Empty set</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>(R₁ \| R₂)</code></td>
+<td>Union of <code>R₁</code> and <code>R₂</code></td>
+<td><code>L(R₁) ∪ L(R₂)</code></td>
+</tr>
+<tr>
+<td><code>(R₁ · R₂)</code></td>
+<td>Concatenation of <code>R₁</code> and <code>R₂</code></td>
+<td><code>L(R₁) ∘ L(R₂)</code></td>
+</tr>
+<tr>
+<td><code>(R₁*)</code></td>
+<td>Kleene star of <code>R₁</code></td>
+<td><code>L(R₁)*</code></td>
+</tr>
+</tbody>
+</table>
+<p>Everything else is syntactic sugar built on top of these six forms.</p>
+<div class="admonition warning">
+<p class="admonition-title">∅ vs ε</p>
+<ul>
+<li><code>∅</code> denotes the <strong>empty language</strong> (no strings at all). A machine for <code>∅</code> never accepts.</li>
+<li><code>ε</code> denotes the language containing <strong>only the empty string</strong> <code>{ε}</code>. A machine for <code>ε</code> accepts only the empty input.
+These are completely different.</li>
+</ul>
+</div>
+<hr />
+<h2 id="expansion-order-precedence">Expansion Order (Precedence)<a class="headerlink" href="#expansion-order-precedence" title="Permanent link">&para;</a></h2>
+<p>Analogous to BODMAS in arithmetic, regular expression operators have precedence:</p>
+<ol>
+<li><strong>Parentheses</strong> — innermost first</li>
+<li><strong>Star</strong> (<code>*</code>) — highest precedence among operators</li>
+<li><strong>Concatenation</strong> (<code>.</code>) — middle precedence</li>
+<li><strong>Union</strong> (<code>|</code>) — lowest precedence</li>
+</ol>
+<p><strong>Example:</strong> <code>ab*|c</code> is parsed as <code>(a(b*)) | c</code>, <strong>not</strong> as <code>a(b* | c)</code> or <code>(ab)* | c</code>.</p>
+<hr />
+<h2 id="worked-examples">Worked Examples<a class="headerlink" href="#worked-examples" title="Permanent link">&para;</a></h2>
+<h3 id="example-1">Example 1<a class="headerlink" href="#example-1" title="Permanent link">&para;</a></h3>
+<pre><code>a*b*
+</code></pre>
+<p>"Zero or more <code>a</code>'s followed by zero or more <code>b</code>'s."</p>
+<pre><code>L = {ε, a, b, aa, ab, bb, aaa, aab, abb, bbb, …}
+</code></pre>
+<h3 id="example-2">Example 2<a class="headerlink" href="#example-2" title="Permanent link">&para;</a></h3>
+<pre><code>(a|b)*
+</code></pre>
+<p>"Zero or more symbols, each of which is either <code>a</code> or <code>b</code>." This is the set of <strong>all strings</strong> over <code>{a, b}</code>:</p>
+<pre><code>L = {ε, a, b, aa, ab, ba, bb, aaa, …} = {a, b}*
+</code></pre>
+<h3 id="example-3">Example 3<a class="headerlink" href="#example-3" title="Permanent link">&para;</a></h3>
+<pre><code>(b*ab*ab*)*
+</code></pre>
+<p>Break it down: <code>b*ab*ab*</code> is any string with exactly two <code>a</code>'s (and any number of <code>b</code>'s before, between, and after). The outer star means we can have <strong>any number of repetitions</strong> of this, giving strings with an even number of <code>a</code>'s:</p>
+<pre><code>L = {ε, aa, baa, aba, aab, baab, baba, …} = {w | w has an even number of a's}
+</code></pre>
+<h3 id="example-4">Example 4<a class="headerlink" href="#example-4" title="Permanent link">&para;</a></h3>
+<pre><code>(a|b)*a(a|b)(a|b)
+</code></pre>
+<p>"Any string ending in a symbol <code>a</code> at position 3 from the right." The third character from the end must be <code>a</code>; the last two can be anything:</p>
+<pre><code>L = {aaa, aab, aba, abb, baaa, baab, …}
+     = {w | the third symbol from the right of w is 'a'}
+</code></pre>
+<h3 id="example-5-combined">Example 5 (Combined)<a class="headerlink" href="#example-5-combined" title="Permanent link">&para;</a></h3>
+<pre><code>(0 ∪ 1) · 11 · (0 ∪ 1)
+</code></pre>
+<p>Evaluated step by step:</p>
+<ul>
+<li><code>(0 ∪ 1) = {0, 1}</code></li>
+<li><code>11 = {11}</code> (the string "eleven")</li>
+<li><code>(0 ∪ 1) · 11 · (0 ∪ 1) = {0110, 1110, 0111, 1111}</code></li>
+</ul>
+<hr />
+<h2 id="common-regex-patterns">Common Regex Patterns<a class="headerlink" href="#common-regex-patterns" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Regex</th>
+<th>Language</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>(0|1)*</code></td>
+<td>All binary strings</td>
+</tr>
+<tr>
+<td><code>(0|1)*1</code></td>
+<td>Binary strings ending in 1</td>
+</tr>
+<tr>
+<td><code>0*10*</code></td>
+<td>Binary strings with exactly one 1</td>
+</tr>
+<tr>
+<td><code>(0|1)*11(0|1)*</code></td>
+<td>Binary strings containing <code>11</code></td>
+</tr>
+<tr>
+<td><code>(aa)*</code></td>
+<td>Strings of <code>a</code>'s with even length</td>
+</tr>
+<tr>
+<td><code>(a|b)*aba(a|b)*</code></td>
+<td>Strings over <code>{a,b}</code> containing <code>aba</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="practice-problems">Practice Problems<a class="headerlink" href="#practice-problems" title="Permanent link">&para;</a></h2>
+<p>Write regular expressions for the following languages over <code>Σ = {a, b}</code>:</p>
+<ol>
+<li>All strings that start and end with <code>a</code>.</li>
+<li>All strings of odd length.</li>
+<li>All strings that do <strong>not</strong> contain <code>bb</code> as a substring.</li>
+<li>All strings with at least two <code>b</code>'s.</li>
+<li>All strings where every <code>a</code> is immediately followed by a <code>b</code>.</li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../regular-languages/" class="btn btn-neutral float-left" title="Regular Languages & Operations"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../re-fa-equivalence/" class="btn btn-neutral float-right" title="Equivalence of REs and FAs">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ccoew-org/ToC" class="fa fa-code-fork" style="color: #fcfcfc"> ccoew-org/ToC</a>
+        </span>
+    
+    
+      <span><a href="../regular-languages/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../re-fa-equivalence/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Sourav Kulkarni" /><link rel="canonical" href="https://ccoew-org.github.io/ToC/unit2/pumping-lemma/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Pumping Lemma - Theory of Computation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Pumping Lemma";
+        var mkdocs_page_input_path = "unit2/pumping-lemma.md";
+        var mkdocs_page_url = "/ToC/unit2/pumping-lemma/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Theory of Computation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 0 — Motivation & Foundations</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/overview/">Overview & Course Details</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/math-foundations/">Mathematical Foundations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/building-blocks/">Building Blocks of Computation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 1 — Formal Languages & Finite Automata</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/intro/">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/dfa/">Deterministic Finite Automata (DFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/nfa/">Non-Deterministic Finite Automata (NFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/enfa-conversions/">Epsilon-NFA and Conversions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/fa-with-output/">Finite Automata with Output</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 2 — Regular Expressions & Languages</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../regular-languages/">Regular Languages & Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../regular-expressions/">Regular Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../re-fa-equivalence/">Equivalence of REs and FAs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ardens-theorem/">Arden's Theorem & FA→RE Conversion</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Pumping Lemma</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#motivation">Motivation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-pumping-lemma">The Pumping Lemma</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#why-does-this-hold-for-regular-languages">Why Does This Hold for Regular Languages?</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#using-the-pumping-lemma-proof-structure">Using the Pumping Lemma (Proof Structure)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#worked-example-1-l-anbn-n-0">Worked Example 1: L = {aⁿbⁿ | n ≥ 0}</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#worked-example-2-l-w-ab-w-is-a-palindrome">Worked Example 2: L = {w ∈ {a,b}* | w is a palindrome}</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#worked-example-3-l-0n-n-is-a-perfect-square">Worked Example 3: L = {0ⁿ | n is a perfect square}</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#practice-problems">Practice Problems</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 3 — Context-Free Grammars & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/chomsky-hierarchy/">The Chomsky Hierarchy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/grammars-basics/">Grammars — Basics & Regular Grammars</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfg-derivations/">Context-Free Grammars & Derivations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/ambiguity/">Ambiguity in CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/simplification/">Simplification of CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/normal-forms/">Normal Forms (CNF & GNF)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfl-properties/">Properties of CFLs</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Theory of Computation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Unit 2 — Regular Expressions & Languages</li>
+      <li class="breadcrumb-item active">Pumping Lemma</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ccoew-org/ToC/edit/master/docs/unit2/pumping-lemma.md">Edit on ccoew-org/ToC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="pumping-lemma-for-regular-languages">Pumping Lemma for Regular Languages<a class="headerlink" href="#pumping-lemma-for-regular-languages" title="Permanent link">&para;</a></h1>
+<h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
+<p>We have shown that many languages <em>are</em> regular. But how do we prove that a language <em>is not</em> regular?</p>
+<p>We cannot just say "I tried to build an FA and couldn't" — maybe we weren't clever enough. We need a <em>mathematical proof of impossibility</em>.</p>
+<p>The <strong>Pumping Lemma</strong> provides exactly this tool. It states a property that every regular language <em>must</em> have. If a language violates this property, it cannot be regular.</p>
+<hr />
+<h2 id="the-pumping-lemma">The Pumping Lemma<a class="headerlink" href="#the-pumping-lemma" title="Permanent link">&para;</a></h2>
+<p><strong>Theorem (Pumping Lemma for Regular Languages):</strong></p>
+<p>If <code>L</code> is a regular language, then there exists a constant <code>p ≥ 1</code> (the <strong>pumping length</strong>) such that every string <code>s ∈ L</code> with <code>|s| ≥ p</code> can be split into three parts:</p>
+<pre><code>s = x · y · z
+</code></pre>
+<p>satisfying all three of the following conditions:</p>
+<ol>
+<li><code>|xy| ≤ p</code> — the first two parts together are at most <code>p</code> symbols long.</li>
+<li><code>|y| ≥ 1</code> — the middle part <code>y</code> is non-empty.</li>
+<li>For all <code>i ≥ 0</code>: <code>xyⁱz ∈ L</code> — we can "pump" <code>y</code> any number of times (including zero) and stay in <code>L</code>.</li>
+</ol>
+<p>Here <code>yⁱ</code> means <code>y</code> repeated <code>i</code> times: <code>y⁰ = ε</code>, <code>y¹ = y</code>, <code>y² = yy</code>, etc.</p>
+<h3 id="why-does-this-hold-for-regular-languages">Why Does This Hold for Regular Languages?<a class="headerlink" href="#why-does-this-hold-for-regular-languages" title="Permanent link">&para;</a></h3>
+<p>If <code>L</code> is regular, some DFA <code>M</code> with <code>p</code> states accepts <code>L</code>. When <code>M</code> processes a string <code>s</code> with <code>|s| ≥ p</code>, it visits at least <code>p+1</code> states — but there are only <code>p</code> states. By the <strong>Pigeonhole Principle</strong>, some state <code>q</code> must be visited <em>twice</em> in the first <code>p+1</code> steps.</p>
+<p>Let <code>x</code> be the input consumed up to the first visit to <code>q</code>, let <code>y</code> be the input consumed between the two visits to <code>q</code> (this is non-empty, giving condition 2), and let <code>z</code> be the remainder.</p>
+<p>Since <code>y</code> takes the machine from <code>q</code> back to <code>q</code>, we can loop <code>y</code> any number of times and still end up at <code>q</code>. Since <code>z</code> then takes the machine from <code>q</code> to an accept state (as originally), <code>xyⁱz ∈ L</code> for all <code>i ≥ 0</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">The Pumping Lemma is a necessary, not sufficient, condition</p>
+<p>The Pumping Lemma says: if <code>L</code> is regular, then it can be pumped. The contrapositive is: if <code>L</code> cannot be pumped, then <code>L</code> is not regular. <strong>However</strong>, some non-regular languages can be pumped too — so being "pumpable" does not prove a language is regular.</p>
+</div>
+<hr />
+<h2 id="using-the-pumping-lemma-proof-structure">Using the Pumping Lemma (Proof Structure)<a class="headerlink" href="#using-the-pumping-lemma-proof-structure" title="Permanent link">&para;</a></h2>
+<p>To prove that language <code>L</code> is <strong>not</strong> regular using the Pumping Lemma:</p>
+<ol>
+<li><strong>Assume</strong> for contradiction that <code>L</code> is regular, and let <code>p</code> be its pumping length.</li>
+<li><strong>Choose</strong> a specific string <code>s ∈ L</code> with <code>|s| ≥ p</code>. (Choose <code>s</code> cleverly — make it hard to pump.)</li>
+<li><strong>Consider all possible ways</strong> to split <code>s = xyz</code> satisfying <code>|xy| ≤ p</code> and <code>|y| ≥ 1</code>.</li>
+<li><strong>For each such split</strong>, show that there exists some <code>i ≥ 0</code> such that <code>xyⁱz ∉ L</code>.</li>
+<li><strong>Conclude</strong> that no valid pumping decomposition exists, contradicting the Pumping Lemma. Therefore <code>L</code> is not regular.</li>
+</ol>
+<hr />
+<h2 id="worked-example-1-l-anbn-n-0">Worked Example 1: <code>L = {aⁿbⁿ | n ≥ 0}</code><a class="headerlink" href="#worked-example-1-l-anbn-n-0" title="Permanent link">&para;</a></h2>
+<p><strong>Claim:</strong> <code>L</code> is not regular.</p>
+<p><strong>Proof:</strong></p>
+<p>Assume <code>L</code> is regular with pumping length <code>p</code>. Choose <code>s = aᵖbᵖ ∈ L</code> (this has length <code>2p ≥ p</code>).</p>
+<p>By the Pumping Lemma, <code>s = xyz</code> with <code>|xy| ≤ p</code> and <code>|y| ≥ 1</code>.</p>
+<p>Since <code>|xy| ≤ p</code>, the substring <code>xy</code> lies entirely within the first <code>p</code> symbols of <code>s</code>, which are all <code>a</code>'s. Therefore <code>y = aᵏ</code> for some <code>k ≥ 1</code>.</p>
+<p>Now consider <code>i = 2</code>: <code>xy²z = x·aa...a·y·z = aᵖ⁺ᵏbᵖ</code>.</p>
+<p>This string has <code>p + k</code> copies of <code>a</code> but only <code>p</code> copies of <code>b</code>. Since <code>k ≥ 1</code>, we have <code>p + k ≠ p</code>, so <code>xy²z ∉ L</code>.</p>
+<p>This contradicts the Pumping Lemma. Therefore <code>L</code> is <strong>not regular</strong>. ∎</p>
+<hr />
+<h2 id="worked-example-2-l-w-ab-w-is-a-palindrome">Worked Example 2: <code>L = {w ∈ {a,b}* | w is a palindrome}</code><a class="headerlink" href="#worked-example-2-l-w-ab-w-is-a-palindrome" title="Permanent link">&para;</a></h2>
+<p><strong>Claim:</strong> <code>L</code> is not regular.</p>
+<p><strong>Proof:</strong></p>
+<p>Assume <code>L</code> is regular with pumping length <code>p</code>. Choose <code>s = aᵖbaᵖ</code> (a palindrome of length <code>2p + 1 ≥ p</code>).</p>
+<p>Since <code>|xy| ≤ p</code>, <code>xy</code> lies entirely in the leading block of <code>a</code>'s. So <code>y = aᵏ</code> for some <code>k ≥ 1</code>.</p>
+<p>Consider <code>i = 0</code>: <code>xy⁰z = xz = aᵖ⁻ᵏbaᵖ</code>.</p>
+<p>For this to be a palindrome, we need it to read the same forwards and backwards. The string has <code>p - k</code> copies of <code>a</code>, then <code>b</code>, then <code>p</code> copies of <code>a</code>. Since <code>k ≥ 1</code>, <code>p - k &lt; p</code>, so it is <strong>not</strong> a palindrome.</p>
+<p>Therefore <code>xy⁰z ∉ L</code>, contradicting the Pumping Lemma. Therefore <code>L</code> is <strong>not regular</strong>. ∎</p>
+<hr />
+<h2 id="worked-example-3-l-0n-n-is-a-perfect-square">Worked Example 3: <code>L = {0ⁿ | n is a perfect square}</code><a class="headerlink" href="#worked-example-3-l-0n-n-is-a-perfect-square" title="Permanent link">&para;</a></h2>
+<p><strong>Claim:</strong> <code>L</code> is not regular.</p>
+<p><strong>Proof:</strong></p>
+<p>Assume <code>L</code> is regular with pumping length <code>p</code>. Choose <code>s = 0^(p²) ∈ L</code>.</p>
+<p>Split <code>s = xyz</code> with <code>|xy| ≤ p</code> and <code>|y| = k ≥ 1</code>. Then <code>y = 0ᵏ</code>.</p>
+<p>Consider <code>xyⁱz = 0^(p² + (i-1)k)</code> for various <code>i</code>. For this to stay in <code>L</code>, <code>p² + (i-1)k</code> must be a perfect square for all <code>i ≥ 0</code>.</p>
+<p>In particular, consider <code>i = 2</code>: the string has length <code>p² + k</code>. We need <code>p² + k</code> to be a perfect square. But <code>p² &lt; p² + k ≤ p² + p &lt; (p+1)²</code> — the length falls <em>strictly between</em> two consecutive perfect squares. Therefore <code>p² + k</code> is not a perfect square, so <code>xy²z ∉ L</code>.</p>
+<p>This contradicts the Pumping Lemma. Therefore <code>L</code> is <strong>not regular</strong>. ∎</p>
+<hr />
+<h2 id="practice-problems">Practice Problems<a class="headerlink" href="#practice-problems" title="Permanent link">&para;</a></h2>
+<p>Use the Pumping Lemma to show the following languages are not regular:</p>
+<ol>
+<li><code>L = {0^m 1^n | m &gt; n}</code></li>
+<li><code>L = {aⁿ | n is prime}</code></li>
+<li><code>L = {ww | w ∈ {a,b}*}</code> (strings that are their own repetition)</li>
+<li><code>L = {1^(n²) | n ≥ 0}</code></li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../ardens-theorem/" class="btn btn-neutral float-left" title="Arden's Theorem & FA→RE Conversion"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../unit3/chomsky-hierarchy/" class="btn btn-neutral float-right" title="The Chomsky Hierarchy">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ccoew-org/ToC" class="fa fa-code-fork" style="color: #fcfcfc"> ccoew-org/ToC</a>
+        </span>
+    
+    
+      <span><a href="../ardens-theorem/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../unit3/chomsky-hierarchy/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

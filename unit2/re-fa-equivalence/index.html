@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Sourav Kulkarni" /><link rel="canonical" href="https://ccoew-org.github.io/ToC/unit2/re-fa-equivalence/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Equivalence of REs and FAs - Theory of Computation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Equivalence of REs and FAs";
+        var mkdocs_page_input_path = "unit2/re-fa-equivalence.md";
+        var mkdocs_page_url = "/ToC/unit2/re-fa-equivalence/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Theory of Computation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 0 — Motivation & Foundations</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/overview/">Overview & Course Details</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/math-foundations/">Mathematical Foundations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/building-blocks/">Building Blocks of Computation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 1 — Formal Languages & Finite Automata</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/intro/">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/dfa/">Deterministic Finite Automata (DFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/nfa/">Non-Deterministic Finite Automata (NFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/enfa-conversions/">Epsilon-NFA and Conversions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/fa-with-output/">Finite Automata with Output</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 2 — Regular Expressions & Languages</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../regular-languages/">Regular Languages & Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../regular-expressions/">Regular Expressions</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Equivalence of REs and FAs</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#the-main-theorem">The Main Theorem</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#part-1-re-nfa">Part 1: RE → ε-NFA</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#base-cases">Base Cases</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#inductive-cases">Inductive Cases</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#algorithm-building-an-nfa-from-a-re">Algorithm: Building an NFA from a RE</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#worked-example-re-ab-ba-nfa">Worked Example: RE (ab | ba)* → ε-NFA</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#practice-problems-re-nfa">Practice Problems: RE → NFA</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#part-2-fa-re">Part 2: FA → RE</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ardens-theorem/">Arden's Theorem & FA→RE Conversion</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pumping-lemma/">Pumping Lemma</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 3 — Context-Free Grammars & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/chomsky-hierarchy/">The Chomsky Hierarchy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/grammars-basics/">Grammars — Basics & Regular Grammars</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfg-derivations/">Context-Free Grammars & Derivations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/ambiguity/">Ambiguity in CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/simplification/">Simplification of CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/normal-forms/">Normal Forms (CNF & GNF)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfl-properties/">Properties of CFLs</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Theory of Computation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Unit 2 — Regular Expressions & Languages</li>
+      <li class="breadcrumb-item active">Equivalence of REs and FAs</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ccoew-org/ToC/edit/master/docs/unit2/re-fa-equivalence.md">Edit on ccoew-org/ToC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="equivalence-of-regular-expressions-and-finite-automata">Equivalence of Regular Expressions and Finite Automata<a class="headerlink" href="#equivalence-of-regular-expressions-and-finite-automata" title="Permanent link">&para;</a></h1>
+<h2 id="the-main-theorem">The Main Theorem<a class="headerlink" href="#the-main-theorem" title="Permanent link">&para;</a></h2>
+<p><strong>Theorem:</strong> A language is regular (accepted by some FA) if and only if it is described by some regular expression.</p>
+<p>This means:</p>
+<ul>
+<li>Every RE can be converted to an equivalent ε-NFA → NFA → DFA.</li>
+<li>Every FA can be converted to an equivalent RE (using Arden's Theorem or state elimination).</li>
+</ul>
+<hr />
+<h2 id="part-1-re-nfa">Part 1: RE → ε-NFA<a class="headerlink" href="#part-1-re-nfa" title="Permanent link">&para;</a></h2>
+<p>We show that for each of the six base cases of a regular expression, we can build an ε-NFA. Larger REs are handled by composing these base machines using the union, concatenation, and star constructions from Unit 2 (Regular Languages).</p>
+<h3 id="base-cases">Base Cases<a class="headerlink" href="#base-cases" title="Permanent link">&para;</a></h3>
+<p><strong>RE: <code>a</code></strong> (single symbol)<br />
+Language: <code>{a}</code></p>
+<pre><code>q₀ ──a──→ q₁ (accept)
+</code></pre>
+<p><strong>RE: <code>ε</code></strong> (empty string)<br />
+Language: <code>{ε}</code></p>
+<pre><code>→ q₀ (accept)     (start state is also the accept state; accepts ε immediately)
+</code></pre>
+<p><strong>RE: <code>∅</code></strong> (empty language)<br />
+Language: <code>{}</code></p>
+<pre><code>→ q₀    q₁ (accept)     (no path from q₀ to q₁; nothing is accepted)
+</code></pre>
+<h3 id="inductive-cases">Inductive Cases<a class="headerlink" href="#inductive-cases" title="Permanent link">&para;</a></h3>
+<p><strong>RE: <code>(R₁ | R₂)</code> — Union</strong><br />
+Build machines <code>N₁</code> and <code>N₂</code> for <code>R₁</code> and <code>R₂</code>. Connect a new start state to both via ε-transitions:</p>
+<pre><code>           ε ──→  N₁
+q_new
+           ε ──→  N₂
+</code></pre>
+<p><strong>RE: <code>(R₁ · R₂)</code> — Concatenation</strong><br />
+Connect the accept states of <code>N₁</code> to the start state of <code>N₂</code> via ε-transitions:</p>
+<pre><code>──→ N₁ ──ε──→ N₂ (accept)
+</code></pre>
+<p><strong>RE: <code>(R₁*)</code> — Star</strong><br />
+Add a new start/accept state and loop:</p>
+<pre><code>              ┌────────ε────────┐
+              ↓                 │
+q_new ──ε──→ N₁ ──ε──→ q_new
+(accept)
+</code></pre>
+<h3 id="algorithm-building-an-nfa-from-a-re">Algorithm: Building an NFA from a RE<a class="headerlink" href="#algorithm-building-an-nfa-from-a-re" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Identify the smallest sub-expressions of the regex.</li>
+<li>Build a base-case NFA for each atomic sub-expression.</li>
+<li>Combine using the inductive constructions, working from the inside of the expression outward.</li>
+</ol>
+<hr />
+<h2 id="worked-example-re-ab-ba-nfa">Worked Example: RE <code>(ab | ba)*</code> → ε-NFA<a class="headerlink" href="#worked-example-re-ab-ba-nfa" title="Permanent link">&para;</a></h2>
+<p><strong>Step 1:</strong> Build NFA for <code>a</code>:</p>
+<pre><code>q₀ ──a──→ q₁
+</code></pre>
+<p><strong>Step 2:</strong> Build NFA for <code>ab</code> (concatenate <code>a</code> and <code>b</code>):</p>
+<pre><code>q₀ ──a──→ q₁ ──b──→ q₂
+</code></pre>
+<p><strong>Step 3:</strong> Build NFA for <code>b</code>:</p>
+<pre><code>q₀ ──b──→ q₁
+</code></pre>
+<p><strong>Step 4:</strong> Build NFA for <code>ba</code> (concatenate <code>b</code> and <code>a</code>):</p>
+<pre><code>q₃ ──b──→ q₄ ──a──→ q₅
+</code></pre>
+<p><strong>Step 5:</strong> Combine <code>ab | ba</code> with union construction — add new start state <code>q₀'</code> with ε-transitions into both machines:</p>
+<pre><code>       ε ──→ q₀ ──a──→ q₁ ──b──→ q₂ (accept₁)
+q₀'
+       ε ──→ q₃ ──b──→ q₄ ──a──→ q₅ (accept₂)
+</code></pre>
+<p><strong>Step 6:</strong> Apply the star construction — add a new start/accept state <code>q_s</code> with ε into <code>q₀'</code>, and ε-transitions from both accept states back to <code>q₀'</code>:</p>
+<pre><code>              ε ──→  q₀ ──a──→ q₁ ──b──→ q₂ ──ε──┐
+q_s ──ε──→ q₀'                                         ──ε──→ q_s
+              ε ──→  q₃ ──b──→ q₄ ──a──→ q₅ ──ε──┘
+(q_s is accept)
+</code></pre>
+<p>This ε-NFA accepts exactly the language of <code>(ab | ba)*</code>.</p>
+<hr />
+<h2 id="practice-problems-re-nfa">Practice Problems: RE → NFA<a class="headerlink" href="#practice-problems-re-nfa" title="Permanent link">&para;</a></h2>
+<p>Construct equivalent ε-NFAs (then convert to DFA if required) for:</p>
+<ol>
+<li><code>bb(aa)*bb</code></li>
+<li><code>(a|b)*aba</code></li>
+<li><code>(a|ba)*</code></li>
+<li><code>(a|b)*abb(a|b)*</code></li>
+<li><code>(b*ab*ab*)*</code></li>
+</ol>
+<hr />
+<h2 id="part-2-fa-re">Part 2: FA → RE<a class="headerlink" href="#part-2-fa-re" title="Permanent link">&para;</a></h2>
+<p>For this direction, see <strong>Arden's Theorem</strong> on the next page, which gives a systematic algebraic method for converting any DFA to an equivalent regular expression.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../regular-expressions/" class="btn btn-neutral float-left" title="Regular Expressions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ardens-theorem/" class="btn btn-neutral float-right" title="Arden's Theorem & FA→RE Conversion">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ccoew-org/ToC" class="fa fa-code-fork" style="color: #fcfcfc"> ccoew-org/ToC</a>
+        </span>
+    
+    
+      <span><a href="../regular-expressions/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../ardens-theorem/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

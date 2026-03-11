@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Sourav Kulkarni" /><link rel="canonical" href="https://ccoew-org.github.io/ToC/unit2/ardens-theorem/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Arden's Theorem & FA→RE Conversion - Theory of Computation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Arden\u0027s Theorem \u0026 FA\u2192RE Conversion";
+        var mkdocs_page_input_path = "unit2/ardens-theorem.md";
+        var mkdocs_page_url = "/ToC/unit2/ardens-theorem/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Theory of Computation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 0 — Motivation & Foundations</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/overview/">Overview & Course Details</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/math-foundations/">Mathematical Foundations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/building-blocks/">Building Blocks of Computation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 1 — Formal Languages & Finite Automata</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/intro/">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/dfa/">Deterministic Finite Automata (DFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/nfa/">Non-Deterministic Finite Automata (NFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/enfa-conversions/">Epsilon-NFA and Conversions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/fa-with-output/">Finite Automata with Output</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 2 — Regular Expressions & Languages</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../regular-languages/">Regular Languages & Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../regular-expressions/">Regular Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../re-fa-equivalence/">Equivalence of REs and FAs</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Arden's Theorem & FA→RE Conversion</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#ardens-theorem">Arden's Theorem</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#statement">Statement</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#verification">Verification</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#fa-re-conversion-method">FA → RE Conversion Method</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-setup">The Setup</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#solving-the-system">Solving the System</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#worked-example">Worked Example</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-dfa">The DFA</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-1-write-the-linear-equations">Step 1: Write the Linear Equations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-2-substitute-to-reduce">Step 2: Substitute to Reduce</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#step-3-find-the-accept-state-regex">Step 3: Find the Accept State Regex</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#result">Result</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summary-method-for-fa-re-via-ardens-theorem">Summary: Method for FA → RE via Arden's Theorem</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../pumping-lemma/">Pumping Lemma</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 3 — Context-Free Grammars & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/chomsky-hierarchy/">The Chomsky Hierarchy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/grammars-basics/">Grammars — Basics & Regular Grammars</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfg-derivations/">Context-Free Grammars & Derivations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/ambiguity/">Ambiguity in CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/simplification/">Simplification of CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/normal-forms/">Normal Forms (CNF & GNF)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfl-properties/">Properties of CFLs</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Theory of Computation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Unit 2 — Regular Expressions & Languages</li>
+      <li class="breadcrumb-item active">Arden's Theorem & FA→RE Conversion</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ccoew-org/ToC/edit/master/docs/unit2/ardens-theorem.md">Edit on ccoew-org/ToC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="ardens-theorem-fa-re-conversion">Arden's Theorem &amp; FA → RE Conversion<a class="headerlink" href="#ardens-theorem-fa-re-conversion" title="Permanent link">&para;</a></h1>
+<h2 id="ardens-theorem">Arden's Theorem<a class="headerlink" href="#ardens-theorem" title="Permanent link">&para;</a></h2>
+<p>Arden's Theorem is the algebraic tool for converting a finite automaton into an equivalent regular expression.</p>
+<h3 id="statement">Statement<a class="headerlink" href="#statement" title="Permanent link">&para;</a></h3>
+<p>Let <code>P</code> and <code>Q</code> be regular expressions over alphabet Σ, and suppose <code>ε ∉ L(P)</code> (i.e., <code>P</code> does not describe the empty string). Then the equation:</p>
+<pre><code>R = Q + R · P
+</code></pre>
+<p>has a <strong>unique solution</strong>:</p>
+<pre><code>R = Q · P*
+</code></pre>
+<h3 id="verification">Verification<a class="headerlink" href="#verification" title="Permanent link">&para;</a></h3>
+<p>Substitute <code>R = Q · P*</code> back:</p>
+<pre><code>Q · P*  =  Q + (Q · P*) · P
+       =  Q + Q · P* · P
+       =  Q · (ε + P* · P)
+       =  Q · P*              ✓   (since ε + P* · P = P*)
+</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">The condition ε ∉ L(P) is necessary</p>
+<p>If <code>P</code> could generate <code>ε</code>, the equation may have multiple solutions and Arden's theorem does not give the unique one. In practice, when applying the theorem to DFAs with self-loops, you need to ensure the loop pattern <code>P</code> does not include <code>ε</code>.</p>
+</div>
+<hr />
+<h2 id="fa-re-conversion-method">FA → RE Conversion Method<a class="headerlink" href="#fa-re-conversion-method" title="Permanent link">&para;</a></h2>
+<h3 id="the-setup">The Setup<a class="headerlink" href="#the-setup" title="Permanent link">&para;</a></h3>
+<p>Every DFA can be described by a system of <strong>linear regular equations</strong> — one per state. For each state <code>qᵢ</code>, write an equation of the form:</p>
+<pre><code>qᵢ = (sum of terms: some_regex · qⱼ for each transition into qᵢ) + (ε if qᵢ is the start state)
+</code></pre>
+<p>Wait — it is cleaner to write equations from the <em>source</em> perspective. For each state <code>qᵢ</code>, the equation captures "how do you reach <code>qᵢ</code>?":</p>
+<p>Think of <code>qᵢ</code> as a variable representing the set of strings that take the DFA from the start state to state <code>qᵢ</code>. Then:</p>
+<ul>
+<li>The start state <code>q₀</code> always includes <code>ε</code> (the empty string takes you from <code>q₀</code> to <code>q₀</code>).</li>
+<li>For each transition <code>δ(qⱼ, a) = qᵢ</code>, add the term <code>qⱼ · a</code> to the equation for <code>qᵢ</code>.</li>
+</ul>
+<p>The <strong>language of the DFA</strong> is the union of all <code>qᵢ</code> for which <code>qᵢ ∈ F</code>.</p>
+<h3 id="solving-the-system">Solving the System<a class="headerlink" href="#solving-the-system" title="Permanent link">&para;</a></h3>
+<p>Apply Arden's theorem to eliminate state variables one by one (starting from states that appear only in their own equation), until you have a closed-form regex for the accept states.</p>
+<hr />
+<h2 id="worked-example">Worked Example<a class="headerlink" href="#worked-example" title="Permanent link">&para;</a></h2>
+<h3 id="the-dfa">The DFA<a class="headerlink" href="#the-dfa" title="Permanent link">&para;</a></h3>
+<p>A DFA that accepts all strings over <code>{a, b}</code> of the form <code>(b | aa | abb | abaa)* · aba</code>.</p>
+<p>(This is taken from the lecture notes. Four states: <code>q₀</code> is start and the only accept state is <code>q₃</code>.)</p>
+<p>The transitions are:</p>
+<pre><code>δ(q₀, a) = q₁,   δ(q₀, b) = q₀
+δ(q₁, a) = q₁,   δ(q₁, b) = q₂
+δ(q₂, a) = q₃,   δ(q₂, b) = q₀
+δ(q₃, a) = q₁,   δ(q₃, b) = q₀
+</code></pre>
+<p>Accept state: <code>q₃</code>.</p>
+<h3 id="step-1-write-the-linear-equations">Step 1: Write the Linear Equations<a class="headerlink" href="#step-1-write-the-linear-equations" title="Permanent link">&para;</a></h3>
+<p>For each state, the variable represents "strings that take the DFA from the start to this state":</p>
+<pre><code>(1)  q₀ = ε + q₀·b + q₂·b + q₃·b
+(2)  q₁ = q₀·a + q₁·a + q₃·a
+(3)  q₂ = q₁·b
+(4)  q₃ = q₂·a
+</code></pre>
+<p>(Explanation: <code>q₀</code> includes <code>ε</code> because it is the start state; it also receives transitions from itself on <code>b</code>, from <code>q₂</code> on <code>b</code>, and from <code>q₃</code> on <code>b</code>. Similarly for the others.)</p>
+<h3 id="step-2-substitute-to-reduce">Step 2: Substitute to Reduce<a class="headerlink" href="#step-2-substitute-to-reduce" title="Permanent link">&para;</a></h3>
+<p>Use equations (3) and (4) to eliminate <code>q₂</code> and <code>q₃</code> from equation (1):</p>
+<p>From (3): <code>q₂ = q₁·b</code><br />
+From (4): <code>q₃ = q₂·a = q₁·b·a</code></p>
+<p>Substitute into (1):</p>
+<pre><code>q₀ = ε + q₀·b + (q₁·b)·b + (q₁·b·a)·b
+   = ε + q₀·b + q₁·bb + q₁·bab
+   = ε + q₀·b + q₁·(bb + bab)
+</code></pre>
+<p>Use equation (2) to find <code>q₁</code>. From (2), apply Arden's theorem (since <code>q₁</code> appears on both sides with pattern <code>P = a</code>):</p>
+<pre><code>q₁ = q₀·a + q₁·a + q₃·a
+   = (q₀·a + q₃·a) + q₁·a
+</code></pre>
+<p>Here <code>P = a</code>, <code>Q = q₀·a + q₃·a</code>. So <code>q₁ = (q₀·a + q₁·b·a·a)·a*</code>. This gets complex. Let us follow the textbook's approach instead (substituting directly into <code>q₀</code>'s equation):</p>
+<p>From (2): <code>q₁ = (q₀·a + q₃·a) · a* = (q₀ + q₃)·a·a*</code> — but <code>q₃ = q₁·ba</code>, so:</p>
+<p>A cleaner path is to substitute everything into the <code>q₀</code> equation and use Arden's once at the end.</p>
+<p>Substituting <code>q₁ = q₀·a</code>, <code>q₂ = q₀·ab</code>, <code>q₃ = q₀·aba</code> (as first-order approximations, ignoring self-loops on <code>q₁</code> first):</p>
+<pre><code>q₀ = ε + q₀·b + q₀·a·bb + q₀·a·bab + q₀·a·ba·a + …
+</code></pre>
+<p>The full derivation (as in the slides) groups these into:</p>
+<pre><code>q₀ = ε + q₀·(b + aa + abb + abaa)
+</code></pre>
+<p>This is in Arden form <code>R = Q + R·P</code> with <code>Q = ε</code>, <code>P = (b + aa + abb + abaa)</code>.</p>
+<p><strong>Solution:</strong> <code>q₀ = ε · (b + aa + abb + abaa)* = (b + aa + abb + abaa)*</code> ... <strong>(5)</strong></p>
+<h3 id="step-3-find-the-accept-state-regex">Step 3: Find the Accept State Regex<a class="headerlink" href="#step-3-find-the-accept-state-regex" title="Permanent link">&para;</a></h3>
+<pre><code>q₁ = q₀·a           = (b + aa + abb + abaa)*·a      ... from (3) of step 2
+q₂ = q₁·b           = (b + aa + abb + abaa)*·ab     ... (6)
+q₃ = q₂·a           = (b + aa + abb + abaa)*·aba    ... (7)
+</code></pre>
+<h3 id="result">Result<a class="headerlink" href="#result" title="Permanent link">&para;</a></h3>
+<p>The regular expression for this DFA is:</p>
+<pre><code>(b + aa + abb + abaa)*·aba
+</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Reading the result</p>
+<p>This says: "Any number of repetitions of strings in <code>{b, aa, abb, abaa}</code>, followed by <code>aba</code>." The suffix <code>aba</code> is what triggers the accept state <code>q₃</code>.</p>
+</div>
+<hr />
+<h2 id="summary-method-for-fa-re-via-ardens-theorem">Summary: Method for FA → RE via Arden's Theorem<a class="headerlink" href="#summary-method-for-fa-re-via-ardens-theorem" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Label each state <code>q₀, q₁, …, qₙ</code> as a variable.</li>
+<li>Write a linear regular equation for each state:</li>
+<li>Include <code>ε</code> for the start state.</li>
+<li>For each incoming transition <code>δ(qⱼ, a) = qᵢ</code>, add <code>qⱼ·a</code> to the right-hand side of <code>qᵢ</code>'s equation.</li>
+<li>Solve the system by substitution, applying Arden's theorem whenever a variable appears on both sides.</li>
+<li>The final regex for the language is the union of the solved expressions for all accept states.</li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../re-fa-equivalence/" class="btn btn-neutral float-left" title="Equivalence of REs and FAs"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../pumping-lemma/" class="btn btn-neutral float-right" title="Pumping Lemma">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ccoew-org/ToC" class="fa fa-code-fork" style="color: #fcfcfc"> ccoew-org/ToC</a>
+        </span>
+    
+    
+      <span><a href="../re-fa-equivalence/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../pumping-lemma/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Sourav Kulkarni" /><link rel="canonical" href="https://ccoew-org.github.io/ToC/unit3/simplification/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Simplification of CFGs - Theory of Computation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Simplification of CFGs";
+        var mkdocs_page_input_path = "unit3/simplification.md";
+        var mkdocs_page_url = "/ToC/unit3/simplification/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Theory of Computation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 0 — Motivation & Foundations</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/overview/">Overview & Course Details</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/math-foundations/">Mathematical Foundations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/building-blocks/">Building Blocks of Computation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 1 — Formal Languages & Finite Automata</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/intro/">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/dfa/">Deterministic Finite Automata (DFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/nfa/">Non-Deterministic Finite Automata (NFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/enfa-conversions/">Epsilon-NFA and Conversions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/fa-with-output/">Finite Automata with Output</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 2 — Regular Expressions & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-languages/">Regular Languages & Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-expressions/">Regular Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/re-fa-equivalence/">Equivalence of REs and FAs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/ardens-theorem/">Arden's Theorem & FA→RE Conversion</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/pumping-lemma/">Pumping Lemma</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 3 — Context-Free Grammars & Languages</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../chomsky-hierarchy/">The Chomsky Hierarchy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../grammars-basics/">Grammars — Basics & Regular Grammars</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cfg-derivations/">Context-Free Grammars & Derivations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ambiguity/">Ambiguity in CFGs</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Simplification of CFGs</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#step-1-eliminate-useless-symbols">Step 1: Eliminate Useless Symbols</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#removing-non-generating-variables">Removing Non-Generating Variables</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#removing-unreachable-variables">Removing Unreachable Variables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-2-eliminate-productions">Step 2: Eliminate ε-Productions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#algorithm">Algorithm</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#step-3-eliminate-unit-productions">Step 3: Eliminate Unit Productions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#algorithm_1">Algorithm</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example_1">Example</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#complete-simplification-example">Complete Simplification Example</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../normal-forms/">Normal Forms (CNF & GNF)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cfl-properties/">Properties of CFLs</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Theory of Computation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Unit 3 — Context-Free Grammars & Languages</li>
+      <li class="breadcrumb-item active">Simplification of CFGs</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ccoew-org/ToC/edit/master/docs/unit3/simplification.md">Edit on ccoew-org/ToC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="simplification-of-cfgs">Simplification of CFGs<a class="headerlink" href="#simplification-of-cfgs" title="Permanent link">&para;</a></h1>
+<p>Simplifying a CFG means removing redundant elements — variables and rules that do not contribute to the language — <strong>without changing <code>L(G)</code></strong>. Simplified grammars are easier to reason about and are required as a precondition for conversion to Normal Forms.</p>
+<p>There are three main simplification steps, and they should be applied in the order given here.</p>
+<hr />
+<h2 id="step-1-eliminate-useless-symbols">Step 1: Eliminate Useless Symbols<a class="headerlink" href="#step-1-eliminate-useless-symbols" title="Permanent link">&para;</a></h2>
+<p>A symbol (variable or terminal) is <strong>useless</strong> if it either:</p>
+<ol>
+<li><strong>Does not generate any terminal string</strong> (non-generating), or</li>
+<li><strong>Is never reachable</strong> from the start symbol <code>S</code>.</li>
+</ol>
+<p>Both kinds must be removed. Importantly, <strong>remove non-generating variables first</strong>, then remove unreachable symbols — the order matters.</p>
+<h3 id="removing-non-generating-variables">Removing Non-Generating Variables<a class="headerlink" href="#removing-non-generating-variables" title="Permanent link">&para;</a></h3>
+<p>A variable <code>A</code> is <strong>generating</strong> if <code>A ⟹* w</code> for some <code>w ∈ Σ*</code> (i.e., it can eventually derive a string of terminals).</p>
+<p><strong>Algorithm:</strong></p>
+<ol>
+<li>Mark all variables that directly produce a terminal string (e.g., <code>A → ab</code> — <code>A</code> is generating).</li>
+<li>Repeatedly mark variables whose rules produce strings of already-marked variables and terminals.</li>
+<li>Repeat until no new variables are marked.</li>
+<li>Any variable not marked is non-generating. Remove it and all rules that contain it.</li>
+</ol>
+<p><strong>Example:</strong></p>
+<pre><code>S → AB | a
+A → aA | a
+B → bC
+</code></pre>
+<ul>
+<li><code>A</code> is generating (<code>A → a</code>).</li>
+<li><code>S</code> is generating (<code>S → a</code>).</li>
+<li><code>C</code> has no production rules → non-generating.</li>
+<li><code>B → bC</code> contains <code>C</code> → <code>B</code> cannot derive a terminal string → <code>B</code> is non-generating.</li>
+<li>Remove <code>B</code>, <code>C</code>, and the rule <code>S → AB</code>.</li>
+</ul>
+<p>Result:</p>
+<pre><code>S → a
+A → aA | a
+</code></pre>
+<h3 id="removing-unreachable-variables">Removing Unreachable Variables<a class="headerlink" href="#removing-unreachable-variables" title="Permanent link">&para;</a></h3>
+<p>A variable <code>A</code> is <strong>reachable</strong> from <code>S</code> if there exists a derivation <code>S ⟹* αAβ</code> for some strings <code>α, β</code>.</p>
+<p><strong>Algorithm:</strong></p>
+<ol>
+<li>Mark <code>S</code> as reachable.</li>
+<li>For each marked variable, mark all variables appearing on the right-hand side of its rules.</li>
+<li>Repeat until no new variables are marked.</li>
+<li>Remove all unmarked variables and their rules.</li>
+</ol>
+<p><strong>Example:</strong></p>
+<pre><code>S → AB | a
+A → aA | a
+B → b
+C → c
+</code></pre>
+<ul>
+<li><code>S</code> is reachable (start).</li>
+<li><code>A</code> and <code>B</code> are reachable (they appear in <code>S → AB</code>).</li>
+<li><code>C</code> is never reachable from <code>S</code>.</li>
+<li>Remove <code>C → c</code>.</li>
+</ul>
+<p>Result:</p>
+<pre><code>S → AB | a
+A → aA | a
+B → b
+</code></pre>
+<hr />
+<h2 id="step-2-eliminate-productions">Step 2: Eliminate ε-Productions<a class="headerlink" href="#step-2-eliminate-productions" title="Permanent link">&para;</a></h2>
+<p>An <strong>ε-production</strong> is any rule of the form <code>A → ε</code>. These can cause complications in parsing and are removed in this step.</p>
+<p><strong>Exception:</strong> If <code>ε ∈ L(G)</code> (the empty string is in the language), then we keep only the rule <code>S → ε</code> for the start symbol. All other ε-productions are removed.</p>
+<h3 id="algorithm">Algorithm<a class="headerlink" href="#algorithm" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Find all <strong>nullable variables</strong> — variables <code>A</code> such that <code>A ⟹* ε</code>.</li>
+<li>
+<p><code>A</code> is nullable if <code>A → ε</code> is a rule, or if <code>A → B₁B₂…Bₖ</code> where every <code>Bᵢ</code> is nullable.</p>
+</li>
+<li>
+<p>For every rule <code>A → α</code> where <code>α</code> contains nullable variables, add <strong>new rules</strong> that correspond to each possible subset of nullable variables being absent from <code>α</code>.</p>
+</li>
+<li>
+<p>Remove all original ε-productions (except <code>S → ε</code> if <code>ε ∈ L(G)</code>).</p>
+</li>
+</ol>
+<h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
+<pre><code>S → AB | a
+A → aA | ε
+B → b
+</code></pre>
+<p><strong>Step 1:</strong> Nullable variables: <code>A</code> (directly, via <code>A → ε</code>).</p>
+<p><strong>Step 2:</strong> The rule <code>S → AB</code> contains nullable variable <code>A</code>. Add <code>S → B</code> (with <code>A</code> absent).<br />
+The rule <code>A → aA</code> contains nullable variable <code>A</code>. Add <code>A → a</code> (with the second <code>A</code> absent; the first <code>a</code> stays).</p>
+<p><strong>Step 3:</strong> Remove <code>A → ε</code>.</p>
+<p>Result:</p>
+<pre><code>S → AB | B | a
+A → aA | a
+B → b
+</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Do not remove all ε-productions blindly</p>
+<p>If <code>ε ∈ L(G)</code>, you must keep <code>S → ε</code>. Removing it would change the language by excluding the empty string.</p>
+</div>
+<hr />
+<h2 id="step-3-eliminate-unit-productions">Step 3: Eliminate Unit Productions<a class="headerlink" href="#step-3-eliminate-unit-productions" title="Permanent link">&para;</a></h2>
+<p>A <strong>unit production</strong> is a rule of the form <code>A → B</code> where both <code>A</code> and <code>B</code> are variables (non-terminals).</p>
+<p>Unit productions add no structure — they just rename one variable as another. They can be eliminated by substituting the rules of <code>B</code> wherever <code>A → B</code> appears.</p>
+<h3 id="algorithm_1">Algorithm<a class="headerlink" href="#algorithm_1" title="Permanent link">&para;</a></h3>
+<p>For each unit production pair <code>A → B</code>:</p>
+<ol>
+<li>Find all rules <code>B → α₁ | α₂ | …</code> (where each <code>αᵢ</code> is not a single variable, to avoid infinite loops).</li>
+<li>Add rules <code>A → α₁ | α₂ | …</code> to the grammar.</li>
+<li>Remove <code>A → B</code>.</li>
+</ol>
+<p>Repeat until no unit productions remain.</p>
+<h3 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link">&para;</a></h3>
+<pre><code>S → A | b
+A → B
+B → a
+</code></pre>
+<ul>
+<li><code>A → B</code> and <code>B → a</code> → add <code>A → a</code>, remove <code>A → B</code>.</li>
+<li><code>S → A</code> and <code>A → a</code> → add <code>S → a</code>, remove <code>S → A</code>.</li>
+<li><code>A</code> and <code>B</code> are now unreachable → can be removed in a subsequent Step 1.</li>
+</ul>
+<p>Result:</p>
+<pre><code>S → a | b
+</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">What is and is not a unit production</p>
+<ul>
+<li><code>A → B</code> is a unit production. Remove it.</li>
+<li><code>A → a</code> (single terminal) is <strong>not</strong> a unit production. Keep it.</li>
+<li><code>A → u₁Bu₂</code> is <strong>not</strong> a unit production. Keep it — <code>B</code> is embedded in a longer string, not replacing <code>A</code> directly.</li>
+</ul>
+</div>
+<hr />
+<h2 id="complete-simplification-example">Complete Simplification Example<a class="headerlink" href="#complete-simplification-example" title="Permanent link">&para;</a></h2>
+<p><strong>Original grammar:</strong></p>
+<pre><code>S → aBC | ε
+A → aA | a
+B → bC
+C → c
+D → d
+</code></pre>
+<p><strong>Step 1a (remove non-generating):</strong>
+- <code>A</code> generates (<code>A → a</code>). <code>C</code> generates (<code>C → c</code>). <code>D</code> generates (<code>D → d</code>).
+- <code>B → bC</code>: <code>C</code> is generating, so <code>B</code> generates.
+- <code>S → aBC</code>: <code>B</code>, <code>C</code> generate, so <code>S</code> generates.
+- All variables are generating. Nothing removed in this substep.</p>
+<p><strong>Step 1b (remove unreachable):</strong>
+- <code>S</code> is reachable.
+- From <code>S → aBC</code>: <code>B</code>, <code>C</code> reachable.
+- From <code>B → bC</code>: <code>C</code> already marked.
+- <code>A</code> and <code>D</code> are never reachable from <code>S</code>.
+- Remove <code>A → aA | a</code> and <code>D → d</code>.</p>
+<p>After Step 1:</p>
+<pre><code>S → aBC | ε
+B → bC
+C → c
+</code></pre>
+<p><strong>Step 2 (remove ε-productions):</strong>
+- <code>S</code> is nullable (via <code>S → ε</code>). Is any other variable nullable? No.
+- <code>ε ∈ L(G)</code>, so keep <code>S → ε</code>.
+- No other rules contain <code>S</code> on the RHS, so no new rules to add.</p>
+<p>After Step 2 (no change except confirmation):</p>
+<pre><code>S → aBC | ε
+B → bC
+C → c
+</code></pre>
+<p><strong>Step 3 (remove unit productions):</strong> None present.</p>
+<p><strong>Final simplified grammar:</strong></p>
+<pre><code>S → aBC | ε
+B → bC
+C → c
+</code></pre>
+<p>Language: <code>{ε, abcc}</code> — only two strings (a very small language!).</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../ambiguity/" class="btn btn-neutral float-left" title="Ambiguity in CFGs"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../normal-forms/" class="btn btn-neutral float-right" title="Normal Forms (CNF & GNF)">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ccoew-org/ToC" class="fa fa-code-fork" style="color: #fcfcfc"> ccoew-org/ToC</a>
+        </span>
+    
+    
+      <span><a href="../ambiguity/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../normal-forms/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

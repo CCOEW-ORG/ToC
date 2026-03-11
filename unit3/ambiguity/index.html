@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Sourav Kulkarni" /><link rel="canonical" href="https://ccoew-org.github.io/ToC/unit3/ambiguity/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Ambiguity in CFGs - Theory of Computation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Ambiguity in CFGs";
+        var mkdocs_page_input_path = "unit3/ambiguity.md";
+        var mkdocs_page_url = "/ToC/unit3/ambiguity/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Theory of Computation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 0 — Motivation & Foundations</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/overview/">Overview & Course Details</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/math-foundations/">Mathematical Foundations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/building-blocks/">Building Blocks of Computation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 1 — Formal Languages & Finite Automata</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/intro/">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/dfa/">Deterministic Finite Automata (DFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/nfa/">Non-Deterministic Finite Automata (NFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/enfa-conversions/">Epsilon-NFA and Conversions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/fa-with-output/">Finite Automata with Output</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 2 — Regular Expressions & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-languages/">Regular Languages & Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-expressions/">Regular Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/re-fa-equivalence/">Equivalence of REs and FAs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/ardens-theorem/">Arden's Theorem & FA→RE Conversion</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/pumping-lemma/">Pumping Lemma</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 3 — Context-Free Grammars & Languages</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../chomsky-hierarchy/">The Chomsky Hierarchy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../grammars-basics/">Grammars — Basics & Regular Grammars</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cfg-derivations/">Context-Free Grammars & Derivations</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Ambiguity in CFGs</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#definition">Definition</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#why-ambiguity-matters">Why Ambiguity Matters</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#example-1-arithmetic-expressions">Example 1: Arithmetic Expressions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-ambiguous-grammar">The Ambiguous Grammar</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#removing-the-ambiguity">Removing the Ambiguity</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#example-2-the-dangling-else-problem">Example 2: The Dangling Else Problem</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-ambiguous-grammar_1">The Ambiguous Grammar</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#removing-the-ambiguity_1">Removing the Ambiguity</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#general-strategies-for-removing-ambiguity">General Strategies for Removing Ambiguity</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simplification/">Simplification of CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../normal-forms/">Normal Forms (CNF & GNF)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cfl-properties/">Properties of CFLs</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Theory of Computation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Unit 3 — Context-Free Grammars & Languages</li>
+      <li class="breadcrumb-item active">Ambiguity in CFGs</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ccoew-org/ToC/edit/master/docs/unit3/ambiguity.md">Edit on ccoew-org/ToC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="ambiguity-in-cfgs">Ambiguity in CFGs<a class="headerlink" href="#ambiguity-in-cfgs" title="Permanent link">&para;</a></h1>
+<h2 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">&para;</a></h2>
+<p>A CFG <code>G</code> is <strong>ambiguous</strong> if there exists at least one string <code>w ∈ L(G)</code> that has two or more distinct <strong>parse trees</strong>.</p>
+<p>Equivalently, <code>G</code> is ambiguous if some string has two or more distinct <strong>leftmost derivations</strong> (or two or more distinct rightmost derivations — these are equivalent conditions).</p>
+<div class="admonition warning">
+<p class="admonition-title">Distinct derivations ≠ distinct parse trees</p>
+<p>A single parse tree can correspond to many different derivations (depending on the order you expand non-terminals). What matters for ambiguity is whether the <em>tree structure</em> — the hierarchical grouping — is unique.</p>
+<ul>
+<li>Unique parse tree <strong>does not</strong> imply unique derivation.</li>
+<li><strong>Two or more</strong> distinct parse trees <strong>does</strong> imply ambiguity.</li>
+</ul>
+</div>
+<h3 id="why-ambiguity-matters">Why Ambiguity Matters<a class="headerlink" href="#why-ambiguity-matters" title="Permanent link">&para;</a></h3>
+<p>Ambiguous grammars are problematic in practice because the parse tree encodes the <em>meaning</em> of the string (e.g., the order of operations in an arithmetic expression). Multiple parse trees mean multiple interpretations — and computers need a single, deterministic answer.</p>
+<p>A <strong>compiler</strong> for a programming language cannot tolerate an ambiguous grammar: the same source code would have multiple possible meanings.</p>
+<hr />
+<h2 id="example-1-arithmetic-expressions">Example 1: Arithmetic Expressions<a class="headerlink" href="#example-1-arithmetic-expressions" title="Permanent link">&para;</a></h2>
+<h3 id="the-ambiguous-grammar">The Ambiguous Grammar<a class="headerlink" href="#the-ambiguous-grammar" title="Permanent link">&para;</a></h3>
+<pre><code>E → E + E | E * E | id
+</code></pre>
+<p>This grammar is ambiguous. Consider deriving <code>id + id * id</code>:</p>
+<p><strong>Parse Tree 1</strong> (interprets as <code>(id + id) * id</code> — wrong operator precedence):</p>
+<pre><code>       E
+      / \  \
+     E   *   E
+    / \  \     \
+   E  +  E     id
+   |     |
+  id    id
+</code></pre>
+<p>Wait — let's write it more precisely. Derivation 1 (<code>+</code> first):</p>
+<pre><code>E ⟹ E * E ⟹ (E + E) * E ⟹ (id + E) * E ⟹ (id + id) * E ⟹ (id + id) * id
+</code></pre>
+<p>Parse Tree 1: <code>*</code> is the root, left child is <code>E + E</code>.</p>
+<pre><code>        E
+       /|\
+      E  *  E
+     /|\     \
+    E + E    id
+    |   |
+   id  id
+</code></pre>
+<p>Derivation 2 (<code>*</code> first):</p>
+<pre><code>E ⟹ E + E ⟹ id + E ⟹ id + E * E ⟹ id + id * E ⟹ id + id * id
+</code></pre>
+<p>Parse Tree 2: <code>+</code> is the root, right child is <code>E * E</code>.</p>
+<pre><code>        E
+       /|\
+      E  +  E
+      |    /|\
+     id   E  *  E
+          |     |
+         id    id
+</code></pre>
+<p>These are <strong>two distinct parse trees</strong> for the same string <code>id + id * id</code>. The grammar is ambiguous.</p>
+<h3 id="removing-the-ambiguity">Removing the Ambiguity<a class="headerlink" href="#removing-the-ambiguity" title="Permanent link">&para;</a></h3>
+<p>The ambiguity arises because the grammar does not encode <strong>operator precedence</strong> (<code>*</code> binds tighter than <code>+</code>) or <strong>associativity</strong>.</p>
+<p><strong>Unambiguous grammar:</strong></p>
+<pre><code>E → E + T | T
+T → T * F | F
+F → (E) | id
+</code></pre>
+<p>This forces <code>*</code> to always bind tighter than <code>+</code> (because <code>*</code> lives at the <code>T</code> level, below <code>+</code> at the <code>E</code> level). And both operators are left-associative (the left-recursive form <code>E → E + T</code> ensures left-to-right evaluation).</p>
+<p><strong>Derivation of <code>id + id * id</code> in the unambiguous grammar:</strong></p>
+<pre><code>E ⟹ E + T ⟹ T + T ⟹ F + T ⟹ id + T ⟹ id + T * F ⟹ id + F * F ⟹ id + id * F ⟹ id + id * id
+</code></pre>
+<p>This is the <strong>only</strong> leftmost derivation. There is only one parse tree, with <code>+</code> at the top and <code>*</code> inside the right subtree.</p>
+<hr />
+<h2 id="example-2-the-dangling-else-problem">Example 2: The Dangling Else Problem<a class="headerlink" href="#example-2-the-dangling-else-problem" title="Permanent link">&para;</a></h2>
+<h3 id="the-ambiguous-grammar_1">The Ambiguous Grammar<a class="headerlink" href="#the-ambiguous-grammar_1" title="Permanent link">&para;</a></h3>
+<p>Consider a grammar for <code>if-then-else</code> statements:</p>
+<pre><code>S → if C then S
+  | if C then S else S
+  | A
+C → p | q | r
+A → a | b | c
+</code></pre>
+<p>The string <code>if p then if q then a else b</code> is ambiguous. Two interpretations:</p>
+<p><strong>Interpretation 1</strong> — <code>else b</code> belongs to the <strong>inner</strong> <code>if</code>:</p>
+<pre><code>if p then (if q then a else b)
+</code></pre>
+<p><strong>Interpretation 2</strong> — <code>else b</code> belongs to the <strong>outer</strong> <code>if</code>:</p>
+<pre><code>(if p then if q then a) else b
+</code></pre>
+<p>Both are valid derivations under the grammar.</p>
+<h3 id="removing-the-ambiguity_1">Removing the Ambiguity<a class="headerlink" href="#removing-the-ambiguity_1" title="Permanent link">&para;</a></h3>
+<p>The standard fix: <strong>every <code>else</code> matches the nearest unmatched <code>if</code></strong> (Interpretation 1 above). We encode this by splitting <code>S</code> into:</p>
+<ul>
+<li><code>Sm</code> (matched): an <code>if-then-else</code> where the <code>then</code> branch is also fully matched.</li>
+<li><code>Su</code> (unmatched): an <code>if-then</code> with no <code>else</code>, or an <code>if-then-else</code> where the <code>then</code> branch is unmatched.</li>
+</ul>
+<p><strong>Unambiguous grammar:</strong></p>
+<pre><code>S → Sm | Su
+Sm → if C then Sm else Sm | A
+Su → if C then S | if C then Sm else Su
+C → p | q | r
+A → a | b | c
+</code></pre>
+<p>Under this grammar, <code>if p then if q then a else b</code> has the unique derivation:</p>
+<pre><code>S ⟹ Su ⟹ if C then S ⟹ if p then S ⟹ if p then Sm
+  ⟹ if p then if C then Sm else Sm
+  ⟹ if p then if q then Sm else Sm
+  ⟹ if p then if q then A else Sm
+  ⟹ if p then if q then a else Sm
+  ⟹ if p then if q then a else A
+  ⟹ if p then if q then a else b
+</code></pre>
+<p>The <code>else b</code> is unambiguously attached to the inner <code>if q</code>.</p>
+<hr />
+<h2 id="general-strategies-for-removing-ambiguity">General Strategies for Removing Ambiguity<a class="headerlink" href="#general-strategies-for-removing-ambiguity" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>When to Apply</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Set precedence levels</strong></td>
+<td>When operators of different "strength" are at the same grammar level</td>
+</tr>
+<tr>
+<td><strong>Set associativity</strong> (left or right recursion)</td>
+<td>When the same operator can group left or right</td>
+</tr>
+<tr>
+<td><strong>Split non-terminals</strong></td>
+<td>When a non-terminal is overloaded (e.g., matched vs. unmatched statements)</td>
+</tr>
+<tr>
+<td><strong>Factor out common prefixes</strong></td>
+<td>When two rules share a common prefix, they can be merged</td>
+</tr>
+<tr>
+<td><strong>Simplify/restructure rules</strong></td>
+<td>Remove redundant choices that create ambiguity</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition danger">
+<p class="admonition-title">Inherently Ambiguous Languages</p>
+<p>Some context-free languages are <strong>inherently ambiguous</strong> — every CFG for them is ambiguous. No grammar transformation can remove the ambiguity. An example is:</p>
+<p><code>L = {aⁱbʲcᵏ | i = j  or  j = k}</code></p>
+<p>For strings where <code>i = j = k</code>, any parse tree must "decide" which equality is the reason for acceptance — and there is no way to make that decision uniquely.</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../cfg-derivations/" class="btn btn-neutral float-left" title="Context-Free Grammars & Derivations"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../simplification/" class="btn btn-neutral float-right" title="Simplification of CFGs">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ccoew-org/ToC" class="fa fa-code-fork" style="color: #fcfcfc"> ccoew-org/ToC</a>
+        </span>
+    
+    
+      <span><a href="../cfg-derivations/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../simplification/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

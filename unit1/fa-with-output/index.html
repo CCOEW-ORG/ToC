@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Sourav Kulkarni" /><link rel="canonical" href="https://ccoew-org.github.io/ToC/unit1/fa-with-output/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Finite Automata with Output - Theory of Computation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Finite Automata with Output";
+        var mkdocs_page_input_path = "unit1/fa-with-output.md";
+        var mkdocs_page_url = "/ToC/unit1/fa-with-output/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Theory of Computation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 0 — Motivation & Foundations</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/overview/">Overview & Course Details</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/math-foundations/">Mathematical Foundations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/building-blocks/">Building Blocks of Computation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 1 — Formal Languages & Finite Automata</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../intro/">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dfa/">Deterministic Finite Automata (DFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nfa/">Non-Deterministic Finite Automata (NFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../enfa-conversions/">Epsilon-NFA and Conversions</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Finite Automata with Output</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mealy-machine">Mealy Machine</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#formal-definition">Formal Definition</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example">Example</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#moore-machine">Moore Machine</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#formal-definition_1">Formal Definition</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example_1">Example</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mealy-to-moore-conversion">Mealy to Moore Conversion</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#algorithm">Algorithm</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#worked-example-mealy-moore">Worked Example: Mealy → Moore</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#moore-to-mealy-conversion">Moore to Mealy Conversion</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#algorithm_1">Algorithm</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#worked-example-moore-mealy">Worked Example: Moore → Mealy</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#key-differences-mealy-vs-moore">Key Differences: Mealy vs. Moore</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 2 — Regular Expressions & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-languages/">Regular Languages & Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-expressions/">Regular Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/re-fa-equivalence/">Equivalence of REs and FAs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/ardens-theorem/">Arden's Theorem & FA→RE Conversion</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/pumping-lemma/">Pumping Lemma</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 3 — Context-Free Grammars & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/chomsky-hierarchy/">The Chomsky Hierarchy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/grammars-basics/">Grammars — Basics & Regular Grammars</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfg-derivations/">Context-Free Grammars & Derivations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/ambiguity/">Ambiguity in CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/simplification/">Simplification of CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/normal-forms/">Normal Forms (CNF & GNF)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfl-properties/">Properties of CFLs</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Theory of Computation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Unit 1 — Formal Languages & Finite Automata</li>
+      <li class="breadcrumb-item active">Finite Automata with Output</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ccoew-org/ToC/edit/master/docs/unit1/fa-with-output.md">Edit on ccoew-org/ToC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="finite-automata-with-output-moore-and-mealy-machines">Finite Automata with Output: Moore and Mealy Machines<a class="headerlink" href="#finite-automata-with-output-moore-and-mealy-machines" title="Permanent link">&para;</a></h1>
+<p>So far, our finite automata have produced only a binary output — accept or reject. We now extend them to produce a richer output at each step. Two classical models exist: <strong>Mealy machines</strong> and <strong>Moore machines</strong>.</p>
+<hr />
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Mealy Machine</th>
+<th>Moore Machine</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Output depends on</td>
+<td>Current state <strong>and</strong> current input</td>
+<td>Current state <strong>only</strong></td>
+</tr>
+<tr>
+<td>When output is produced</td>
+<td>On each <strong>transition</strong></td>
+<td>In each <strong>state</strong></td>
+</tr>
+<tr>
+<td>Output function</td>
+<td><code>λ : Q × Σ → Δ</code></td>
+<td><code>λ : Q → Δ</code></td>
+</tr>
+</tbody>
+</table>
+<p>Both models produce an output string as they process an input string, rather than a simple accept/reject.</p>
+<hr />
+<h2 id="mealy-machine">Mealy Machine<a class="headerlink" href="#mealy-machine" title="Permanent link">&para;</a></h2>
+<h3 id="formal-definition">Formal Definition<a class="headerlink" href="#formal-definition" title="Permanent link">&para;</a></h3>
+<p>A <strong>Mealy machine</strong> is a 6-tuple:</p>
+<pre><code>M = (Q, Σ, Δ, δ, λ, q₀)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Q</code></td>
+<td>Finite set of states</td>
+</tr>
+<tr>
+<td><code>Σ</code></td>
+<td>Input alphabet</td>
+</tr>
+<tr>
+<td><code>Δ</code></td>
+<td>Output alphabet</td>
+</tr>
+<tr>
+<td><code>δ</code></td>
+<td>State transition function: <code>δ : Q × Σ → Q</code></td>
+</tr>
+<tr>
+<td><code>λ</code></td>
+<td>Output function: <code>λ : Q × Σ → Δ</code></td>
+</tr>
+<tr>
+<td><code>q₀</code></td>
+<td>Start state</td>
+</tr>
+</tbody>
+</table>
+<p>The output is associated with each <strong>transition edge</strong>. In a state transition diagram, edges are labelled <code>input/output</code>.</p>
+<h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
+<pre><code>Q = {q₀, q₁, q₂},  Σ = {0, 1},  Δ = {0, 1}
+
+δ table:             λ table:
+State | 0  | 1      State | 0 | 1
+  q₀  | q₁ | q₀      q₀  | 0 | 0
+  q₁  | q₁ | q₂      q₁  | 0 | 1
+  q₂  | q₂ | q₂      q₂  | 1 | 1
+</code></pre>
+<hr />
+<h2 id="moore-machine">Moore Machine<a class="headerlink" href="#moore-machine" title="Permanent link">&para;</a></h2>
+<h3 id="formal-definition_1">Formal Definition<a class="headerlink" href="#formal-definition_1" title="Permanent link">&para;</a></h3>
+<p>A <strong>Moore machine</strong> is a 6-tuple:</p>
+<pre><code>M = (Q, Σ, Δ, δ, λ, q₀)
+</code></pre>
+<p>The difference from Mealy: the output function is <code>λ : Q → Δ</code> (output depends only on state, not on input). The output is associated with each <strong>state node</strong>.</p>
+<h3 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link">&para;</a></h3>
+<pre><code>Q = {q₀, q₁, q₂},  Σ = {0, 1},  Δ = {0, 1}
+
+δ table:             λ table:
+State | 0  | 1      State | output
+  q₀  | q₁ | q₀      q₀  |   0
+  q₁  | q₁ | q₂      q₁  |   0
+  q₂  | q₂ | q₂      q₂  |   1
+</code></pre>
+<p>Note: In a Moore machine, the output is produced as the machine <em>enters</em> a state (including the start state), so a string of length <code>n</code> produces <code>n+1</code> output symbols. (Some conventions produce only <code>n</code> outputs by ignoring the start-state output; be consistent with whichever convention your course uses.)</p>
+<hr />
+<h2 id="mealy-to-moore-conversion">Mealy to Moore Conversion<a class="headerlink" href="#mealy-to-moore-conversion" title="Permanent link">&para;</a></h2>
+<p>A Mealy machine can be converted to an equivalent Moore machine. The key challenge: in a Mealy machine, the same state can produce different outputs depending on <em>which</em> input caused the transition into it. In a Moore machine, a state has a single fixed output. The solution is to <strong>split</strong> any state that would need to produce different outputs into multiple copies — one per distinct output value.</p>
+<h3 id="algorithm">Algorithm<a class="headerlink" href="#algorithm" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1:</strong> Define a combined transition-output table <code>T</code>:</p>
+<pre><code>T(q, a) = (δ(q, a), λ(q, a))
+</code></pre>
+<p>This gives pairs <code>(next_state, output)</code> for each <code>(state, input)</code>.</p>
+<p><strong>Step 2:</strong> Identify target states that appear with more than one output value across all transitions. Split each such state <code>qᵢ</code> into states <code>qᵢ₀</code>, <code>qᵢ₁</code>, … — one per distinct output value.</p>
+<p>Update all transitions: wherever <code>(qᵢ, v)</code> appeared as a target, replace it with the appropriate <code>qᵢᵥ</code>.</p>
+<p><strong>Step 3:</strong> From <code>T'</code> (the updated table), extract:
+- <code>δ'</code> (state transitions) — just the first component of each pair.
+- <code>λ'</code> (state output) — the output value associated with each new state (the subscript on the state name).</p>
+<h3 id="worked-example-mealy-moore">Worked Example: Mealy → Moore<a class="headerlink" href="#worked-example-mealy-moore" title="Permanent link">&para;</a></h3>
+<p><strong>Original Mealy machine:</strong></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>0 (δ, λ)</th>
+<th>1 (δ, λ)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q₀</code></td>
+<td><code>q₁, 0</code></td>
+<td><code>q₀, 0</code></td>
+</tr>
+<tr>
+<td><code>q₁</code></td>
+<td><code>q₂, 1</code></td>
+<td><code>q₃, 0</code></td>
+</tr>
+<tr>
+<td><code>q₂</code></td>
+<td><code>q₂, 0</code></td>
+<td><code>q₃, 1</code></td>
+</tr>
+<tr>
+<td><code>q₃</code></td>
+<td><code>q₁, 0</code></td>
+<td><code>q₂, 0</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Step 1: Build T table:</strong></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>0</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q₀</code></td>
+<td><code>(q₁, 0)</code></td>
+<td><code>(q₀, 0)</code></td>
+</tr>
+<tr>
+<td><code>q₁</code></td>
+<td><code>(q₂, 1)</code></td>
+<td><code>(q₃, 0)</code></td>
+</tr>
+<tr>
+<td><code>q₂</code></td>
+<td><code>(q₂, 0)</code></td>
+<td><code>(q₃, 1)</code></td>
+</tr>
+<tr>
+<td><code>q₃</code></td>
+<td><code>(q₁, 0)</code></td>
+<td><code>(q₂, 0)</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Step 2: Identify states needing splitting.</strong></p>
+<ul>
+<li><code>q₂</code> appears as target with output <code>1</code> (from <code>q₁</code> on <code>0</code>) and output <code>0</code> (from <code>q₂</code> on <code>0</code>, <code>q₃</code> on <code>1</code>) → split into <code>q₂₀</code> and <code>q₂₁</code>.</li>
+<li><code>q₃</code> appears as target with output <code>0</code> (from <code>q₁</code> on <code>1</code>) and output <code>1</code> (from <code>q₂</code> on <code>1</code>) → split into <code>q₃₀</code> and <code>q₃₁</code>.</li>
+<li><code>q₀</code> and <code>q₁</code> always appear with the same output → no split needed.</li>
+</ul>
+<p><strong>Step 3: Build Moore machine tables:</strong></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>0</th>
+<th>1</th>
+<th>Moore output <code>λ'</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q₀</code></td>
+<td><code>q₁</code></td>
+<td><code>q₀</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>q₁</code></td>
+<td><code>q₂₁</code></td>
+<td><code>q₃₀</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>q₂₀</code></td>
+<td><code>q₂₀</code></td>
+<td><code>q₃₁</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>q₂₁</code></td>
+<td><code>q₂₀</code></td>
+<td><code>q₃₁</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>q₃₀</code></td>
+<td><code>q₁</code></td>
+<td><code>q₂₀</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>q₃₁</code></td>
+<td><code>q₁</code></td>
+<td><code>q₂₀</code></td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="moore-to-mealy-conversion">Moore to Mealy Conversion<a class="headerlink" href="#moore-to-mealy-conversion" title="Permanent link">&para;</a></h2>
+<p>Converting in the other direction is generally simpler — Moore machines often have more states than their Mealy equivalents, so this conversion tends to <em>reduce</em> the number of states.</p>
+<h3 id="algorithm_1">Algorithm<a class="headerlink" href="#algorithm_1" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1:</strong> Define <code>T</code>:</p>
+<pre><code>T(q, a) = (δ(q, a),  λ(δ(q, a)))
+</code></pre>
+<p>The output is determined by the <em>target</em> state's Moore output.</p>
+<p><strong>Step 2:</strong> Find transitions where different source states transition to the same target state with the same output. These source states can potentially be <strong>merged</strong> — combine them into a single state if all their transitions match identically.</p>
+<p><strong>Step 3:</strong> From <code>T'</code>, extract <code>δ'</code> (transitions) and <code>λ'</code> (output function — now on transitions, not states).</p>
+<h3 id="worked-example-moore-mealy">Worked Example: Moore → Mealy<a class="headerlink" href="#worked-example-moore-mealy" title="Permanent link">&para;</a></h3>
+<p><strong>Original Moore machine:</strong></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>0</th>
+<th>1</th>
+<th><code>λ</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q₀</code></td>
+<td><code>q₁</code></td>
+<td><code>q₄</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>q₁</code></td>
+<td><code>q₄</code></td>
+<td><code>q₃</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>q₂</code></td>
+<td><code>q₀</code></td>
+<td><code>q₁</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>q₃</code></td>
+<td><code>q₁</code></td>
+<td><code>q₄</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>q₄</code></td>
+<td><code>q₃</code></td>
+<td><code>q₂</code></td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Step 1: Build T table</strong> (output = <code>λ</code> of target state):</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>0</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q₀</code></td>
+<td><code>(q₁, 1)</code></td>
+<td><code>(q₄, 0)</code></td>
+</tr>
+<tr>
+<td><code>q₁</code></td>
+<td><code>(q₄, 0)</code></td>
+<td><code>(q₃, 1)</code></td>
+</tr>
+<tr>
+<td><code>q₂</code></td>
+<td><code>(q₀, 0)</code></td>
+<td><code>(q₁, 1)</code></td>
+</tr>
+<tr>
+<td><code>q₃</code></td>
+<td><code>(q₁, 1)</code></td>
+<td><code>(q₄, 0)</code></td>
+</tr>
+<tr>
+<td><code>q₄</code></td>
+<td><code>(q₃, 1)</code></td>
+<td><code>(q₂, 1)</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Step 2: Merge states</strong> — <code>q₀</code> and <code>q₃</code> have identical transition pairs in T. Merge into <code>q₀₃</code>.</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>0</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q₀₃</code></td>
+<td><code>(q₁, 1)</code></td>
+<td><code>(q₄, 0)</code></td>
+</tr>
+<tr>
+<td><code>q₁</code></td>
+<td><code>(q₄, 0)</code></td>
+<td><code>(q₀₃, 1)</code></td>
+</tr>
+<tr>
+<td><code>q₂</code></td>
+<td><code>(q₀₃, 0)</code></td>
+<td><code>(q₁, 1)</code></td>
+</tr>
+<tr>
+<td><code>q₄</code></td>
+<td><code>(q₀₃, 1)</code></td>
+<td><code>(q₂, 1)</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Step 3: Extract Mealy machine:</strong></p>
+<p><code>δ'</code> and <code>λ'</code>:</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>δ'(q,0)</th>
+<th>λ'(q,0)</th>
+<th>δ'(q,1)</th>
+<th>λ'(q,1)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q₀₃</code></td>
+<td><code>q₁</code></td>
+<td>1</td>
+<td><code>q₄</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>q₁</code></td>
+<td><code>q₄</code></td>
+<td>0</td>
+<td><code>q₀₃</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>q₂</code></td>
+<td><code>q₀₃</code></td>
+<td>0</td>
+<td><code>q₁</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>q₄</code></td>
+<td><code>q₀₃</code></td>
+<td>1</td>
+<td><code>q₂</code></td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>The resulting Mealy machine has 4 states, down from the Moore machine's 5.</p>
+<hr />
+<h2 id="key-differences-mealy-vs-moore">Key Differences: Mealy vs. Moore<a class="headerlink" href="#key-differences-mealy-vs-moore" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Equivalence</p>
+<p>Every Mealy machine has an equivalent Moore machine and vice versa. They are not different in what functions they can compute — only in how that computation is expressed. In practice, Mealy machines tend to use fewer states (since one state can produce different outputs for different inputs), while Moore machines are sometimes easier to reason about because the output depends only on where you are, not on how you got there.</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../enfa-conversions/" class="btn btn-neutral float-left" title="Epsilon-NFA and Conversions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../unit2/regular-languages/" class="btn btn-neutral float-right" title="Regular Languages & Operations">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ccoew-org/ToC" class="fa fa-code-fork" style="color: #fcfcfc"> ccoew-org/ToC</a>
+        </span>
+    
+    
+      <span><a href="../enfa-conversions/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../unit2/regular-languages/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

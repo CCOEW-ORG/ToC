@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Sourav Kulkarni" /><link rel="canonical" href="https://ccoew-org.github.io/ToC/unit1/nfa/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Non-Deterministic Finite Automata (NFA) - Theory of Computation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Non-Deterministic Finite Automata (NFA)";
+        var mkdocs_page_input_path = "unit1/nfa.md";
+        var mkdocs_page_url = "/ToC/unit1/nfa/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Theory of Computation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 0 — Motivation & Foundations</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/overview/">Overview & Course Details</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/math-foundations/">Mathematical Foundations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/building-blocks/">Building Blocks of Computation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 1 — Formal Languages & Finite Automata</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../intro/">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dfa/">Deterministic Finite Automata (DFA)</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Non-Deterministic Finite Automata (NFA)</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#motivation-the-cost-of-memory-management-in-dfas">Motivation: The Cost of Memory Management in DFAs</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-non-deterministic-alternative">The Non-Deterministic Alternative</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#formal-definition">Formal Definition</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-the-different-cases-mean">What the Different Cases Mean</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#acceptance-in-an-nfa">Acceptance in an NFA</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#nfa-example-strings-ending-with-ab">NFA Example: Strings Ending with ab</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#trace-processing-w-aab-with-the-nfa-above">Trace: Processing w = aab with the NFA above</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#power-of-non-determinism">Power of Non-Determinism</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#nfa-examples-11-or-101">NFA Examples: ...11... or ...101...</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#practice-problems">Practice Problems</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../enfa-conversions/">Epsilon-NFA and Conversions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fa-with-output/">Finite Automata with Output</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 2 — Regular Expressions & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-languages/">Regular Languages & Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-expressions/">Regular Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/re-fa-equivalence/">Equivalence of REs and FAs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/ardens-theorem/">Arden's Theorem & FA→RE Conversion</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/pumping-lemma/">Pumping Lemma</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 3 — Context-Free Grammars & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/chomsky-hierarchy/">The Chomsky Hierarchy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/grammars-basics/">Grammars — Basics & Regular Grammars</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfg-derivations/">Context-Free Grammars & Derivations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/ambiguity/">Ambiguity in CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/simplification/">Simplification of CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/normal-forms/">Normal Forms (CNF & GNF)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfl-properties/">Properties of CFLs</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Theory of Computation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Unit 1 — Formal Languages & Finite Automata</li>
+      <li class="breadcrumb-item active">Non-Deterministic Finite Automata (NFA)</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ccoew-org/ToC/edit/master/docs/unit1/nfa.md">Edit on ccoew-org/ToC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="non-deterministic-finite-automata-nfa">Non-Deterministic Finite Automata (NFA)<a class="headerlink" href="#non-deterministic-finite-automata-nfa" title="Permanent link">&para;</a></h1>
+<h2 id="motivation-the-cost-of-memory-management-in-dfas">Motivation: The Cost of Memory Management in DFAs<a class="headerlink" href="#motivation-the-cost-of-memory-management-in-dfas" title="Permanent link">&para;</a></h2>
+<p>Consider building a DFA to accept all strings over <code>{a, b}</code> that <em>end with</em> <code>ab</code>.</p>
+<p>To recognize a pattern of length <code>k</code> at the <em>end</em> of an input string, a DFA must implicitly "remember" the last <code>k</code> symbols seen. This is done by encoding all relevant suffixes into the state structure, which requires states to shift their "memory window" as each new symbol arrives.</p>
+<p>For the "ends with <code>ab</code>" example, three states are needed:
+- One for the general case (haven't just seen <code>a</code>)
+- One for "the last symbol was <code>a</code>"
+- One for "the last two symbols were <code>ab</code>" (accept state)</p>
+<p>This is manageable. But for more complex patterns — especially patterns involving multiple alternatives — the state count and the transition bookkeeping grow rapidly. The designer is doing <em>implicit memory management inside the state space</em>.</p>
+<h3 id="the-non-deterministic-alternative">The Non-Deterministic Alternative<a class="headerlink" href="#the-non-deterministic-alternative" title="Permanent link">&para;</a></h3>
+<p>What if, instead of building one machine that carefully tracks all possibilities in its state structure, we allow the machine to <strong>explore multiple computational paths simultaneously</strong>?</p>
+<p>The idea: when the machine faces an ambiguous choice, it <strong>forks</strong> into multiple copies of itself. Each copy independently continues processing the remaining input. The overall machine <strong>accepts</strong> if <em>at least one copy</em> ends in an accept state.</p>
+<p>This is <strong>non-determinism</strong>: the machine does not commit to a single path. It explores all possibilities in parallel.</p>
+<hr />
+<h2 id="formal-definition">Formal Definition<a class="headerlink" href="#formal-definition" title="Permanent link">&para;</a></h2>
+<p>A <strong>Non-Deterministic Finite Automaton (NFA)</strong> is a 5-tuple:</p>
+<pre><code>M = (Q, Σ, δ, q₀, F)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Q</code></td>
+<td>Finite, non-empty set of states</td>
+</tr>
+<tr>
+<td><code>Σ</code></td>
+<td>Input alphabet</td>
+</tr>
+<tr>
+<td><code>δ</code></td>
+<td>Transition function: <code>δ : Q × Σ → P(Q)</code></td>
+</tr>
+<tr>
+<td><code>q₀</code></td>
+<td>Start state</td>
+</tr>
+<tr>
+<td><code>F</code></td>
+<td>Set of accept states, <code>F ⊆ Q</code></td>
+</tr>
+</tbody>
+</table>
+<p>The crucial difference from a DFA is the transition function:</p>
+<ul>
+<li><strong>DFA:</strong> <code>δ : Q × Σ → Q</code> — returns exactly <strong>one</strong> next state</li>
+<li><strong>NFA:</strong> <code>δ : Q × Σ → P(Q)</code> — returns a <strong>set</strong> of next states (possibly empty, possibly containing multiple states)</li>
+</ul>
+<p><code>P(Q)</code> is the <strong>power set</strong> of <code>Q</code> — the set of all subsets of <code>Q</code>.</p>
+<h3 id="what-the-different-cases-mean">What the Different Cases Mean<a class="headerlink" href="#what-the-different-cases-mean" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><code>δ(q, a)</code> value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{p}</code></td>
+<td>Deterministic: go to state <code>p</code></td>
+</tr>
+<tr>
+<td><code>{p, r}</code></td>
+<td>Non-deterministic: fork into copies going to <code>p</code> and <code>r</code></td>
+</tr>
+<tr>
+<td><code>∅</code></td>
+<td>No transition: this copy of the machine <strong>dies</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="acceptance-in-an-nfa">Acceptance in an NFA<a class="headerlink" href="#acceptance-in-an-nfa" title="Permanent link">&para;</a></h3>
+<p>An NFA accepts a string <code>w</code> if there <strong>exists</strong> at least one computational path through the NFA that, after reading all of <code>w</code>, ends in an accept state.</p>
+<p>Equivalently, let <code>δ̂(q, w)</code> be the set of all states reachable from <code>q</code> by reading <code>w</code> (following all possible non-deterministic choices):</p>
+<pre><code>M accepts w  ⟺  δ̂(q₀, w) ∩ F ≠ ∅
+</code></pre>
+<hr />
+<h2 id="nfa-example-strings-ending-with-ab">NFA Example: Strings Ending with <code>ab</code><a class="headerlink" href="#nfa-example-strings-ending-with-ab" title="Permanent link">&para;</a></h2>
+<p>Compare the DFA and NFA for <code>L = { w ∈ {a,b}* | w ends with ab }</code>:</p>
+<p><strong>DFA</strong> (requires careful memory management):</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th><code>a</code></th>
+<th><code>b</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>→ <code>q₀</code></td>
+<td><code>q₁</code></td>
+<td><code>q₀</code></td>
+</tr>
+<tr>
+<td><code>q₁</code></td>
+<td><code>q₁</code></td>
+<td><code>q₂</code></td>
+</tr>
+<tr>
+<td>* <code>q₂</code></td>
+<td><code>q₁</code></td>
+<td><code>q₀</code></td>
+</tr>
+</tbody>
+</table>
+<p>3 states, 6 transitions.</p>
+<p><strong>NFA</strong> (direct, intuitive design):</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th><code>a</code></th>
+<th><code>b</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>→ <code>q₀</code></td>
+<td><code>{q₀, q₁}</code></td>
+<td><code>{q₀}</code></td>
+</tr>
+<tr>
+<td><code>q₁</code></td>
+<td><code>∅</code></td>
+<td><code>{q₂}</code></td>
+</tr>
+<tr>
+<td>* <code>q₂</code></td>
+<td><code>∅</code></td>
+<td><code>∅</code></td>
+</tr>
+</tbody>
+</table>
+<p>3 states, 3 (non-empty) transitions.</p>
+<p>The NFA is more natural: <code>q₀</code> is the "haven't started the suffix yet" state, <code>q₁</code> means "just saw <code>a</code> — maybe this is the start of the final <code>ab</code>", and <code>q₂</code> means "just completed <code>ab</code>". The non-determinism handles the fact that we don't know <em>which</em> <code>a</code> in the string will be the last one.</p>
+<h3 id="trace-processing-w-aab-with-the-nfa-above">Trace: Processing <code>w = aab</code> with the NFA above<a class="headerlink" href="#trace-processing-w-aab-with-the-nfa-above" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Input symbol</th>
+<th>Active states</th>
+<th>Reasoning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start</td>
+<td>—</td>
+<td><code>{q₀}</code></td>
+<td>Start state</td>
+</tr>
+<tr>
+<td>Read <code>a</code></td>
+<td><code>a</code></td>
+<td><code>{q₀, q₁}</code></td>
+<td><code>δ(q₀, a) = {q₀, q₁}</code></td>
+</tr>
+<tr>
+<td>Read <code>a</code></td>
+<td><code>a</code></td>
+<td><code>{q₀, q₁}</code></td>
+<td><code>δ(q₀,a)={q₀,q₁}</code>, <code>δ(q₁,a)=∅</code>; union = <code>{q₀,q₁}</code></td>
+</tr>
+<tr>
+<td>Read <code>b</code></td>
+<td><code>b</code></td>
+<td><code>{q₀, q₂}</code></td>
+<td><code>δ(q₀,b)={q₀}</code>, <code>δ(q₁,b)={q₂}</code>; union = <code>{q₀,q₂}</code></td>
+</tr>
+<tr>
+<td>End</td>
+<td>—</td>
+<td><code>{q₀, q₂}</code></td>
+<td><code>q₂ ∈ F</code> → <strong>ACCEPT</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="power-of-non-determinism">Power of Non-Determinism<a class="headerlink" href="#power-of-non-determinism" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Non-determinism does NOT add computational power</p>
+<p>NFAs and DFAs recognize exactly the <strong>same class of languages</strong> — the regular languages. Non-determinism makes machine <em>descriptions</em> more concise and intuitive, but it does not allow machines to solve problems that DFAs cannot.</p>
+<p>Formally: for every NFA, there exists a DFA that accepts the same language. (The DFA may have exponentially more states — up to <code>2|Q|</code> — but it exists.)</p>
+</div>
+<p>The benefit of NFAs is purely one of <strong>design convenience</strong>:</p>
+<ul>
+<li>NFA descriptions can be <em>exponentially</em> more concise than their equivalent DFAs.</li>
+<li>NFAs make it much easier to prove closure properties of regular languages (see Unit 2).</li>
+<li>NFAs are the natural intermediate form when converting regular expressions to automata.</li>
+</ul>
+<hr />
+<h2 id="nfa-examples-11-or-101">NFA Examples: <code>...11...</code> or <code>...101...</code><a class="headerlink" href="#nfa-examples-11-or-101" title="Permanent link">&para;</a></h2>
+<p><strong>Language:</strong> <code>L = { w ∈ {0,1}* | w contains</code>11<code>or</code>101<code>as a substring }</code></p>
+<p><strong>NFA</strong> (4 states, 6 transitions):</p>
+<p>A state <code>q₀</code> loops on both <code>0</code> and <code>1</code> (we haven't started a potential pattern). On seeing <code>1</code>, the machine forks: one copy guesses we are starting <code>11</code>, another guesses we are starting <code>101</code>.</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th><code>0</code></th>
+<th><code>1</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>→ <code>q₀</code></td>
+<td><code>{q₀}</code></td>
+<td><code>{q₀, q₁, q₃}</code></td>
+</tr>
+<tr>
+<td><code>q₁</code></td>
+<td><code>∅</code></td>
+<td><code>{q₂}</code></td>
+</tr>
+<tr>
+<td>* <code>q₂</code></td>
+<td><code>{q₂}</code></td>
+<td><code>{q₂}</code></td>
+</tr>
+<tr>
+<td><code>q₃</code></td>
+<td><code>{q₄}</code></td>
+<td><code>∅</code></td>
+</tr>
+<tr>
+<td><code>q₄</code></td>
+<td><code>∅</code></td>
+<td><code>{q₂}</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>(Here <code>q₁→q₂</code> handles <code>11</code>, and <code>q₃→q₄→q₂</code> handles <code>101</code>.)</em></p>
+<hr />
+<h2 id="practice-problems">Practice Problems<a class="headerlink" href="#practice-problems" title="Permanent link">&para;</a></h2>
+<p>Construct NFAs for the following languages over <code>Σ = {a, b}</code>:</p>
+<ol>
+<li><code>L = { w | w ends with</code>ba<code>}</code></li>
+<li><code>L = { w | w contains</code>aba<code>as a substring }</code></li>
+<li><code>L = { w | w has</code>aa<code>or</code>bb<code>as a substring }</code></li>
+<li><code>L = { w | |w| mod 2 = 0 or w ends with</code>a<code>}</code> <em>(hint: use ε-transitions to combine two smaller NFAs)</em></li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../dfa/" class="btn btn-neutral float-left" title="Deterministic Finite Automata (DFA)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../enfa-conversions/" class="btn btn-neutral float-right" title="Epsilon-NFA and Conversions">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ccoew-org/ToC" class="fa fa-code-fork" style="color: #fcfcfc"> ccoew-org/ToC</a>
+        </span>
+    
+    
+      <span><a href="../dfa/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../enfa-conversions/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

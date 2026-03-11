@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Sourav Kulkarni" /><link rel="canonical" href="https://ccoew-org.github.io/ToC/unit3/grammars-basics/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Grammars — Basics & Regular Grammars - Theory of Computation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Grammars \u2014 Basics \u0026 Regular Grammars";
+        var mkdocs_page_input_path = "unit3/grammars-basics.md";
+        var mkdocs_page_url = "/ToC/unit3/grammars-basics/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Theory of Computation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 0 — Motivation & Foundations</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/overview/">Overview & Course Details</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/math-foundations/">Mathematical Foundations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/building-blocks/">Building Blocks of Computation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 1 — Formal Languages & Finite Automata</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/intro/">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/dfa/">Deterministic Finite Automata (DFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/nfa/">Non-Deterministic Finite Automata (NFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/enfa-conversions/">Epsilon-NFA and Conversions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit1/fa-with-output/">Finite Automata with Output</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 2 — Regular Expressions & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-languages/">Regular Languages & Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-expressions/">Regular Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/re-fa-equivalence/">Equivalence of REs and FAs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/ardens-theorem/">Arden's Theorem & FA→RE Conversion</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/pumping-lemma/">Pumping Lemma</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 3 — Context-Free Grammars & Languages</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../chomsky-hierarchy/">The Chomsky Hierarchy</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Grammars — Basics & Regular Grammars</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-a-grammar">What Is a Grammar?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#formal-definition">Formal Definition</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#regular-grammars">Regular Grammars</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#right-linear-grammar">Right-Linear Grammar</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#left-linear-grammar">Left-Linear Grammar</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#regular-grammar-examples">Regular Grammar Examples</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#example-1-l-anb-n-0">Example 1: L = {aⁿb | n ≥ 0}</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-2-l-w-01-w-ends-in-01">Example 2: L = { w ∈ {0,1}* | w ends in 01 }</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-3-l-w-01-w-has-an-even-number-of-0s">Example 3: L = { w ∈ {0,1}* | w has an even number of 0s }</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#converting-between-left-linear-and-right-linear">Converting Between Left-Linear and Right-Linear</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ll-rl-conversion-rules">LL → RL Conversion Rules</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rl-ll-conversion-rules">RL → LL Conversion Rules</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#worked-example-ll-rl">Worked Example: LL → RL</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cfg-derivations/">Context-Free Grammars & Derivations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ambiguity/">Ambiguity in CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../simplification/">Simplification of CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../normal-forms/">Normal Forms (CNF & GNF)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cfl-properties/">Properties of CFLs</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Theory of Computation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Unit 3 — Context-Free Grammars & Languages</li>
+      <li class="breadcrumb-item active">Grammars — Basics & Regular Grammars</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ccoew-org/ToC/edit/master/docs/unit3/grammars-basics.md">Edit on ccoew-org/ToC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="grammars-basics-regular-grammars">Grammars — Basics &amp; Regular Grammars<a class="headerlink" href="#grammars-basics-regular-grammars" title="Permanent link">&para;</a></h1>
+<h2 id="what-is-a-grammar">What Is a Grammar?<a class="headerlink" href="#what-is-a-grammar" title="Permanent link">&para;</a></h2>
+<p>A <strong>grammar</strong> <code>G</code> is a formal device for generating the strings of a language. It specifies a finite set of <strong>production rules</strong> that can be applied repeatedly, starting from a designated start symbol, to derive any string in the language.</p>
+<h3 id="formal-definition">Formal Definition<a class="headerlink" href="#formal-definition" title="Permanent link">&para;</a></h3>
+<p>A grammar is a 4-tuple:</p>
+<pre><code>G = (V, Σ, R, S)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>V</code></td>
+<td>Finite set of <strong>variables</strong> (also called <em>non-terminals</em>). These are intermediate symbols used during derivation — they never appear in the final string.</td>
+</tr>
+<tr>
+<td><code>Σ</code></td>
+<td>Finite set of <strong>terminals</strong> (the alphabet). These are the actual symbols of the language. <code>V ∩ Σ = ∅</code>.</td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>Finite set of <strong>production rules</strong> of the form <code>α → β</code>, where <code>α, β ∈ (V ∪ Σ)*</code>.</td>
+</tr>
+<tr>
+<td><code>S</code></td>
+<td><strong>Start symbol</strong>: <code>S ∈ V</code>. Every derivation begins here.</td>
+</tr>
+</tbody>
+</table>
+<p>A <strong>derivation</strong> is a sequence of rule applications that transforms <code>S</code> into a string of terminals:</p>
+<pre><code>S ⟹ α₁ ⟹ α₂ ⟹ … ⟹ w    (w ∈ Σ*)
+</code></pre>
+<p>The <strong>language generated by G</strong>, written <code>L(G)</code>, is the set of all terminal strings derivable from <code>S</code>:</p>
+<pre><code>L(G) = { w ∈ Σ* | S ⟹* w }
+</code></pre>
+<hr />
+<h2 id="regular-grammars">Regular Grammars<a class="headerlink" href="#regular-grammars" title="Permanent link">&para;</a></h2>
+<p>A <strong>regular grammar</strong> is a grammar in which every production rule has a single non-terminal on the left-hand side, and the right-hand side has a restricted form:</p>
+<ul>
+<li>At most one non-terminal, which appears only at one end (left or right) of the right-hand side.</li>
+<li>No nesting of non-terminals within each other.</li>
+</ul>
+<p>There are two equivalent styles:</p>
+<h3 id="right-linear-grammar">Right-Linear Grammar<a class="headerlink" href="#right-linear-grammar" title="Permanent link">&para;</a></h3>
+<p>Every rule has the form <code>A → wB</code> or <code>A → w</code>, where <code>A, B ∈ V</code> and <code>w ∈ Σ*</code> (a string of terminals, possibly empty).</p>
+<p>The non-terminal (if present) is always at the <em>right</em> end.</p>
+<h3 id="left-linear-grammar">Left-Linear Grammar<a class="headerlink" href="#left-linear-grammar" title="Permanent link">&para;</a></h3>
+<p>Every rule has the form <code>A → Bw</code> or <code>A → w</code>, where <code>A, B ∈ V</code> and <code>w ∈ Σ*</code>.</p>
+<p>The non-terminal (if present) is always at the <em>left</em> end.</p>
+<div class="admonition warning">
+<p class="admonition-title">Do not mix left and right linear rules in the same grammar</p>
+<p>A grammar must be consistently right-linear <em>or</em> left-linear. Mixing them does not give a regular grammar.</p>
+</div>
+<p><strong>Theorem:</strong> Both right-linear and left-linear grammars generate exactly the class of regular languages. They are interconvertible.</p>
+<hr />
+<h2 id="regular-grammar-examples">Regular Grammar Examples<a class="headerlink" href="#regular-grammar-examples" title="Permanent link">&para;</a></h2>
+<h3 id="example-1-l-anb-n-0">Example 1: <code>L = {aⁿb | n ≥ 0}</code><a class="headerlink" href="#example-1-l-anb-n-0" title="Permanent link">&para;</a></h3>
+<p><strong>Right-Linear:</strong></p>
+<pre><code>S → aS | b
+</code></pre>
+<p>Derivation of <code>aab</code>: <code>S ⟹ aS ⟹ aaS ⟹ aab</code>.</p>
+<p><strong>Left-Linear:</strong></p>
+<pre><code>S → Ab
+A → Aa | ε
+</code></pre>
+<p>Derivation of <code>aab</code>: <code>S ⟹ Ab ⟹ Aab ⟹ Aaab ⟹ aab</code> — wait, we apply left-linear differently: <code>S ⟹ Ab ⟹ Aab ⟹ εaab = aab</code> (applying <code>A → ε</code> last).</p>
+<h3 id="example-2-l-w-01-w-ends-in-01">Example 2: <code>L = { w ∈ {0,1}* | w ends in 01 }</code><a class="headerlink" href="#example-2-l-w-01-w-ends-in-01" title="Permanent link">&para;</a></h3>
+<p><strong>Right-Linear:</strong></p>
+<pre><code>S → 0S | 1S | 0A
+A → 1
+</code></pre>
+<p><strong>Left-Linear:</strong></p>
+<pre><code>S → A1
+A → B0
+B → B0 | B1 | ε
+</code></pre>
+<h3 id="example-3-l-w-01-w-has-an-even-number-of-0s">Example 3: <code>L = { w ∈ {0,1}* | w has an even number of 0s }</code><a class="headerlink" href="#example-3-l-w-01-w-has-an-even-number-of-0s" title="Permanent link">&para;</a></h3>
+<p><strong>Right-Linear:</strong></p>
+<pre><code>S → 0A | 1S | ε
+A → 0S | 1A
+</code></pre>
+<p><strong>Left-Linear:</strong></p>
+<pre><code>S → A0 | S1 | ε
+A → S0 | A1
+</code></pre>
+<hr />
+<h2 id="converting-between-left-linear-and-right-linear">Converting Between Left-Linear and Right-Linear<a class="headerlink" href="#converting-between-left-linear-and-right-linear" title="Permanent link">&para;</a></h2>
+<p>Both styles generate the same language. To convert between them, the standard approach is:</p>
+<ol>
+<li><strong>Build a finite automaton from the given grammar.</strong></li>
+<li><strong>Re-derive the grammar of the other style from that FA.</strong></li>
+</ol>
+<h3 id="ll-rl-conversion-rules">LL → RL Conversion Rules<a class="headerlink" href="#ll-rl-conversion-rules" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Create a new start state <code>S_new</code>.</li>
+<li>Non-terminals of the LL grammar become states of the FA.</li>
+<li>The original start symbol <code>S</code> becomes a <strong>final (accept) state</strong> of the FA.</li>
+<li>For each rule <code>A → Ba</code>, add transition <code>B → A</code> on input <code>a</code> (i.e., <code>δ(B, a) = A</code>).</li>
+<li>For each rule <code>A → a</code> or <code>A → ε</code>, add transition <code>S_new → A</code> on input <code>a</code> or <code>ε</code>.</li>
+<li><strong>Re-derive the RL grammar</strong> from the FA:</li>
+<li><code>S_new</code> becomes the new start symbol.</li>
+<li>For each transition <code>A → B</code> on input <code>a</code>, add rule <code>A → aB</code>.</li>
+<li>Add <code>S → ε</code> (the old accept state becomes nullable).</li>
+</ol>
+<h3 id="rl-ll-conversion-rules">RL → LL Conversion Rules<a class="headerlink" href="#rl-ll-conversion-rules" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Non-terminals become states of the FA.</li>
+<li>For each rule <code>A → aB</code>, add transition <code>δ(A, a) = B</code>.</li>
+<li>For each terminal rule <code>A → a</code> or <code>A → ε</code>, create a new final state <code>F</code> and add transition <code>δ(A, a) = F</code> or <code>δ(A, ε) = F</code>.</li>
+<li><strong>Re-derive the LL grammar</strong> from the FA:</li>
+<li><code>F</code> becomes the new start symbol.</li>
+<li>For each transition <code>δ(A, a) = B</code>, add rule <code>B → Aa</code>.</li>
+<li>Add <code>S → ε</code>.</li>
+</ol>
+<h3 id="worked-example-ll-rl">Worked Example: LL → RL<a class="headerlink" href="#worked-example-ll-rl" title="Permanent link">&para;</a></h3>
+<p><strong>Given LL grammar:</strong></p>
+<pre><code>S → A1
+A → B0
+B → B0 | B1 | ε
+</code></pre>
+<p><strong>Step 1:</strong> Build the FA.</p>
+<p>States: <code>{S_new, S, A, B}</code>. Final state: <code>S</code>.</p>
+<p>From the rules:
+- <code>A → B0</code> → transition <code>δ(B, 0) = A</code>
+- <code>S → A1</code> → transition <code>δ(A, 1) = S</code>
+- <code>B → B0</code> → transition <code>δ(B, 0) = B</code> (but we already have <code>δ(B,0) = A</code>; NFAs allow both)
+- <code>B → B1</code> → transition <code>δ(B, 1) = B</code>
+- <code>B → ε</code> → <code>S_new →ε B</code></p>
+<p>FA table:</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>0</th>
+<th>1</th>
+<th>ε</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>→ <code>S_new</code></td>
+<td>∅</td>
+<td>∅</td>
+<td><code>{B}</code></td>
+</tr>
+<tr>
+<td>* <code>S</code></td>
+<td>∅</td>
+<td>∅</td>
+<td>∅</td>
+</tr>
+<tr>
+<td><code>A</code></td>
+<td>∅</td>
+<td><code>{S}</code></td>
+<td>∅</td>
+</tr>
+<tr>
+<td><code>B</code></td>
+<td><code>{A, B}</code></td>
+<td><code>{B}</code></td>
+<td>∅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Step 2:</strong> Re-derive the RL grammar.</p>
+<ul>
+<li>Start symbol: <code>S_new</code></li>
+<li><code>S_new → εB</code> simplifies to <code>S_new → B</code> (or since ε-transition, <code>S_new</code> effectively starts at <code>B</code>)</li>
+<li><code>B → 0B | 1B | 0A</code></li>
+<li><code>A → 1S</code></li>
+<li><code>S → ε</code></li>
+</ul>
+<p>Resulting RL grammar:</p>
+<pre><code>S_new → B          (via ε-transition to B)
+B → 0B | 1B | 0A
+A → 1S
+S → ε
+</code></pre>
+<p>This accepts the same language as the original LL grammar.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../chomsky-hierarchy/" class="btn btn-neutral float-left" title="The Chomsky Hierarchy"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../cfg-derivations/" class="btn btn-neutral float-right" title="Context-Free Grammars & Derivations">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ccoew-org/ToC" class="fa fa-code-fork" style="color: #fcfcfc"> ccoew-org/ToC</a>
+        </span>
+    
+    
+      <span><a href="../chomsky-hierarchy/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../cfg-derivations/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

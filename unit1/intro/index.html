@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Sourav Kulkarni" /><link rel="canonical" href="https://ccoew-org.github.io/ToC/unit1/intro/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Introduction - Theory of Computation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Introduction";
+        var mkdocs_page_input_path = "unit1/intro.md";
+        var mkdocs_page_url = "/ToC/unit1/intro/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Theory of Computation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 0 — Motivation & Foundations</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/overview/">Overview & Course Details</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/math-foundations/">Mathematical Foundations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/building-blocks/">Building Blocks of Computation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 1 — Formal Languages & Finite Automata</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Introduction</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-a-machine-in-the-toc-sense">What Is a Machine (in the ToC Sense)?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-simplest-machine-a-string-acceptor">The Simplest Machine: A String Acceptor</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#finite-state-machine-finite-automaton">Finite State Machine (Finite Automaton)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-fsms-can-and-cannot-count">What FSMs Can and Cannot Count</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#machines-and-languages-a-sneak-peek">Machines and Languages: A Sneak Peek</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#grammar-constructor">Grammar (Constructor)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#machine-regular-expression-acceptor">Machine / Regular Expression (Acceptor)</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dfa/">Deterministic Finite Automata (DFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nfa/">Non-Deterministic Finite Automata (NFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../enfa-conversions/">Epsilon-NFA and Conversions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fa-with-output/">Finite Automata with Output</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 2 — Regular Expressions & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-languages/">Regular Languages & Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-expressions/">Regular Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/re-fa-equivalence/">Equivalence of REs and FAs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/ardens-theorem/">Arden's Theorem & FA→RE Conversion</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/pumping-lemma/">Pumping Lemma</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 3 — Context-Free Grammars & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/chomsky-hierarchy/">The Chomsky Hierarchy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/grammars-basics/">Grammars — Basics & Regular Grammars</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfg-derivations/">Context-Free Grammars & Derivations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/ambiguity/">Ambiguity in CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/simplification/">Simplification of CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/normal-forms/">Normal Forms (CNF & GNF)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfl-properties/">Properties of CFLs</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Theory of Computation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Unit 1 — Formal Languages & Finite Automata</li>
+      <li class="breadcrumb-item active">Introduction</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ccoew-org/ToC/edit/master/docs/unit1/intro.md">Edit on ccoew-org/ToC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="introduction-to-formal-languages-finite-automata">Introduction to Formal Languages &amp; Finite Automata<a class="headerlink" href="#introduction-to-formal-languages-finite-automata" title="Permanent link">&para;</a></h1>
+<h2 id="what-is-a-machine-in-the-toc-sense">What Is a Machine (in the ToC Sense)?<a class="headerlink" href="#what-is-a-machine-in-the-toc-sense" title="Permanent link">&para;</a></h2>
+<p>A <strong>machine</strong> is an abstract mechanical model of a function. It takes some input and produces some output:</p>
+<pre><code>Input  ──→  Machine  ──→  Output
+</code></pre>
+<p>For our purposes, the internal workings of a machine are understood as purely mechanical symbol-manipulation processes. Whether a physical implementation is feasible is irrelevant — we are studying <em>abstract</em> machines.</p>
+<h3 id="the-simplest-machine-a-string-acceptor">The Simplest Machine: A String Acceptor<a class="headerlink" href="#the-simplest-machine-a-string-acceptor" title="Permanent link">&para;</a></h3>
+<p>The most basic machine is one whose only job is to decide whether an input string is "acceptable":</p>
+<pre><code>Input string  ──→  Machine  ──→  {Accept, Reject}
+</code></pre>
+<p>The machine reads the input string one symbol at a time. After reading the last symbol, it halts. If it ends in a designated <strong>accept state</strong>, the string is accepted; otherwise it is rejected.</p>
+<p>The set of all strings accepted by a machine <code>M</code> is called the <strong>language recognized by M</strong>, written <code>L(M)</code>.</p>
+<hr />
+<h2 id="finite-state-machine-finite-automaton">Finite State Machine (Finite Automaton)<a class="headerlink" href="#finite-state-machine-finite-automaton" title="Permanent link">&para;</a></h2>
+<p>A <strong>Finite State Machine (FSM)</strong> — also called a <strong>Finite Automaton (FA)</strong> — is the simplest string acceptor. Its defining characteristics are:</p>
+<ul>
+<li>It has a <strong>finite</strong> amount of memory — just enough to remember which <em>state</em> it is currently in.</li>
+<li>It reads its input <strong>left to right</strong>, one symbol at a time, and <strong>cannot go back</strong>.</li>
+<li>After each symbol, it transitions to a new state (determined by its transition function).</li>
+</ul>
+<h3 id="what-fsms-can-and-cannot-count">What FSMs Can and Cannot Count<a class="headerlink" href="#what-fsms-can-and-cannot-count" title="Permanent link">&para;</a></h3>
+<p>Because an FSM has only finitely many states, there is a hard limit on what it can "remember":</p>
+<table>
+<thead>
+<tr>
+<th>FSMs <strong>can</strong> count/check</th>
+<th>FSMs <strong>cannot</strong> count/check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Even number of 1s</td>
+<td>Equal number of 0s and 1s</td>
+</tr>
+<tr>
+<td>Number of symbols mod k</td>
+<td>Count up to an input value <code>n</code></td>
+</tr>
+<tr>
+<td>Exactly three 0s</td>
+<td>Whether a string is a palindrome of arbitrary length</td>
+</tr>
+<tr>
+<td>Whether a pattern appears</td>
+<td>Whether <code>n</code> copies of one symbol are followed by <code>n</code> copies of another</td>
+</tr>
+</tbody>
+</table>
+<p>The key insight: an FSM can only track a fixed, finite amount of information. Anything requiring <em>unbounded counting</em> is beyond its reach.</p>
+<hr />
+<h2 id="machines-and-languages-a-sneak-peek">Machines and Languages: A Sneak Peek<a class="headerlink" href="#machines-and-languages-a-sneak-peek" title="Permanent link">&para;</a></h2>
+<p>Before diving into the formal definitions, here is a preview of how the three main language-representation tools relate:</p>
+<h3 id="grammar-constructor">Grammar (Constructor)<a class="headerlink" href="#grammar-constructor" title="Permanent link">&para;</a></h3>
+<p>Given <code>Σ = {a, b}</code>, build the language <code>L = {ε, ab, aabb, aaabbb, …} = {aⁿbⁿ | n ≥ 0}</code>:</p>
+<pre><code>Start symbol:       S
+Terminals:          {a, b}
+Non-terminals:      {S}
+Production rules:   S → aSb | ε
+</code></pre>
+<p>This grammar <em>generates</em> strings in <code>L</code> by repeatedly applying the production rules.</p>
+<h3 id="machine-regular-expression-acceptor">Machine / Regular Expression (Acceptor)<a class="headerlink" href="#machine-regular-expression-acceptor" title="Permanent link">&para;</a></h3>
+<p>Given <code>Σ = {a, b}</code>, recognize all strings containing <code>bab</code> as a substring:</p>
+<pre><code>Regex:  (a|b)* bab (a|b)*
+</code></pre>
+<p>Or equivalently, a finite automaton that scans the input and accepts if and only if <code>bab</code> appears somewhere in the string.</p>
+<div class="admonition tip">
+<p class="admonition-title">The Big Picture</p>
+<ul>
+<li>Grammars <strong>build</strong> languages from the inside out.</li>
+<li>Machines and regexes <strong>check</strong> strings from the outside in.</li>
+<li>For the classes of languages we study in Units 1–3, both views describe <em>exactly the same set of languages</em>. Proving that equivalence is a central goal of this course.</li>
+</ul>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../unit0/building-blocks/" class="btn btn-neutral float-left" title="Building Blocks of Computation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../dfa/" class="btn btn-neutral float-right" title="Deterministic Finite Automata (DFA)">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ccoew-org/ToC" class="fa fa-code-fork" style="color: #fcfcfc"> ccoew-org/ToC</a>
+        </span>
+    
+    
+      <span><a href="../../unit0/building-blocks/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../dfa/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

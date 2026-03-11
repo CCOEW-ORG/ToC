@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Sourav Kulkarni" /><link rel="canonical" href="https://ccoew-org.github.io/ToC/unit1/enfa-conversions/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Epsilon-NFA and Conversions - Theory of Computation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Epsilon-NFA and Conversions";
+        var mkdocs_page_input_path = "unit1/enfa-conversions.md";
+        var mkdocs_page_url = "/ToC/unit1/enfa-conversions/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Theory of Computation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 0 — Motivation & Foundations</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/overview/">Overview & Course Details</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/math-foundations/">Mathematical Foundations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit0/building-blocks/">Building Blocks of Computation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 1 — Formal Languages & Finite Automata</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../intro/">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../dfa/">Deterministic Finite Automata (DFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../nfa/">Non-Deterministic Finite Automata (NFA)</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Epsilon-NFA and Conversions</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#-nfa-epsilon-nfa">ε-NFA (Epsilon-NFA)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#formal-definition">Formal Definition</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#why-transitions-are-useful">Why ε-Transitions Are Useful</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-nfa">Example ε-NFA</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#-closure">ε-Closure</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#computing-closure">Computing ε-Closure</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#conversion-1-nfa-nfa">Conversion 1: ε-NFA → NFA</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#worked-example-nfa-nfa">Worked Example: ε-NFA → NFA</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#conversion-2-nfa-dfa-subset-construction">Conversion 2: NFA → DFA (Subset Construction)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#worked-example-nfa-dfa">Worked Example: NFA → DFA</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#conversion-3-nfa-dfa-direct">Conversion 3: ε-NFA → DFA (Direct)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#worked-example-nfa-dfa_1">Worked Example: ε-NFA → DFA</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interconvertibility-summary">Interconvertibility Summary</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../fa-with-output/">Finite Automata with Output</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 2 — Regular Expressions & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-languages/">Regular Languages & Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/regular-expressions/">Regular Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/re-fa-equivalence/">Equivalence of REs and FAs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/ardens-theorem/">Arden's Theorem & FA→RE Conversion</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit2/pumping-lemma/">Pumping Lemma</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 3 — Context-Free Grammars & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/chomsky-hierarchy/">The Chomsky Hierarchy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/grammars-basics/">Grammars — Basics & Regular Grammars</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfg-derivations/">Context-Free Grammars & Derivations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/ambiguity/">Ambiguity in CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/simplification/">Simplification of CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/normal-forms/">Normal Forms (CNF & GNF)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../unit3/cfl-properties/">Properties of CFLs</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Theory of Computation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Unit 1 — Formal Languages & Finite Automata</li>
+      <li class="breadcrumb-item active">Epsilon-NFA and Conversions</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ccoew-org/ToC/edit/master/docs/unit1/enfa-conversions.md">Edit on ccoew-org/ToC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="-nfa-and-automata-conversions">ε-NFA and Automata Conversions<a class="headerlink" href="#-nfa-and-automata-conversions" title="Permanent link">&para;</a></h1>
+<h2 id="-nfa-epsilon-nfa">ε-NFA (Epsilon-NFA)<a class="headerlink" href="#-nfa-epsilon-nfa" title="Permanent link">&para;</a></h2>
+<p>An <strong>ε-NFA</strong> (epsilon-NFA) is an NFA that also allows <strong>spontaneous transitions</strong> — transitions that consume <em>no input symbol</em>. These are written as <code>ε</code>-transitions.</p>
+<h3 id="formal-definition">Formal Definition<a class="headerlink" href="#formal-definition" title="Permanent link">&para;</a></h3>
+<p>An ε-NFA is also a 5-tuple <code>M = (Q, Σ, δ, q₀, F)</code>, but the transition function is extended:</p>
+<pre><code>δ : Q × (Σ ∪ {ε}) → P(Q)
+</code></pre>
+<p>That is, from any state the machine may spontaneously fork into copies in other states without reading any symbol.</p>
+<h3 id="why-transitions-are-useful">Why ε-Transitions Are Useful<a class="headerlink" href="#why-transitions-are-useful" title="Permanent link">&para;</a></h3>
+<p>ε-transitions make it easy to <em>compose</em> smaller machines:</p>
+<ul>
+<li>To accept <code>L₁ ∪ L₂</code>, add a new start state with ε-transitions into the start states of the machines for <code>L₁</code> and <code>L₂</code>.</li>
+<li>To accept <code>L₁ · L₂</code> (concatenation), connect the accept states of the <code>L₁</code> machine to the start state of the <code>L₂</code> machine with ε-transitions.</li>
+<li>These constructions are the foundation of the regex-to-NFA conversion in Unit 2.</li>
+</ul>
+<h3 id="example-nfa">Example ε-NFA<a class="headerlink" href="#example-nfa" title="Permanent link">&para;</a></h3>
+<pre><code>δ     | 0        | 1           | ε
+------|---------|------------|-------
+→ q₀  | {q₀}    | {q₀, q₁}   | ∅
+  q₁  | {q₂}    | ∅           | {q₂}
+  q₂  | ∅       | {q₃}        | ∅
+* q₃  | {q₃}    | {q₃}        | ∅
+</code></pre>
+<p>Here, from <code>q₁</code> the machine can spontaneously move to <code>q₂</code> without consuming a symbol.</p>
+<hr />
+<h2 id="-closure">ε-Closure<a class="headerlink" href="#-closure" title="Permanent link">&para;</a></h2>
+<p>The <strong>ε-closure</strong> of a state <code>q</code>, written <code>E(q)</code> or <code>ε-closure(q)</code>, is the set of all states reachable from <code>q</code> by following <strong>zero or more</strong> ε-transitions (including <code>q</code> itself).</p>
+<p>Formally: <code>E(q) = { p ∈ Q | p is reachable from q via ε-transitions alone }</code>.</p>
+<p>The ε-closure is extended to sets: <code>E(S) = ⋃_{q ∈ S} E(q)</code>.</p>
+<h3 id="computing-closure">Computing ε-Closure<a class="headerlink" href="#computing-closure" title="Permanent link">&para;</a></h3>
+<p>Use a BFS/DFS starting from the state, following only ε-edges:</p>
+<p><strong>For the example above:</strong></p>
+<pre><code>E(q₀) = {q₀}          — no ε-transitions out of q₀
+E(q₁) = {q₁, q₂}      — q₁ →ε q₂; from q₂ no further ε-transitions
+E(q₂) = {q₂}          — no ε-transitions out of q₂
+E(q₃) = {q₃}          — no ε-transitions out of q₃
+</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Always include the state itself</p>
+<p>A state is always in its own ε-closure, even if it has no outgoing ε-transitions.</p>
+</div>
+<hr />
+<h2 id="conversion-1-nfa-nfa">Conversion 1: ε-NFA → NFA<a class="headerlink" href="#conversion-1-nfa-nfa" title="Permanent link">&para;</a></h2>
+<p>Given ε-NFA <code>M₁ = (Q, Σ_ε, δ, q₀, F)</code>, construct an equivalent NFA <code>M₂ = (Q, Σ, δ', q₀', F')</code>:</p>
+<p><strong>Algorithm:</strong></p>
+<ol>
+<li>States remain the same: <code>Q' = Q</code>.</li>
+<li>New transition function: <code>δ'(q, a) = E( ⋃_{r ∈ E(q)} δ(r, a) )</code>  for <code>a ∈ Σ</code> (not ε).
+   In words: from state <code>q</code>, first follow all ε-transitions to compute <code>E(q)</code>, then for each state in <code>E(q)</code> take the <code>a</code>-transition, then follow all ε-transitions from every state you reach.</li>
+<li>New start state: <code>q₀' = E(q₀)</code> — actually <code>q₀</code> stays the same, but note that if <code>E(q₀)</code> contains an accept state, then <code>q₀'</code> must also be an accept state.</li>
+<li>Accept states: <code>F' = { q ∈ Q | E(q) ∩ F ≠ ∅ }</code> — any state from which an accept state is reachable via ε alone becomes an accept state.</li>
+</ol>
+<h3 id="worked-example-nfa-nfa">Worked Example: ε-NFA → NFA<a class="headerlink" href="#worked-example-nfa-nfa" title="Permanent link">&para;</a></h3>
+<p>Using the ε-NFA from the example above:</p>
+<p><strong>ε-closures:</strong></p>
+<pre><code>E(q₀) = {q₀},  E(q₁) = {q₁, q₂},  E(q₂) = {q₂},  E(q₃) = {q₃}
+</code></pre>
+<p><strong>Computing δ':</strong></p>
+<p>For each state <code>q</code> and each symbol <code>a ∈ {0, 1}</code>:</p>
+<p><code>δ'(q, a) = E( ⋃_{r ∈ E(q)} δ(r, a) )</code></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>0</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>→ <code>q₀</code></td>
+<td><code>E(δ(q₀,0)) = E({q₀}) = {q₀}</code></td>
+<td><code>E(δ(q₀,1)) = E({q₀,q₁}) = {q₀}∪{q₁,q₂} = {q₀,q₁,q₂}</code></td>
+</tr>
+<tr>
+<td><code>q₁</code></td>
+<td><code>E(δ(q₁,0)∪δ(q₂,0)) = E({q₂}∪∅) = {q₂}</code></td>
+<td><code>E(δ(q₁,1)∪δ(q₂,1)) = E(∅∪{q₃}) = {q₃}</code></td>
+</tr>
+<tr>
+<td><code>q₂</code></td>
+<td><code>E(∅) = ∅</code></td>
+<td><code>E({q₃}) = {q₃}</code></td>
+</tr>
+<tr>
+<td>* <code>q₃</code></td>
+<td><code>E({q₃}) = {q₃}</code></td>
+<td><code>E({q₃}) = {q₃}</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Resulting NFA δ' table (compact):</strong></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>0</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>→ <code>q₀</code></td>
+<td><code>{q₀}</code></td>
+<td><code>{q₀, q₁, q₂}</code></td>
+</tr>
+<tr>
+<td><code>q₁</code></td>
+<td><code>{q₂}</code></td>
+<td><code>{q₃}</code></td>
+</tr>
+<tr>
+<td><code>q₂</code></td>
+<td><code>∅</code></td>
+<td><code>{q₃}</code></td>
+</tr>
+<tr>
+<td>* <code>q₃</code></td>
+<td><code>{q₃}</code></td>
+<td><code>{q₃}</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>(Note: <code>q₁</code> was collapsed with <code>q₂</code>'s transitions because <code>E(q₁) = {q₁, q₂}</code>.)</em></p>
+<hr />
+<h2 id="conversion-2-nfa-dfa-subset-construction">Conversion 2: NFA → DFA (Subset Construction)<a class="headerlink" href="#conversion-2-nfa-dfa-subset-construction" title="Permanent link">&para;</a></h2>
+<p>This is the fundamental algorithm proving NFA ⊆ DFA in expressive power.</p>
+<p>Given NFA <code>Mₙ = (Q, Σ, δ, q₀, F)</code>, construct DFA <code>M_D = (Q', Σ, δ', q₀', F')</code>:</p>
+<p><strong>Key idea:</strong> Each <em>state</em> of the DFA corresponds to a <em>set of states</em> of the NFA — specifically, all states the NFA might currently be in across all non-deterministic branches.</p>
+<p><strong>Algorithm:</strong></p>
+<ol>
+<li><code>Q' ⊆ P(Q)</code> — DFA states are subsets of NFA states; <code>|Q'| ≤ 2|Q|</code>.</li>
+<li><code>δ'(R, a) = ⋃_{r ∈ R} δ(r, a)</code> for <code>R ∈ Q'</code>, <code>a ∈ Σ</code>.</li>
+<li><code>q₀' = {q₀}</code> (or <code>E(q₀)</code> for ε-NFAs).</li>
+<li><code>F' = { R ∈ Q' | R ∩ F ≠ ∅ }</code> — a DFA state is accepting if it contains at least one NFA accept state.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Build states lazily to minimize the DFA</p>
+<p>In practice, most of the <code>2|Q|</code> possible subsets are never reached. <strong>Start from <code>{q₀}</code> and only add a new DFA state when it is referenced by a transition.</strong> This gives the minimal reachable DFA directly and avoids filling out a huge table.</p>
+</div>
+<h3 id="worked-example-nfa-dfa">Worked Example: NFA → DFA<a class="headerlink" href="#worked-example-nfa-dfa" title="Permanent link">&para;</a></h3>
+<p><strong>NFA:</strong></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>0</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>→ <code>q₀</code></td>
+<td><code>{q₀}</code></td>
+<td><code>{q₀, q₁, q₂}</code></td>
+</tr>
+<tr>
+<td><code>q₁</code></td>
+<td><code>{q₂}</code></td>
+<td><code>∅</code></td>
+</tr>
+<tr>
+<td><code>q₂</code></td>
+<td><code>∅</code></td>
+<td><code>{q₃}</code></td>
+</tr>
+<tr>
+<td>* <code>q₃</code></td>
+<td><code>{q₃}</code></td>
+<td><code>{q₃}</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Step-by-step subset construction (lazy):</strong></p>
+<p>Start: <code>q₀' = {q₀}</code>.</p>
+<table>
+<thead>
+<tr>
+<th>DFA state <code>R</code></th>
+<th><code>δ'(R, 0)</code></th>
+<th><code>δ'(R, 1)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>→ <code>{q₀}</code></td>
+<td><code>δ(q₀,0) = {q₀}</code></td>
+<td><code>δ(q₀,1) = {q₀,q₁,q₂}</code></td>
+</tr>
+<tr>
+<td><code>{q₀,q₁,q₂}</code></td>
+<td><code>δ(q₀,0)∪δ(q₁,0)∪δ(q₂,0) = {q₀}∪{q₂}∪∅ = {q₀,q₂}</code></td>
+<td><code>δ(q₀,1)∪δ(q₁,1)∪δ(q₂,1) = {q₀,q₁,q₂}∪∅∪{q₃} = {q₀,q₁,q₂,q₃}</code></td>
+</tr>
+<tr>
+<td><code>{q₀,q₂}</code></td>
+<td><code>{q₀}∪∅ = {q₀}</code></td>
+<td><code>{q₀,q₁,q₂}∪{q₃} = {q₀,q₁,q₂,q₃}</code></td>
+</tr>
+<tr>
+<td>* <code>{q₀,q₁,q₂,q₃}</code></td>
+<td><code>{q₀}∪{q₂}∪∅∪{q₃} = {q₀,q₂,q₃}</code></td>
+<td><code>{q₀,q₁,q₂}∪∅∪{q₃}∪{q₃} = {q₀,q₁,q₂,q₃}</code></td>
+</tr>
+<tr>
+<td>* <code>{q₀,q₂,q₃}</code></td>
+<td><code>{q₀}∪∅∪{q₃} = {q₀,q₃}</code></td>
+<td><code>{q₀,q₁,q₂}∪{q₃}∪{q₃} = {q₀,q₁,q₂,q₃}</code></td>
+</tr>
+<tr>
+<td>* <code>{q₀,q₃}</code></td>
+<td><code>{q₀}∪{q₃} = {q₀,q₃}</code></td>
+<td><code>{q₀,q₁,q₂}∪{q₃} = {q₀,q₁,q₂,q₃}</code></td>
+</tr>
+</tbody>
+</table>
+<p>Accept states: any DFA state containing <code>q₃</code> (marked with *).</p>
+<p>This is the minimal reachable DFA. Note that only 6 of the <code>2⁴ = 16</code> possible subsets were ever reached.</p>
+<hr />
+<h2 id="conversion-3-nfa-dfa-direct">Conversion 3: ε-NFA → DFA (Direct)<a class="headerlink" href="#conversion-3-nfa-dfa-direct" title="Permanent link">&para;</a></h2>
+<p>Combines both conversions. Given ε-NFA <code>M₁ = (Q, Σ, δ, q₀, F)</code>, construct DFA <code>M_D</code>:</p>
+<p><strong>Algorithm:</strong></p>
+<ol>
+<li><code>Q' ⊆ P(Q)</code>, <code>|Q'| ≤ 2|Q|</code>.</li>
+<li><code>δ'(R, a) = E( ⋃_{r ∈ R} δ(r, a) )</code> — apply ε-closure after every transition.</li>
+<li><code>q₀' = E(q₀)</code> — start state is the ε-closure of the NFA start state.</li>
+<li><code>F' = { R ∈ Q' | R ∩ F ≠ ∅ }</code>.</li>
+</ol>
+<h3 id="worked-example-nfa-dfa_1">Worked Example: ε-NFA → DFA<a class="headerlink" href="#worked-example-nfa-dfa_1" title="Permanent link">&para;</a></h3>
+<p><strong>ε-NFA:</strong></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th><code>a</code></th>
+<th><code>b</code></th>
+<th><code>ε</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>→ <code>q₀</code></td>
+<td><code>{q₀, q₁}</code></td>
+<td><code>{q₀}</code></td>
+<td><code>∅</code></td>
+</tr>
+<tr>
+<td><code>q₁</code></td>
+<td><code>∅</code></td>
+<td><code>{q₂}</code></td>
+<td><code>{q₃}</code></td>
+</tr>
+<tr>
+<td><code>q₂</code></td>
+<td><code>∅</code></td>
+<td><code>{q₃}</code></td>
+<td><code>∅</code></td>
+</tr>
+<tr>
+<td><code>q₃</code></td>
+<td><code>{q₄}</code></td>
+<td><code>∅</code></td>
+<td><code>{q₁}</code></td>
+</tr>
+<tr>
+<td>* <code>q₄</code></td>
+<td><code>{q₄}</code></td>
+<td><code>{q₄}</code></td>
+<td><code>∅</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ε-closures:</strong></p>
+<pre><code>E(q₀) = {q₀}
+E(q₁) = {q₁, q₃}      (q₁ →ε q₃; from q₃ →ε q₁ — already in set)
+E(q₂) = {q₂}
+E(q₃) = {q₁, q₃}      (q₃ →ε q₁; from q₁ →ε q₃ — already in set)
+E(q₄) = {q₄}
+</code></pre>
+<p><strong>Start state:</strong> <code>q₀' = E(q₀) = {q₀}</code>.</p>
+<p><strong>Lazy construction:</strong></p>
+<table>
+<thead>
+<tr>
+<th>DFA state <code>R</code></th>
+<th><code>δ'(R, a)</code></th>
+<th><code>δ'(R, b)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>→ <code>{q₀}</code></td>
+<td><code>E({q₀,q₁}) = {q₀}∪{q₁,q₃} = {q₀,q₁,q₃}</code></td>
+<td><code>E({q₀}) = {q₀}</code></td>
+</tr>
+<tr>
+<td><code>{q₀,q₁,q₃}</code></td>
+<td><code>E({q₀,q₁}∪∅∪{q₄}) = {q₀,q₁,q₃}∪{q₄} = {q₀,q₁,q₃,q₄}</code></td>
+<td><code>E({q₀}∪{q₂}∪∅) = {q₀}∪{q₂} = {q₀,q₂}</code></td>
+</tr>
+<tr>
+<td>* <code>{q₀,q₁,q₃,q₄}</code></td>
+<td><code>E({q₀,q₁}∪∅∪{q₄}∪{q₄}) = {q₀,q₁,q₃,q₄}</code></td>
+<td><code>E({q₀}∪{q₂}∪∅∪{q₄}) = {q₀,q₂,q₄}</code></td>
+</tr>
+<tr>
+<td><code>{q₀,q₂}</code></td>
+<td><code>E({q₀,q₁}∪∅) = {q₀,q₁,q₃}</code></td>
+<td><code>E({q₀}∪{q₃}) = {q₀}∪{q₁,q₃} = {q₀,q₁,q₃}</code></td>
+</tr>
+<tr>
+<td>* <code>{q₀,q₂,q₄}</code></td>
+<td><code>E({q₀,q₁}∪∅∪{q₄}) = {q₀,q₁,q₃,q₄}</code></td>
+<td><code>E({q₀}∪{q₃}∪{q₄}) = {q₀,q₁,q₃,q₄}</code></td>
+</tr>
+</tbody>
+</table>
+<p>Accept states: any DFA state containing <code>q₄</code> (marked *).</p>
+<p>The resulting DFA has 5 reachable states.</p>
+<hr />
+<h2 id="interconvertibility-summary">Interconvertibility Summary<a class="headerlink" href="#interconvertibility-summary" title="Permanent link">&para;</a></h2>
+<p>All three models — ε-NFA, NFA, and DFA — are <strong>equivalent</strong> in expressive power. Any language accepted by one is accepted by all three.</p>
+<pre><code>ε-NFA  ←→  NFA  ←→  DFA
+</code></pre>
+<p>The conversions show:</p>
+<table>
+<thead>
+<tr>
+<th>Conversion</th>
+<th>States in result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ε-NFA → NFA</td>
+<td>Same number of states (at most)</td>
+</tr>
+<tr>
+<td>NFA → DFA</td>
+<td>At most <code>2|Q|</code> states (exponential blowup possible)</td>
+</tr>
+<tr>
+<td>ε-NFA → DFA</td>
+<td>At most <code>2|Q|</code> states</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">DFA Minimization</p>
+<p>After converting an NFA to a DFA using subset construction, you may obtain many unreachable or equivalent states. You can minimize the DFA using the <strong>Myhill-Nerode Theorem</strong> and the <strong>Table-Filling (Distinguishability) Method</strong>. This is recommended further reading.</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../nfa/" class="btn btn-neutral float-left" title="Non-Deterministic Finite Automata (NFA)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../fa-with-output/" class="btn btn-neutral float-right" title="Finite Automata with Output">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ccoew-org/ToC" class="fa fa-code-fork" style="color: #fcfcfc"> ccoew-org/ToC</a>
+        </span>
+    
+    
+      <span><a href="../nfa/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../fa-with-output/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

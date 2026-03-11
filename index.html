@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="Course notes for Theory of Computation (23PCCE401), CCEW Pune. Covers Formal Languages, Finite Automata, Regular Expressions, Context-Free Grammars, Pushdown Automata, and Turing Machines." /><meta name="author" content="Sourav Kulkarni" /><link rel="canonical" href="https://ccoew-org.github.io/ToC/" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Theory of Computation</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Home";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = "/ToC/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> Theory of Computation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Home</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#about-this-course">About This Course</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#course-details">Course Details</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#course-objectives">Course Objectives</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#syllabus-at-a-glance">Syllabus at a Glance</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-use-these-notes">How to Use These Notes</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 0 — Motivation & Foundations</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="unit0/overview/">Overview & Course Details</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="unit0/math-foundations/">Mathematical Foundations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="unit0/building-blocks/">Building Blocks of Computation</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 1 — Formal Languages & Finite Automata</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="unit1/intro/">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="unit1/dfa/">Deterministic Finite Automata (DFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="unit1/nfa/">Non-Deterministic Finite Automata (NFA)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="unit1/enfa-conversions/">Epsilon-NFA and Conversions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="unit1/fa-with-output/">Finite Automata with Output</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 2 — Regular Expressions & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="unit2/regular-languages/">Regular Languages & Operations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="unit2/regular-expressions/">Regular Expressions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="unit2/re-fa-equivalence/">Equivalence of REs and FAs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="unit2/ardens-theorem/">Arden's Theorem & FA→RE Conversion</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="unit2/pumping-lemma/">Pumping Lemma</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Unit 3 — Context-Free Grammars & Languages</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="unit3/chomsky-hierarchy/">The Chomsky Hierarchy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="unit3/grammars-basics/">Grammars — Basics & Regular Grammars</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="unit3/cfg-derivations/">Context-Free Grammars & Derivations</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="unit3/ambiguity/">Ambiguity in CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="unit3/simplification/">Simplification of CFGs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="unit3/normal-forms/">Normal Forms (CNF & GNF)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="unit3/cfl-properties/">Properties of CFLs</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">Theory of Computation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Home</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ccoew-org/ToC/edit/master/docs/index.md">Edit on ccoew-org/ToC</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="theory-of-computation">Theory of Computation<a class="headerlink" href="#theory-of-computation" title="Permanent link">&para;</a></h1>
+<p><strong>Course Code:</strong> 23PCCE401<br />
+<strong>Institution:</strong> Cummins College of Engineering for Women (CCEW), Pune<br />
+<strong>Instructor:</strong> Sourav Kulkarni<br />
+<strong>Semester:</strong> Second Year, Semester IV — January 2025</p>
+<hr />
+<h2 id="about-this-course">About This Course<a class="headerlink" href="#about-this-course" title="Permanent link">&para;</a></h2>
+<p>Theory of Computation (ToC) sits at the heart of computer science. It asks — and answers — the most fundamental questions about what computers <em>can</em> and <em>cannot</em> do:</p>
+<ul>
+<li>What does it mean to <em>compute</em> something?</li>
+<li>What problems can be solved mechanically, and which ones are forever beyond the reach of any machine?</li>
+<li>How do you characterize the <em>difficulty</em> of a problem? Can two very different-looking problems be shown to be fundamentally the same?</li>
+<li>What are the minimal resources (memory, time) needed to solve a class of problems?</li>
+</ul>
+<p>This course builds a rigorous mathematical framework to answer these questions, moving from the simplest possible machines (Finite Automata) up through increasingly powerful models (Pushdown Automata, Turing Machines).</p>
+<hr />
+<h2 id="course-details">Course Details<a class="headerlink" href="#course-details" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lectures</td>
+<td>3 hours/week (~42 lectures/semester)</td>
+</tr>
+<tr>
+<td>Tutorials</td>
+<td>1 hour/week/per group</td>
+</tr>
+<tr>
+<td>In-Semester Assessment</td>
+<td>50 Marks</td>
+</tr>
+<tr>
+<td>End-Semester Examination</td>
+<td>50 Marks</td>
+</tr>
+<tr>
+<td>Credits</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Data Structures</strong> — comfort with recursive definitions, trees, and graphs.</li>
+<li><strong>Discrete Mathematics &amp; Statistics</strong> — sets, functions, relations, proof techniques (induction, contradiction).</li>
+</ul>
+<hr />
+<h2 id="course-objectives">Course Objectives<a class="headerlink" href="#course-objectives" title="Permanent link">&para;</a></h2>
+<p>By the end of this course you will be able to:</p>
+<ol>
+<li>Recall and apply the mathematical concepts underpinning formal languages and machines.</li>
+<li>Design computational models — Finite Automata, Regular Expressions, Context-Free Grammars — for given languages.</li>
+<li>Convert between equivalent representations of a language (e.g. NFA ↔ DFA, Regex ↔ NFA, Grammar ↔ FA).</li>
+<li>Design Pushdown Automata and Turing Machines for languages beyond the reach of finite automata.</li>
+</ol>
+<hr />
+<h2 id="syllabus-at-a-glance">Syllabus at a Glance<a class="headerlink" href="#syllabus-at-a-glance" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Unit</th>
+<th>Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Motivation and Mathematical Foundations</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Introduction to Formal Languages and Finite Automata</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Regular Expressions and Languages</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Context-Free Grammars and Languages</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Pushdown Automata <em>(coming soon)</em></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Turing Machines and Computability Theory <em>(coming soon)</em></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="how-to-use-these-notes">How to Use These Notes<a class="headerlink" href="#how-to-use-these-notes" title="Permanent link">&para;</a></h2>
+<p>These notes are an expanded version of the lecture slides. Definitions are stated formally, proofs are written out in full where the slides were compressed, and worked examples are explained step-by-step. Use the navigation on the left to jump to any topic.</p>
+<div class="admonition tip">
+<p class="admonition-title">Recommended Reading</p>
+<p>These notes are a supplement, <strong>not</strong> a replacement, for the textbooks. The two classic references for this course are:</p>
+<ul>
+<li>Sipser, M. — <em>Introduction to the Theory of Computation</em> (3rd ed.)</li>
+<li>Hopcroft, Motwani &amp; Ullman — <em>Introduction to Automata Theory, Languages, and Computation</em> (3rd ed.)</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Disclaimer</p>
+<p>These notes may contain errors. If you find one, please raise it with the instructor. Always cross-reference with the recommended textbooks for examination preparation.</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="unit0/overview/" class="btn btn-neutral float-right" title="Overview & Course Details">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ccoew-org/ToC" class="fa fa-code-fork" style="color: #fcfcfc"> ccoew-org/ToC</a>
+        </span>
+    
+    
+    
+      <span><a href="unit0/overview/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2026-03-11 06:24:46.725226+00:00
+-->
