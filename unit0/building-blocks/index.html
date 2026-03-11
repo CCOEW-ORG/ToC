@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -55,11 +56,11 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#1-symbol">1. Symbol</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2-alphabet">2. Alphabet (Σ)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#2-alphabet-sigma">2. Alphabet (\(\Sigma\))</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#3-string-w">3. String (w)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#3-string-w">3. String (\(w\))</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#the-empty-string">The Empty String (ε)</a>
+    <li class="toctree-l4"><a class="reference internal" href="#the-empty-string-varepsilon">The Empty String (\(\varepsilon\))</a>
     </li>
         </ul>
     </li>
@@ -71,9 +72,9 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#operations-on-alphabets">Operations on Alphabets</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#6-kleene-star-closure">6. Kleene (Star) Closure: Σ*</a>
+    <li class="toctree-l3"><a class="reference internal" href="#6-kleene-star-closure-sigma">6. Kleene (Star) Closure: \(\Sigma^*\)</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#7-positive-closure">7. Positive Closure: Σ⁺</a>
+    <li class="toctree-l3"><a class="reference internal" href="#7-positive-closure-sigma">7. Positive Closure: \(\Sigma^+\)</a>
     </li>
         </ul>
     </li>
@@ -168,79 +169,69 @@
 <h2 id="symbols-alphabets-and-strings">Symbols, Alphabets, and Strings<a class="headerlink" href="#symbols-alphabets-and-strings" title="Permanent link">&para;</a></h2>
 <h3 id="1-symbol">1. Symbol<a class="headerlink" href="#1-symbol" title="Permanent link">&para;</a></h3>
 <p>A <strong>symbol</strong> is an atomic, indivisible unit. It has no internal structure — it simply <em>is</em>.</p>
-<p>Examples: <code>0</code>, <code>1</code>, <code>a</code>, <code>b</code>, <code>$</code>, <code>·</code></p>
-<h3 id="2-alphabet">2. Alphabet (Σ)<a class="headerlink" href="#2-alphabet" title="Permanent link">&para;</a></h3>
+<p>Examples: <span class="arithmatex">\(0,\ 1,\ a,\ b,\ \$,\ \cdot\)</span></p>
+<h3 id="2-alphabet-sigma">2. Alphabet (<span class="arithmatex">\(\Sigma\)</span>)<a class="headerlink" href="#2-alphabet-sigma" title="Permanent link">&para;</a></h3>
 <p>An <strong>alphabet</strong> is a <em>finite, non-empty</em> set of symbols.</p>
 <p>Examples:</p>
-<pre><code>Σ₁ = {0, 1}          — binary alphabet
-Σ₂ = {a, b, c}
-Σ₃ = {a, e, i, o, u}  — vowels
-</code></pre>
-<h3 id="3-string-w">3. String (w)<a class="headerlink" href="#3-string-w" title="Permanent link">&para;</a></h3>
-<p>A <strong>string</strong> over an alphabet Σ is a <em>finite sequence</em> of symbols drawn from Σ.</p>
-<p>If <code>Σ = {a, b, c}</code>, then <code>ab</code>, <code>bca</code>, <code>aaa</code>, and <code>c</code> are all valid strings.</p>
-<p>The <strong>length</strong> of a string <code>w</code>, written <code>|w|</code>, is the number of symbols it contains:</p>
-<pre><code>|abc| = 3
-|aab| = 3
-|a|   = 1
-</code></pre>
-<h4 id="the-empty-string">The Empty String (ε)<a class="headerlink" href="#the-empty-string" title="Permanent link">&para;</a></h4>
-<p>The <strong>empty string</strong> <code>ε</code> (epsilon) is the unique string of length zero: <code>|ε| = 0</code>. It contains no symbols but is still a valid string over any alphabet.</p>
+<div class="arithmatex">\[\Sigma_1 = \{0, 1\} \quad \text{(binary alphabet)}\]</div>
+<div class="arithmatex">\[\Sigma_2 = \{a, b, c\}\]</div>
+<div class="arithmatex">\[\Sigma_3 = \{a, e, i, o, u\} \quad \text{(vowels)}\]</div>
+<h3 id="3-string-w">3. String (<span class="arithmatex">\(w\)</span>)<a class="headerlink" href="#3-string-w" title="Permanent link">&para;</a></h3>
+<p>A <strong>string</strong> over an alphabet <span class="arithmatex">\(\Sigma\)</span> is a <em>finite sequence</em> of symbols drawn from <span class="arithmatex">\(\Sigma\)</span>.</p>
+<p>If <span class="arithmatex">\(\Sigma = \{a, b, c\}\)</span>, then <span class="arithmatex">\(ab\)</span>, <span class="arithmatex">\(bca\)</span>, <span class="arithmatex">\(aaa\)</span>, and <span class="arithmatex">\(c\)</span> are all valid strings.</p>
+<p>The <strong>length</strong> of a string <span class="arithmatex">\(w\)</span>, written <span class="arithmatex">\(|w|\)</span>, is the number of symbols it contains:</p>
+<div class="arithmatex">\[|abc| = 3 \qquad |aab| = 3 \qquad |a| = 1\]</div>
+<h4 id="the-empty-string-varepsilon">The Empty String (<span class="arithmatex">\(\varepsilon\)</span>)<a class="headerlink" href="#the-empty-string-varepsilon" title="Permanent link">&para;</a></h4>
+<p>The <strong>empty string</strong> <span class="arithmatex">\(\varepsilon\)</span> (epsilon) is the unique string of length zero: <span class="arithmatex">\(|\varepsilon| = 0\)</span>. It contains no symbols but is still a valid string over any alphabet.</p>
 <div class="admonition warning">
-<p class="admonition-title">ε is not a symbol</p>
-<p><code>ε</code> is <strong>not</strong> a symbol in your alphabet. It is a string — specifically, the string with no symbols in it. The alphabet <code>Σ = {a, b}</code> does not contain <code>ε</code>; it contains two symbols, <code>a</code> and <code>b</code>.</p>
+<p class="admonition-title"><span class="arithmatex">\(\varepsilon\)</span> is not a symbol</p>
+<p><span class="arithmatex">\(\varepsilon\)</span> is <strong>not</strong> a symbol in your alphabet. It is a string — specifically, the string with no symbols in it. The alphabet <span class="arithmatex">\(\Sigma = \{a, b\}\)</span> does not contain <span class="arithmatex">\(\varepsilon\)</span>; it contains two symbols, <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span>.</p>
 </div>
 <h3 id="4-substring">4. Substring<a class="headerlink" href="#4-substring" title="Permanent link">&para;</a></h3>
-<p>A <strong>substring</strong> of a string <code>w</code> is any <em>contiguous</em> portion of <code>w</code>.</p>
-<p>If <code>w = abcde</code>, then <code>abc</code>, <code>bcd</code>, <code>cde</code>, <code>b</code>, <code>abcde</code>, and <code>ε</code> are all substrings of <code>w</code>. But <code>ace</code> is <strong>not</strong> a substring (the symbols are not contiguous).</p>
+<p>A <strong>substring</strong> of a string <span class="arithmatex">\(w\)</span> is any <em>contiguous</em> portion of <span class="arithmatex">\(w\)</span>.</p>
+<p>If <span class="arithmatex">\(w = abcde\)</span>, then <span class="arithmatex">\(abc\)</span>, <span class="arithmatex">\(bcd\)</span>, <span class="arithmatex">\(cde\)</span>, <span class="arithmatex">\(b\)</span>, <span class="arithmatex">\(abcde\)</span>, and <span class="arithmatex">\(\varepsilon\)</span> are all substrings of <span class="arithmatex">\(w\)</span>. But <span class="arithmatex">\(ace\)</span> is <strong>not</strong> a substring (the symbols are not contiguous).</p>
 <h3 id="5-concatenation">5. Concatenation<a class="headerlink" href="#5-concatenation" title="Permanent link">&para;</a></h3>
-<p>The <strong>concatenation</strong> of strings <code>w₁</code> and <code>w₂</code>, written <code>w₁w₂</code> or <code>w₁ · w₂</code>, is the string formed by placing <code>w₂</code> immediately after <code>w₁</code>.</p>
-<pre><code>w₁ = abc,  w₂ = def  →  w₁w₂ = abcdef
-</code></pre>
+<p>The <strong>concatenation</strong> of strings <span class="arithmatex">\(w_1\)</span> and <span class="arithmatex">\(w_2\)</span>, written <span class="arithmatex">\(w_1 w_2\)</span> or <span class="arithmatex">\(w_1 \cdot w_2\)</span>, is the string formed by placing <span class="arithmatex">\(w_2\)</span> immediately after <span class="arithmatex">\(w_1\)</span>:</p>
+<div class="arithmatex">\[w_1 = abc,\quad w_2 = def \quad \Rightarrow \quad w_1 w_2 = abcdef\]</div>
 <p>Properties of concatenation:</p>
 <ul>
-<li><code>|w₁w₂| = |w₁| + |w₂|</code></li>
-<li><code>w · ε = ε · w = w</code>  (ε is the identity element)</li>
-<li>Concatenation is <strong>associative</strong>: <code>(w₁w₂)w₃ = w₁(w₂w₃)</code></li>
-<li>Concatenation is <strong>not commutative</strong> in general: <code>ab ≠ ba</code></li>
+<li><span class="arithmatex">\(|w_1 w_2| = |w_1| + |w_2|\)</span></li>
+<li><span class="arithmatex">\(w \cdot \varepsilon = \varepsilon \cdot w = w \quad\)</span> (<span class="arithmatex">\(\varepsilon\)</span> is the identity element)</li>
+<li>Concatenation is <strong>associative</strong>: <span class="arithmatex">\((w_1 w_2) w_3 = w_1 (w_2 w_3)\)</span></li>
+<li>Concatenation is <strong>not commutative</strong> in general: <span class="arithmatex">\(ab \neq ba\)</span></li>
 </ul>
 <hr />
 <h2 id="operations-on-alphabets">Operations on Alphabets<a class="headerlink" href="#operations-on-alphabets" title="Permanent link">&para;</a></h2>
-<h3 id="6-kleene-star-closure">6. Kleene (Star) Closure: Σ*<a class="headerlink" href="#6-kleene-star-closure" title="Permanent link">&para;</a></h3>
-<p>The <strong>Kleene closure</strong> <code>Σ*</code> is the set of <em>all possible strings</em> over Σ, <strong>including</strong> the empty string <code>ε</code>.</p>
-<p>Formally, <code>Σ* = ⋃_{n=0}^{∞} Σⁿ</code>, where <code>Σⁿ</code> is the set of all strings of length exactly <code>n</code>:</p>
-<pre><code>Σ⁰ = {ε}
-Σ¹ = {a, b}         (for Σ = {a, b})
-Σ² = {aa, ab, ba, bb}
-Σ³ = {aaa, aab, aba, abb, baa, bab, bba, bbb}
-...
-
-Σ* = Σ⁰ ∪ Σ¹ ∪ Σ² ∪ … = {ε, a, b, aa, ab, ba, bb, aaa, …}
-</code></pre>
+<h3 id="6-kleene-star-closure-sigma">6. Kleene (Star) Closure: <span class="arithmatex">\(\Sigma^*\)</span><a class="headerlink" href="#6-kleene-star-closure-sigma" title="Permanent link">&para;</a></h3>
+<p>The <strong>Kleene closure</strong> <span class="arithmatex">\(\Sigma^*\)</span> is the set of <em>all possible strings</em> over <span class="arithmatex">\(\Sigma\)</span>, <strong>including</strong> the empty string <span class="arithmatex">\(\varepsilon\)</span>. Formally:</p>
+<div class="arithmatex">\[\Sigma^* = \bigcup_{n=0}^{\infty} \Sigma^n\]</div>
+<p>where <span class="arithmatex">\(\Sigma^n\)</span> is the set of all strings of length exactly <span class="arithmatex">\(n\)</span>:</p>
+<div class="arithmatex">\[\Sigma^0 = \{\varepsilon\}\]</div>
+<div class="arithmatex">\[\Sigma^1 = \{a, b\} \quad \text{(for } \Sigma = \{a,b\}\text{)}\]</div>
+<div class="arithmatex">\[\Sigma^2 = \{aa, ab, ba, bb\}\]</div>
+<div class="arithmatex">\[\Sigma^3 = \{aaa, aab, aba, abb, baa, bab, bba, bbb\}\]</div>
+<div class="arithmatex">\[\Sigma^* = \Sigma^0 \cup \Sigma^1 \cup \Sigma^2 \cup \cdots = \{\varepsilon,\ a,\ b,\ aa,\ ab,\ ba,\ bb,\ aaa,\ \ldots\}\]</div>
 <div class="admonition tip">
 <p class="admonition-title">Key Fact</p>
-<p><code>Σ*</code> is always <strong>infinite</strong> (as long as <code>Σ ≠ ∅</code>). This is why we need finite <em>representations</em> of languages — see below.</p>
+<p><span class="arithmatex">\(\Sigma^*\)</span> is always <strong>infinite</strong> (as long as <span class="arithmatex">\(\Sigma \neq \emptyset\)</span>). This is why we need finite <em>representations</em> of languages — see below.</p>
 </div>
-<p><strong>Proof sketch that every finite string is in Σ*:</strong> Any string of length <code>k</code> over Σ is an element of <code>Σᵏ</code>, and <code>Σᵏ ⊆ Σ*</code> by definition of the union.</p>
-<h3 id="7-positive-closure">7. Positive Closure: Σ⁺<a class="headerlink" href="#7-positive-closure" title="Permanent link">&para;</a></h3>
-<p>The <strong>positive closure</strong> <code>Σ⁺</code> is the set of all strings over Σ, <strong>excluding</strong> the empty string:</p>
-<pre><code>Σ⁺ = Σ* \ {ε}  =  Σ¹ ∪ Σ² ∪ Σ³ ∪ …
-</code></pre>
+<p><strong>Proof sketch:</strong> Any string of length <span class="arithmatex">\(k\)</span> over <span class="arithmatex">\(\Sigma\)</span> is an element of <span class="arithmatex">\(\Sigma^k\)</span>, and <span class="arithmatex">\(\Sigma^k \subseteq \Sigma^*\)</span> by definition of the union. Therefore every finite string over <span class="arithmatex">\(\Sigma\)</span> is in <span class="arithmatex">\(\Sigma^*\)</span>.</p>
+<h3 id="7-positive-closure-sigma">7. Positive Closure: <span class="arithmatex">\(\Sigma^+\)</span><a class="headerlink" href="#7-positive-closure-sigma" title="Permanent link">&para;</a></h3>
+<p>The <strong>positive closure</strong> <span class="arithmatex">\(\Sigma^+\)</span> is the set of all strings over <span class="arithmatex">\(\Sigma\)</span>, <strong>excluding</strong> the empty string:</p>
+<div class="arithmatex">\[\Sigma^+ = \Sigma^* \setminus \{\varepsilon\} = \Sigma^1 \cup \Sigma^2 \cup \Sigma^3 \cup \cdots\]</div>
 <hr />
 <h2 id="languages">Languages<a class="headerlink" href="#languages" title="Permanent link">&para;</a></h2>
-<p>A <strong>language</strong> <code>L</code> is any subset of <code>Σ*</code>:</p>
-<pre><code>L ⊆ Σ*
-</code></pre>
-<p><strong>Examples</strong> over <code>Σ = {0, 1}</code>:</p>
-<pre><code>L₁ = {0, 00, 000, 0000, …}         — strings of only 0s (non-empty)
-L₂ = {ε, 11, 101, 1001, 10001, …}  — a particular infinite set
-L₃ = {}  = ∅                        — the empty language
-L₄ = {0, 1}                         — a 2-element language
-L₅ = Σ*                             — all strings, an infinite language
-</code></pre>
-<p><strong>How many languages are there over <code>Σ = {0, 1}</code>?</strong> <code>Σ*</code> is countably infinite (it can be enumerated). The set of all subsets of a countably infinite set is <em>uncountably infinite</em>. So there are uncountably many languages over any non-trivial alphabet — far more than can ever be described by any finite notation or recognized by any machine.</p>
+<p>A <strong>language</strong> <span class="arithmatex">\(L\)</span> is any subset of <span class="arithmatex">\(\Sigma^*\)</span>:</p>
+<div class="arithmatex">\[L \subseteq \Sigma^*\]</div>
+<p><strong>Examples</strong> over <span class="arithmatex">\(\Sigma = \{0, 1\}\)</span>:</p>
+<div class="arithmatex">\[L_1 = \{0, 00, 000, 0000, \ldots\} \quad \text{— strings of only 0s (non-empty)}\]</div>
+<div class="arithmatex">\[L_2 = \{\varepsilon, 11, 101, 1001, 10001, \ldots\} \quad \text{— a particular infinite set}\]</div>
+<div class="arithmatex">\[L_3 = \emptyset \quad \text{— the empty language}\]</div>
+<div class="arithmatex">\[L_4 = \{0, 1\} \quad \text{— a 2-element language}\]</div>
+<div class="arithmatex">\[L_5 = \Sigma^* \quad \text{— all strings}\]</div>
+<p><strong>How many languages exist over <span class="arithmatex">\(\Sigma = \{0,1\}\)</span>?</strong> <span class="arithmatex">\(\Sigma^*\)</span> is countably infinite. The set of all subsets of a countably infinite set is <em>uncountably infinite</em>. So there are uncountably many possible languages — far more than can ever be described by any finite notation or recognized by any machine.</p>
 <h3 id="what-languages-are-and-are-not-in-toc">What Languages Are (and Are Not) in ToC<a class="headerlink" href="#what-languages-are-and-are-not-in-toc" title="Permanent link">&para;</a></h3>
-<p>In formal language theory, a language is defined <em>purely through syntax</em> — symbol manipulation rules with no meaning attached:</p>
+<p>In formal language theory, a language is defined <em>purely through syntax</em> — symbol manipulation rules with no intrinsic meaning attached:</p>
 <table>
 <thead>
 <tr>
@@ -271,7 +262,7 @@ L₅ = Σ*                             — all strings, an infinite language
 </tr>
 </tbody>
 </table>
-<p><strong>Analogy:</strong> A compiler does not <em>understand</em> your program. It checks whether your source code string <em>conforms</em> to the grammar rules of the programming language. That's a formal language acceptance problem.</p>
+<p><strong>Analogy:</strong> A compiler does not <em>understand</em> your program. It checks whether your source code string <em>conforms</em> to the grammar rules of the programming language. That is a formal language acceptance problem.</p>
 <hr />
 <h2 id="finite-representation-of-languages">Finite Representation of Languages<a class="headerlink" href="#finite-representation-of-languages" title="Permanent link">&para;</a></h2>
 <h3 id="the-problem">The Problem<a class="headerlink" href="#the-problem" title="Permanent link">&para;</a></h3>
@@ -296,18 +287,18 @@ L₅ = Σ*                             — all strings, an infinite language
 <tr>
 <td><strong>Language constructors</strong></td>
 <td>Grammars</td>
-<td>Generate strings that belong to L</td>
+<td>Generate strings that belong to <span class="arithmatex">\(L\)</span></td>
 </tr>
 <tr>
 <td><strong>Language acceptors</strong></td>
 <td>Machines (Automata), Regular Expressions</td>
-<td>Decide whether a given string belongs to L</td>
+<td>Decide whether a given string belongs to <span class="arithmatex">\(L\)</span></td>
 </tr>
 </tbody>
 </table>
-<pre><code>                         Grammar
-                        (constructor)
-                             ↓
+<pre><code>    Grammar
+(constructor)
+        ↓
   Input string ──→  Machine / Regex ──→ {Accept, Reject}
                         (acceptor)
 </code></pre>
@@ -355,6 +346,7 @@ L₅ = Σ*                             — all strings, an infinite language
     <script>var base_url = "../..";</script>
     <script src="../../js/theme_extra.js"></script>
     <script src="../../js/theme.js"></script>
+      <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       <script src="../../search/main.js"></script>
     <script>
         jQuery(function () {

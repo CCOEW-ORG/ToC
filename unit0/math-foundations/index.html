@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -150,30 +151,28 @@
 <h2 id="sets">Sets<a class="headerlink" href="#sets" title="Permanent link">&para;</a></h2>
 <p>A <strong>set</strong> is an <em>unordered</em> collection of distinct objects. The two defining properties are:</p>
 <ul>
-<li><strong>Order does not matter:</strong> <code>{1, 2, 3} = {3, 2, 1}</code></li>
-<li><strong>Duplicates do not matter:</strong> <code>{1, 2, 2, 3} = {1, 2, 3}</code></li>
+<li><strong>Order does not matter:</strong> <span class="arithmatex">\(\{1, 2, 3\} = \{3, 2, 1\}\)</span></li>
+<li><strong>Duplicates do not matter:</strong> <span class="arithmatex">\(\{1, 2, 2, 3\} = \{1, 2, 3\}\)</span></li>
 </ul>
-<p>Sets can be described by listing elements, or by a property:</p>
-<pre><code>A = {1, 2, 3}
-B = {x | x is a prime number ending in 3}
-S = {x | x is an even number less than 10}  →  S = {2, 4, 6, 8}
-</code></pre>
-<p>The <strong>empty set</strong> is written <code>∅</code> or <code>{}</code>.</p>
+<p>Sets can be described by listing elements, or by a defining property:</p>
+<div class="arithmatex">\[A = \{1, 2, 3\}\]</div>
+<div class="arithmatex">\[B = \{x \mid x \text{ is a prime number ending in } 3\}\]</div>
+<div class="arithmatex">\[S = \{x \mid x \text{ is an even number less than } 10\} = \{2, 4, 6, 8\}\]</div>
+<p>The <strong>empty set</strong> is written <span class="arithmatex">\(\emptyset\)</span> or <span class="arithmatex">\(\{\}\)</span>.</p>
 <h3 id="power-set">Power Set<a class="headerlink" href="#power-set" title="Permanent link">&para;</a></h3>
-<p>The <strong>power set</strong> of <code>A</code>, written <code>P(A)</code> or <code>2^A</code>, is the set of all subsets of <code>A</code>.</p>
-<p><strong>Example:</strong> If <code>A = {1, 2, 3}</code>, then:</p>
-<pre><code>P(A) = { ∅, {1}, {2}, {3}, {1,2}, {1,3}, {2,3}, {1,2,3} }
-</code></pre>
+<p>The <strong>power set</strong> of <span class="arithmatex">\(A\)</span>, written <span class="arithmatex">\(\mathcal{P}(A)\)</span> or <span class="arithmatex">\(2^A\)</span>, is the set of all subsets of <span class="arithmatex">\(A\)</span>.</p>
+<p><strong>Example:</strong> If <span class="arithmatex">\(A = \{1, 2, 3\}\)</span>, then:</p>
+<div class="arithmatex">\[\mathcal{P}(A) = \{\emptyset,\ \{1\},\ \{2\},\ \{3\},\ \{1,2\},\ \{1,3\},\ \{2,3\},\ \{1,2,3\}\}\]</div>
 <div class="admonition tip">
 <p class="admonition-title">Size of the Power Set</p>
-<p>If <code>|A| = n</code>, then <code>|P(A)| = 2ⁿ</code>. This grows fast: a set with 4 elements has 16 subsets, one with 10 elements has 1024.</p>
+<p>If <span class="arithmatex">\(|A| = n\)</span>, then <span class="arithmatex">\(|\mathcal{P}(A)| = 2^n\)</span>. This grows fast: a set with 4 elements has 16 subsets, one with 10 elements has 1024.</p>
 </div>
 <hr />
 <h2 id="sequences-and-tuples">Sequences and Tuples<a class="headerlink" href="#sequences-and-tuples" title="Permanent link">&para;</a></h2>
 <p>A <strong>sequence</strong> is an <em>ordered</em> list of objects where both order and duplicates matter:</p>
 <ul>
-<li><code>(1, 2, 3) ≠ (3, 2, 1)</code> — order matters</li>
-<li><code>(1, 2, 3) ≠ (1, 2, 3, 3)</code> — duplicates matter</li>
+<li><span class="arithmatex">\((1, 2, 3) \neq (3, 2, 1)\)</span> — order matters</li>
+<li><span class="arithmatex">\((1, 2, 3) \neq (1, 2, 3, 3)\)</span> — duplicates matter</li>
 </ul>
 <p>A <strong>tuple</strong> is a <em>finite</em> sequence. Tuples of specific sizes have conventional names:</p>
 <table>
@@ -201,64 +200,50 @@ S = {x | x is an even number less than 10}  →  S = {2, 4, 6, 8}
 <td>quadruple</td>
 </tr>
 <tr>
-<td>n</td>
-<td>n-tuple</td>
+<td><span class="arithmatex">\(n\)</span></td>
+<td><span class="arithmatex">\(n\)</span>-tuple</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="cartesian-product">Cartesian Product<a class="headerlink" href="#cartesian-product" title="Permanent link">&para;</a></h2>
-<p>The <strong>Cartesian product</strong> (or <em>cross product</em>) of sets <code>A₁, A₂, …, Aₖ</code> is the set of all <code>k</code>-tuples <code>(a₁, a₂, …, aₖ)</code> where <code>aᵢ ∈ Aᵢ</code>:</p>
-<pre><code>A₁ × A₂ × … × Aₖ = { (a₁, a₂, …, aₖ) | aᵢ ∈ Aᵢ for each i }
-</code></pre>
-<p><strong>Example:</strong></p>
-<pre><code>A = {Tea, Coffee},  B = {Toast, Eggs},  C = {Apple, Banana}
-
-A × B × C = {
-  (Tea,    Toast, Apple),  (Tea,    Toast, Banana),
-  (Tea,    Eggs,  Apple),  (Tea,    Eggs,  Banana),
-  (Coffee, Toast, Apple),  (Coffee, Toast, Banana),
-  (Coffee, Eggs,  Apple),  (Coffee, Eggs,  Banana)
-}
-</code></pre>
-<p>The size of the Cartesian product: <code>|A₁ × A₂ × … × Aₖ| = |A₁| · |A₂| · … · |Aₖ|</code>.</p>
+<p>The <strong>Cartesian product</strong> (or <em>cross product</em>) of sets <span class="arithmatex">\(A_1, A_2, \ldots, A_k\)</span> is the set of all <span class="arithmatex">\(k\)</span>-tuples <span class="arithmatex">\((a_1, a_2, \ldots, a_k)\)</span> where <span class="arithmatex">\(a_i \in A_i\)</span>:</p>
+<div class="arithmatex">\[A_1 \times A_2 \times \cdots \times A_k = \{\ (a_1, a_2, \ldots, a_k) \mid a_i \in A_i \text{ for each } i\ \}\]</div>
+<p><strong>Example:</strong> Let <span class="arithmatex">\(A = \{\text{Tea, Coffee}\}\)</span>, <span class="arithmatex">\(B = \{\text{Toast, Eggs}\}\)</span>, <span class="arithmatex">\(C = \{\text{Apple, Banana}\}\)</span>. Then <span class="arithmatex">\(A \times B \times C\)</span> contains all 8 triples such as <span class="arithmatex">\((\text{Tea, Toast, Apple})\)</span>, <span class="arithmatex">\((\text{Coffee, Eggs, Banana})\)</span>, and so on.</p>
+<p>The size of a Cartesian product is:</p>
+<div class="arithmatex">\[|A_1 \times A_2 \times \cdots \times A_k| = |A_1| \cdot |A_2| \cdot \ldots \cdot |A_k|\]</div>
 <hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h2>
 <p>A <strong>function</strong> is a rule that assigns to each element of the <em>domain</em> exactly one element of the <em>range</em>:</p>
-<pre><code>f : D → R       means f maps domain D to range R
-f(input) = output,   input ∈ D,  output ∈ R
-</code></pre>
+<div class="arithmatex">\[f : D \to R\]</div>
+<p>meaning <span class="arithmatex">\(f\)</span> maps domain <span class="arithmatex">\(D\)</span> to range <span class="arithmatex">\(R\)</span>, with <span class="arithmatex">\(f(\text{input}) = \text{output}\)</span> where <span class="arithmatex">\(\text{input} \in D\)</span> and <span class="arithmatex">\(\text{output} \in R\)</span>.</p>
 <p>The domain can be a Cartesian product, giving functions of multiple arguments:</p>
-<pre><code>f(a₁, a₂, …, aₙ) = output
-</code></pre>
-<p>The <strong>arity</strong> of such a function is <code>n</code> (the number of arguments).</p>
+<div class="arithmatex">\[f(a_1, a_2, \ldots, a_n) = \text{output}\]</div>
+<p>The <strong>arity</strong> of such a function is <span class="arithmatex">\(n\)</span> (the number of arguments).</p>
 <div class="admonition warning">
 <p class="admonition-title">Domain vs. Range vs. Codomain</p>
-<p>In some textbooks, <em>range</em> refers only to the set of values <em>actually produced</em> by <code>f</code>, while <em>codomain</em> is the set <code>R</code> declared in <code>f : D → R</code>. In ToC, the distinction rarely matters, but be aware of it when reading other sources.</p>
+<p>In some textbooks, <em>range</em> refers only to the set of values <em>actually produced</em> by <span class="arithmatex">\(f\)</span>, while <em>codomain</em> is the full set <span class="arithmatex">\(R\)</span> declared in <span class="arithmatex">\(f : D \to R\)</span>. In ToC, the distinction rarely matters, but be aware of it when reading other sources.</p>
 </div>
 <hr />
 <h2 id="graphs">Graphs<a class="headerlink" href="#graphs" title="Permanent link">&para;</a></h2>
-<p>A <strong>graph</strong> is an ordered pair <code>G = (V, E)</code> where:</p>
+<p>A <strong>graph</strong> is an ordered pair <span class="arithmatex">\(G = (V, E)\)</span> where <span class="arithmatex">\(V\)</span> is a finite set of <strong>vertices</strong> (nodes) and <span class="arithmatex">\(E\)</span> is a set of <strong>edges</strong>.</p>
 <ul>
-<li><code>V</code> is a finite set of <strong>vertices</strong> (nodes).</li>
-<li><code>E</code> is a set of <strong>edges</strong>.</li>
+<li><strong>Undirected graph</strong> (no self-loops): <span class="arithmatex">\(E \subseteq \big\{\, \{u, v\} \mid u, v \in V,\ u \neq v \,\big\}\)</span></li>
+<li><strong>Directed graph</strong> (digraph): <span class="arithmatex">\(E \subseteq \big\{\, (u, v) \mid u, v \in V \,\big\}\)</span> — here order matters, so <span class="arithmatex">\((u, v) \neq (v, u)\)</span></li>
 </ul>
-<p>For an <strong>undirected graph</strong> (no self-loops): <code>E ⊆ { {u, v} | u, v ∈ V,  u ≠ v }</code>.</p>
-<p>For a <strong>directed graph</strong> (digraph): <code>E ⊆ { (u, v) | u, v ∈ V }</code> — here order matters, so <code>(u, v) ≠ (v, u)</code>.</p>
 <p>We use directed graphs extensively when drawing <strong>state transition diagrams</strong> for automata.</p>
 <hr />
 <h2 id="closure">Closure<a class="headerlink" href="#closure" title="Permanent link">&para;</a></h2>
 <h3 id="closed-under-an-operation">Closed Under an Operation<a class="headerlink" href="#closed-under-an-operation" title="Permanent link">&para;</a></h3>
-<p>A set <code>A</code> is <strong>closed under</strong> an operation <code>○</code> if applying <code>○</code> to any two members of <code>A</code> always produces another member of <code>A</code>:</p>
-<pre><code>∀ x, y ∈ A :  x ○ y ∈ A
-</code></pre>
-<p><strong>Example:</strong> The natural numbers <code>ℕ</code> are closed under addition (<code>3 + 5 = 8 ∈ ℕ</code>) but <em>not</em> under subtraction (<code>3 − 5 = −2 ∉ ℕ</code>).</p>
+<p>A set <span class="arithmatex">\(A\)</span> is <strong>closed under</strong> an operation <span class="arithmatex">\(\circ\)</span> if applying <span class="arithmatex">\(\circ\)</span> to any two members of <span class="arithmatex">\(A\)</span> always produces another member of <span class="arithmatex">\(A\)</span>:</p>
+<div class="arithmatex">\[\forall\, x, y \in A : x \circ y \in A\]</div>
+<p><strong>Example:</strong> The natural numbers <span class="arithmatex">\(\mathbb{N}\)</span> are closed under addition (<span class="arithmatex">\(3 + 5 = 8 \in \mathbb{N}\)</span>) but <em>not</em> under subtraction (<span class="arithmatex">\(3 - 5 = -2 \notin \mathbb{N}\)</span>).</p>
 <h3 id="closure-of-a-set">Closure of a Set<a class="headerlink" href="#closure-of-a-set" title="Permanent link">&para;</a></h3>
-<p>The <strong>closure</strong> of a set <code>S</code> under a rule/operation is the <em>smallest</em> superset of <code>S</code> that is closed under that rule. It is obtained by repeatedly applying the rule until no new elements can be generated.</p>
+<p>The <strong>closure</strong> of a set <span class="arithmatex">\(S\)</span> under a rule or operation is the <em>smallest</em> superset of <span class="arithmatex">\(S\)</span> that is closed under that rule — obtained by repeatedly applying the rule until no new elements can be generated.</p>
 <p><strong>Examples:</strong></p>
 <ul>
-<li>The closure of <code>{0, 1}</code> under addition is <code>ℕ</code> (the whole numbers) — you can reach any non-negative integer by adding 0s and 1s.</li>
-<li>The closure of <code>{-1, 1}</code> under addition is <code>ℤ</code> (all integers).</li>
+<li>The closure of <span class="arithmatex">\(\{0, 1\}\)</span> under addition is <span class="arithmatex">\(\mathbb{W}\)</span> (the whole numbers).</li>
+<li>The closure of <span class="arithmatex">\(\{-1, 1\}\)</span> under addition is <span class="arithmatex">\(\mathbb{Z}\)</span> (all integers).</li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Why Closure Matters in ToC</p>
@@ -307,6 +292,7 @@ f(input) = output,   input ∈ D,  output ∈ R
     <script>var base_url = "../..";</script>
     <script src="../../js/theme_extra.js"></script>
     <script src="../../js/theme.js"></script>
+      <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       <script src="../../search/main.js"></script>
     <script>
         jQuery(function () {
