@@ -10,120 +10,114 @@ Every concept in Theory of Computation is built on a small set of primitive noti
 
 A **symbol** is an atomic, indivisible unit. It has no internal structure — it simply *is*.
 
-Examples: `0`, `1`, `a`, `b`, `$`, `·`
+Examples: $0,\ 1,\ a,\ b,\ \$,\ \cdot$
 
-### 2. Alphabet (Σ)
+### 2. Alphabet ($\Sigma$)
 
 An **alphabet** is a *finite, non-empty* set of symbols.
 
 Examples:
 
-```
-Σ₁ = {0, 1}          — binary alphabet
-Σ₂ = {a, b, c}
-Σ₃ = {a, e, i, o, u}  — vowels
-```
+$$\Sigma_1 = \{0, 1\} \quad \text{(binary alphabet)}$$
 
-### 3. String (w)
+$$\Sigma_2 = \{a, b, c\}$$
 
-A **string** over an alphabet Σ is a *finite sequence* of symbols drawn from Σ.
+$$\Sigma_3 = \{a, e, i, o, u\} \quad \text{(vowels)}$$
 
-If `Σ = {a, b, c}`, then `ab`, `bca`, `aaa`, and `c` are all valid strings.
+### 3. String ($w$)
 
-The **length** of a string `w`, written `|w|`, is the number of symbols it contains:
+A **string** over an alphabet $\Sigma$ is a *finite sequence* of symbols drawn from $\Sigma$.
 
-```
-|abc| = 3
-|aab| = 3
-|a|   = 1
-```
+If $\Sigma = \{a, b, c\}$, then $ab$, $bca$, $aaa$, and $c$ are all valid strings.
 
-#### The Empty String (ε)
+The **length** of a string $w$, written $|w|$, is the number of symbols it contains:
 
-The **empty string** `ε` (epsilon) is the unique string of length zero: `|ε| = 0`. It contains no symbols but is still a valid string over any alphabet.
+$$|abc| = 3 \qquad |aab| = 3 \qquad |a| = 1$$
 
-!!! warning "ε is not a symbol"
-    `ε` is **not** a symbol in your alphabet. It is a string — specifically, the string with no symbols in it. The alphabet `Σ = {a, b}` does not contain `ε`; it contains two symbols, `a` and `b`.
+#### The Empty String ($\varepsilon$)
+
+The **empty string** $\varepsilon$ (epsilon) is the unique string of length zero: $|\varepsilon| = 0$. It contains no symbols but is still a valid string over any alphabet.
+
+!!! warning "$\varepsilon$ is not a symbol"
+    $\varepsilon$ is **not** a symbol in your alphabet. It is a string — specifically, the string with no symbols in it. The alphabet $\Sigma = \{a, b\}$ does not contain $\varepsilon$; it contains two symbols, $a$ and $b$.
 
 ### 4. Substring
 
-A **substring** of a string `w` is any *contiguous* portion of `w`.
+A **substring** of a string $w$ is any *contiguous* portion of $w$.
 
-If `w = abcde`, then `abc`, `bcd`, `cde`, `b`, `abcde`, and `ε` are all substrings of `w`. But `ace` is **not** a substring (the symbols are not contiguous).
+If $w = abcde$, then $abc$, $bcd$, $cde$, $b$, $abcde$, and $\varepsilon$ are all substrings of $w$. But $ace$ is **not** a substring (the symbols are not contiguous).
 
 ### 5. Concatenation
 
-The **concatenation** of strings `w₁` and `w₂`, written `w₁w₂` or `w₁ · w₂`, is the string formed by placing `w₂` immediately after `w₁`.
+The **concatenation** of strings $w_1$ and $w_2$, written $w_1 w_2$ or $w_1 \cdot w_2$, is the string formed by placing $w_2$ immediately after $w_1$:
 
-```
-w₁ = abc,  w₂ = def  →  w₁w₂ = abcdef
-```
+$$w_1 = abc,\quad w_2 = def \quad \Rightarrow \quad w_1 w_2 = abcdef$$
 
 Properties of concatenation:
 
-- `|w₁w₂| = |w₁| + |w₂|`
-- `w · ε = ε · w = w`  (ε is the identity element)
-- Concatenation is **associative**: `(w₁w₂)w₃ = w₁(w₂w₃)`
-- Concatenation is **not commutative** in general: `ab ≠ ba`
+- $|w_1 w_2| = |w_1| + |w_2|$
+- $w \cdot \varepsilon = \varepsilon \cdot w = w \quad$ ($\varepsilon$ is the identity element)
+- Concatenation is **associative**: $(w_1 w_2) w_3 = w_1 (w_2 w_3)$
+- Concatenation is **not commutative** in general: $ab \neq ba$
 
 ---
 
 ## Operations on Alphabets
 
-### 6. Kleene (Star) Closure: Σ\*
+### 6. Kleene (Star) Closure: $\Sigma^*$
 
-The **Kleene closure** `Σ*` is the set of *all possible strings* over Σ, **including** the empty string `ε`.
+The **Kleene closure** $\Sigma^*$ is the set of *all possible strings* over $\Sigma$, **including** the empty string $\varepsilon$. Formally:
 
-Formally, `Σ* = ⋃_{n=0}^{∞} Σⁿ`, where `Σⁿ` is the set of all strings of length exactly `n`:
+$$\Sigma^* = \bigcup_{n=0}^{\infty} \Sigma^n$$
 
-```
-Σ⁰ = {ε}
-Σ¹ = {a, b}         (for Σ = {a, b})
-Σ² = {aa, ab, ba, bb}
-Σ³ = {aaa, aab, aba, abb, baa, bab, bba, bbb}
-...
+where $\Sigma^n$ is the set of all strings of length exactly $n$:
 
-Σ* = Σ⁰ ∪ Σ¹ ∪ Σ² ∪ … = {ε, a, b, aa, ab, ba, bb, aaa, …}
-```
+$$\Sigma^0 = \{\varepsilon\}$$
+
+$$\Sigma^1 = \{a, b\} \quad \text{(for } \Sigma = \{a,b\}\text{)}$$
+
+$$\Sigma^2 = \{aa, ab, ba, bb\}$$
+
+$$\Sigma^3 = \{aaa, aab, aba, abb, baa, bab, bba, bbb\}$$
+
+$$\Sigma^* = \Sigma^0 \cup \Sigma^1 \cup \Sigma^2 \cup \cdots = \{\varepsilon,\ a,\ b,\ aa,\ ab,\ ba,\ bb,\ aaa,\ \ldots\}$$
 
 !!! tip "Key Fact"
-    `Σ*` is always **infinite** (as long as `Σ ≠ ∅`). This is why we need finite *representations* of languages — see below.
+    $\Sigma^*$ is always **infinite** (as long as $\Sigma \neq \emptyset$). This is why we need finite *representations* of languages — see below.
 
-**Proof sketch that every finite string is in Σ\*:** Any string of length `k` over Σ is an element of `Σᵏ`, and `Σᵏ ⊆ Σ*` by definition of the union.
+**Proof sketch:** Any string of length $k$ over $\Sigma$ is an element of $\Sigma^k$, and $\Sigma^k \subseteq \Sigma^*$ by definition of the union. Therefore every finite string over $\Sigma$ is in $\Sigma^*$.
 
-### 7. Positive Closure: Σ⁺
+### 7. Positive Closure: $\Sigma^+$
 
-The **positive closure** `Σ⁺` is the set of all strings over Σ, **excluding** the empty string:
+The **positive closure** $\Sigma^+$ is the set of all strings over $\Sigma$, **excluding** the empty string:
 
-```
-Σ⁺ = Σ* \ {ε}  =  Σ¹ ∪ Σ² ∪ Σ³ ∪ …
-```
+$$\Sigma^+ = \Sigma^* \setminus \{\varepsilon\} = \Sigma^1 \cup \Sigma^2 \cup \Sigma^3 \cup \cdots$$
 
 ---
 
 ## Languages
 
-A **language** `L` is any subset of `Σ*`:
+A **language** $L$ is any subset of $\Sigma^*$:
 
-```
-L ⊆ Σ*
-```
+$$L \subseteq \Sigma^*$$
 
-**Examples** over `Σ = {0, 1}`:
+**Examples** over $\Sigma = \{0, 1\}$:
 
-```
-L₁ = {0, 00, 000, 0000, …}         — strings of only 0s (non-empty)
-L₂ = {ε, 11, 101, 1001, 10001, …}  — a particular infinite set
-L₃ = {}  = ∅                        — the empty language
-L₄ = {0, 1}                         — a 2-element language
-L₅ = Σ*                             — all strings, an infinite language
-```
+$$L_1 = \{0, 00, 000, 0000, \ldots\} \quad \text{— strings of only 0s (non-empty)}$$
 
-**How many languages are there over `Σ = {0, 1}`?** `Σ*` is countably infinite (it can be enumerated). The set of all subsets of a countably infinite set is *uncountably infinite*. So there are uncountably many languages over any non-trivial alphabet — far more than can ever be described by any finite notation or recognized by any machine.
+$$L_2 = \{\varepsilon, 11, 101, 1001, 10001, \ldots\} \quad \text{— a particular infinite set}$$
+
+$$L_3 = \emptyset \quad \text{— the empty language}$$
+
+$$L_4 = \{0, 1\} \quad \text{— a 2-element language}$$
+
+$$L_5 = \Sigma^* \quad \text{— all strings}$$
+
+**How many languages exist over $\Sigma = \{0,1\}$?** $\Sigma^*$ is countably infinite. The set of all subsets of a countably infinite set is *uncountably infinite*. So there are uncountably many possible languages — far more than can ever be described by any finite notation or recognized by any machine.
 
 ### What Languages Are (and Are Not) in ToC
 
-In formal language theory, a language is defined *purely through syntax* — symbol manipulation rules with no meaning attached:
+In formal language theory, a language is defined *purely through syntax* — symbol manipulation rules with no intrinsic meaning attached:
 
 | Formal languages **ignore** | Formal languages **only care about** |
 |---|---|
@@ -133,7 +127,7 @@ In formal language theory, a language is defined *purely through syntax* — sym
 | Intent | |
 | Context | |
 
-**Analogy:** A compiler does not *understand* your program. It checks whether your source code string *conforms* to the grammar rules of the programming language. That's a formal language acceptance problem.
+**Analogy:** A compiler does not *understand* your program. It checks whether your source code string *conforms* to the grammar rules of the programming language. That is a formal language acceptance problem.
 
 ---
 
@@ -155,13 +149,13 @@ We represent infinite languages in two dual ways:
 
 | Approach | Tool | Role |
 |---|---|---|
-| **Language constructors** | Grammars | Generate strings that belong to L |
-| **Language acceptors** | Machines (Automata), Regular Expressions | Decide whether a given string belongs to L |
+| **Language constructors** | Grammars | Generate strings that belong to $L$ |
+| **Language acceptors** | Machines (Automata), Regular Expressions | Decide whether a given string belongs to $L$ |
 
 ```
-                         Grammar
-                        (constructor)
-                             ↓
+    Grammar
+(constructor)
+        ↓
   Input string ──→  Machine / Regex ──→ {Accept, Reject}
                         (acceptor)
 ```

@@ -24,11 +24,11 @@ Before building machines that compute, it is worth stepping back and asking what
 We will build up our theory in layers, each layer adding more computational power:
 
 ```
-Finite Automata  →  Pushdown Automata  →  Turing Machines
-    (Unit 1)            (Unit 4)              (Unit 5)
-      ↑                   ↑                     ↑
-Regular Languages   Context-Free Lang.    Recursively Enumerable
-    (Unit 2)            (Unit 3)              Languages
+Finite Automata     →   Pushdown Automata       →    Turing Machines
+    (Unit 1)                (Unit 4)                    (Unit 5)
+      ↑                         ↑                           ↑
+Regular Languages       Context-Free Lang.          Recursively Enumerable
+    (Unit 2)                (Unit 3)                    Languages
 ```
 
 At each stage we ask: *What languages can this machine recognize? What can it not?*
